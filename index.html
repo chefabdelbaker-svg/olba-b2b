@@ -468,6 +468,43 @@ body.fxc.fxv #fxd,body.fxc.fxv #fxr{opacity:1}
 .panel.on{animation:fxin .9s cubic-bezier(.2,.7,.2,1)}
 @keyframes fxin{from{opacity:.0;transform:translateY(24px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){#fxsplash,#fxcur,#fxd,#fxr{display:none!important}.sw .w>span{transform:none;transition:none}.panel.on{animation:none}}
+/* ===== v10 tarifs, qui sommes-nous, rail horizontal ===== */
+.tf-top{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:26px 0 8px}
+.tf-top input{flex:1 1 260px;min-width:0;padding:14px 16px;border:1px solid var(--line);background:var(--bg);font:15px var(--sans);color:var(--fg)}
+.tf-chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 22px}
+.tf-chips button{border:1px solid var(--line);background:none;border-radius:999px;padding:9px 15px;font:600 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--fg);cursor:pointer;transition:background .25s,color .25s,border-color .25s}
+.tf-chips button:hover{border-color:var(--acc)}
+.tf-chips button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.tf-h,.tf-r{display:grid;grid-template-columns:96px minmax(0,2.4fr) minmax(0,1.4fr) minmax(0,1.3fr) 112px;gap:14px;align-items:center;padding:14px 8px}
+.tf-h{font:600 11px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid var(--fg);position:sticky;top:60px;background:var(--bg);z-index:5}
+.tf-r{border-bottom:1px solid var(--line);transition:background .25s}
+.tf-r:hover{background:var(--bg2)}
+.tf-r code{font:600 12px var(--sans);letter-spacing:.08em;color:var(--acc)}
+.tf-r b{font:500 17px/1.25 var(--serif);overflow-wrap:anywhere}
+.tf-r span{font:14px var(--sans);color:var(--mute)}
+.tf-r .btn{padding:10px 12px;font-size:11px;justify-content:center}
+.tf-note{margin-top:26px}
+.tf-ft{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:26px}
+@media (max-width:860px){.tf-h{display:none}.tf-r{grid-template-columns:70px minmax(0,1fr) auto;grid-template-areas:"c n a" "c f a" "c p a"}.tf-r code{grid-area:c}.tf-r b{grid-area:n}.tf-r .f{grid-area:f}.tf-r .p{grid-area:p}.tf-r .btn{grid-area:a}}
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(30px,6vw,90px);align-items:center}
+.about .ab{aspect-ratio:4/5;position:relative;background:var(--bg2);box-shadow:var(--shadow)}
+.about .ab img{width:100%;height:100%;object-fit:cover;display:block}
+.about .ab cite{position:absolute;left:16px;right:16px;bottom:16px;font:500 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.6);font-style:normal}
+.pil{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:30px 0 8px}
+.pil div{border-top:2px solid var(--acc);padding-top:14px}
+.pil b{font:500 20px/1.2 var(--serif);display:block;margin-bottom:6px}
+.pil span{font:14px/1.55 var(--sans);color:var(--mute)}
+.founder{margin-top:30px;padding:22px 24px;border-left:3px solid var(--carrot);background:var(--bg)}
+.founder b{font:500 22px var(--serif);display:block}
+.founder small{display:block;font:600 11px var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin:6px 0 10px}
+.founder p{margin:0;font:15px/1.6 var(--sans);color:var(--mute)}
+@media (max-width:860px){.about{grid-template-columns:1fr}.about .ab{aspect-ratio:16/11;order:-1}.pil{grid-template-columns:1fr}}
+.alt.band.hs{overflow:clip}
+.hs>.wrap{position:sticky;top:60px;min-height:calc(100vh - 60px);display:flex;flex-direction:column;justify-content:center}
+.rail.pin{overflow:visible;scroll-snap-type:none;will-change:transform;cursor:default}
+.rail.pin a{flex:0 0 clamp(250px,23vw,340px)}
+.hsbar{height:2px;background:var(--line);margin:6px 0 22px;position:relative}
+.hsbar i{position:absolute;left:0;top:0;bottom:0;width:100%;background:var(--acc);transform-origin:0 50%;transform:scaleX(0)}
 </style>
 </head>
 <body>
@@ -478,6 +515,7 @@ body.fxc.fxv #fxd,body.fxc.fxv #fxr{opacity:1}
   <button role="tab" data-k="catalogue" id="t-catalogue">Catalogue</button>
   <button role="tab" data-k="laboratoire" id="t-laboratoire">Notre laboratoire</button>
   <button role="tab" data-k="collaborer" id="t-collaborer">Collaborer</button>
+  <button role="tab" data-k="tarifs" id="t-tarifs">Tarifs</button>
   <button role="tab" data-k="commander" id="t-commander">Ma demande<span class="badge" id="bd" hidden>0</span></button>
  </nav>
 </div></header>
@@ -560,6 +598,21 @@ body.fxc.fxv #fxd,body.fxc.fxv #fxr{opacity:1}
   <p class="lead rv" style="max-width:62ch">Le coût s'optimise par un meilleur sourcing, l'efficacité de production, le rendement, les achats en volume, la réduction des pertes, l'ingénierie des recettes et la planification, jamais en remplaçant un chocolat, un beurre, une farine ou une préparation de fruits par une qualité inférieure.</p>
   <a class="btn rv" href="#commander">Démarrer une demande</a>
  </div></div>
+<div class="alt band" id="about"><div class="wrap sec"><div class="about">
+ <div>
+  <div class="kick rv">Qui sommes-nous</div>
+  <h2 class="rv">Des artisans, <em>une exploitation.</em></h2>
+  <p class="lead rv">OLBA Bakehouse est née à Riyad d'une conviction : l'excellence artisanale peut se produire à l'échelle, sans perdre son âme. OLBA B2B Solutions met ce laboratoire au service des cafés, restaurants, hôtels et enseignes qui veulent un produit signature sans monter leur propre atelier.</p>
+  <div class="pil">
+   <div class="rv"><b>Artisanal</b><span>Beurre AOP, laminage manuel, recettes développées par des chefs.</span></div>
+   <div class="rv" style="--d:.1s"><b>Rigoureux</b><span>Process documentés, contrôles et traçabilité : chaque lot ressemble au précédent.</span></div>
+   <div class="rv" style="--d:.2s"><b>Partenaire</b><span>Nous analysons votre concept avant toute proposition. Un partenaire, pas un fournisseur.</span></div>
+  </div>
+  <div class="founder rv"><small>La direction</small><b>Abdelhafid Arbi</b><p>Chef entrepreneur et consultant international, chef exécutif et directeur des opérations. Formé en France à l'INBP (CAP boulanger, CAP pâtissier, CQP tourier), vingt ans de métier, une expérience entre la France, l'Uruguay et l'Arabie saoudite.</p></div>
+  <p style="margin-top:26px"><a class="btn" href="#commander">Parlez-nous de votre cuisine</a></p>
+ </div>
+ <div class="ab arch rvx"><img src="img/lab2.jpg" alt="" loading="lazy"><cite>Le laboratoire OLBA · visuel d'illustration</cite></div>
+</div></div></div>
 </section>
 
 <!-- CATALOGUE -->
@@ -686,6 +739,22 @@ body.fxc.fxv #fxd,body.fxc.fxv #fxr{opacity:1}
 </section>
 
 <!-- DEMANDE -->
+<section class="panel" id="p-tarifs" role="tabpanel" aria-labelledby="t-tarifs">
+<div class="dk band"><div class="wrap sec">
+ <div class="kick rv">Tarifs</div>
+ <h2 class="rv">Un produit, un code, <em>un prix sur devis.</em></h2>
+ <p class="lead rv">Chaque référence porte un code unique, à reprendre dans votre demande. Les prix dépendent du volume, du niveau de production et de la durée du contrat : nous les établissons produit par produit.</p>
+</div></div>
+<div class="wrap sec">
+ <div class="tf-top"><input id="tq" type="search" placeholder="Chercher un code ou un produit" aria-label="Chercher un code ou un produit"><span id="tc" class="note"></span></div>
+ <div class="tf-chips" id="tch"></div>
+ <div class="tf-h"><span>Code</span><span>Produit</span><span>Famille</span><span>Prix</span><span></span></div>
+ <div id="tl"></div>
+ <p class="note tf-note">Commande minimum 500 SAR. Les conditions tarifaires reposent sur une durée de contrat, des volumes minimum, une grille de prix par produit et une clause de révision du prix des matières. Elles sont communiquées sur devis.</p>
+ <div class="tf-ft"><button class="btn" id="tcsv" type="button">Télécharger la liste des codes (CSV)</button><a class="btn ghost" href="#commander" style="color:var(--fg)">Ma demande</a></div>
+</div>
+</section>
+
 <section class="panel" id="p-commander" role="tabpanel" aria-labelledby="t-commander">
  <div class="dk band chero"><div class="wrap sec" style="padding-bottom:36px">
   <div class="kick">Logistique et fiabilité B2B</div>
@@ -737,6 +806,7 @@ body.fxc.fxv #fxd,body.fxc.fxv #fxr{opacity:1}
 <footer class="ft dk band"><div class="wrap">
  <div><img src="brand/wordmark-cream.png" alt="OLBA, Baked En Harmonie" width="120" height="43"><p style="margin-top:14px">D'une idée. À un produit. À l'échelle.</p></div>
  <div><h4>Contact</h4><p>partnerships@olbabakehouse.com<br>Riyad, Arabie saoudite</p></div>
+ <div><h4>OLBA</h4><p><a href="#accueil" data-about style="color:inherit">Qui sommes-nous</a><br><a href="#tarifs" data-go="tarifs" style="color:inherit">Tarifs</a></p></div>
  <div><h4>Conditions</h4><p>Commande minimum 500 SAR<br>Délai de 48 h sur demande</p></div>
 </div></footer>
 <div class="toast" id="ts" role="status"></div>
@@ -952,7 +1022,7 @@ body.fxc.fxv #fxd,body.fxc.fxv #fxr{opacity:1}
 
 
  /* ===== routeur et animations ===== */
- var ROUTES=["accueil","catalogue","laboratoire","collaborer","commander"];
+ var ROUTES=["accueil","catalogue","laboratoire","collaborer","tarifs","commander"];
  var tabs=[].slice.call(document.querySelectorAll(".tabs button"));
  var io=null;
  function reveal(){
@@ -974,7 +1044,7 @@ body.fxc.fxv #fxd,body.fxc.fxv #fxr{opacity:1}
   ROUTES.forEach(function(x){$("#p-"+x).classList.toggle("on",x===tab)});
   if(tab==="catalogue")renderCat(k,p[1]?decodeURIComponent(p[1]):"");
   try{window.scrollTo({top:0,behavior:"instant"})}catch(e){window.scrollTo(0,0)}
-  document.title=tab==="accueil"?"OLBA B2B Solutions":"OLBA B2B Solutions · "+({catalogue:"Catalogue",laboratoire:"Notre laboratoire",collaborer:"Collaborer",commander:"Ma demande"}[tab]);
+  document.title=tab==="accueil"?"OLBA B2B Solutions":"OLBA B2B Solutions · "+({catalogue:"Catalogue",laboratoire:"Notre laboratoire",collaborer:"Collaborer",tarifs:"Tarifs",commander:"Ma demande"}[tab]);
   sync();reveal();
  }
  function show(k){if(location.hash==="#"+k)route();else location.hash="#"+k}
@@ -1012,6 +1082,23 @@ body.fxc.fxv #fxd,body.fxc.fxv #fxr{opacity:1}
  var tk=0;
  window.addEventListener("scroll",function(){if(tk||rm)return;tk=requestAnimationFrame(function(){tk=0;if($("#p-accueil").classList.contains("on")){var y=Math.min(window.scrollY,900);hv.style.transform="translateY("+(y*.08)+"px)"}})},{passive:true});
 
+ /* ===== tarifs ===== */
+ (function(){
+  var PRIX={},cur="",q="";
+  var ch=$("#tch"),tl=$("#tl");
+  ch.innerHTML='<button class="on" data-f="">Toutes</button>'+FAM.map(function(f,i){return'<button data-f="'+i+'">'+f[1].replace(/^Les /,"")+'</button>'}).join("");
+  function row(p){return'<div class="tf-r"><code>'+p.c+'</code><b>'+esc(p.n)+'</b><span class="f">'+FAM[p.f][1]+'</span><span class="p">'+(PRIX[p.c]?PRIX[p.c]+" SAR":"Sur devis")+'</span><button class="btn" data-add="'+p.c+' '+esc(p.n)+'">Ajouter</button></div>'}
+  function draw(){var r=ALL.filter(function(p){return(cur===""||String(p.f)===cur)&&(!q||p.n.toLowerCase().indexOf(q)>-1||p.c.toLowerCase().indexOf(q)>-1)});tl.innerHTML=r.map(row).join("");$("#tc").textContent=r.length+" référence"+(r.length>1?"s":"");sync()}
+  ch.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;cur=b.dataset.f;[].forEach.call(ch.children,function(x){x.classList.toggle("on",x===b)});draw()});
+  $("#tq").addEventListener("input",function(){q=this.value.trim().toLowerCase();draw()});
+  $("#tcsv").addEventListener("click",function(){
+   var L=["Code;Produit;Famille;Prix"];ALL.forEach(function(p){L.push([p.c,'"'+p.n.replace(/"/g,'""')+'"',FAM[p.f][1],PRIX[p.c]?PRIX[p.c]+" SAR":"Sur devis"].join(";"))});
+   var bl=new Blob(["\ufeff"+L.join("\r\n")],{type:"text/csv;charset=utf-8"}),name="OLBA-B2B-codes-produits.csv";
+   function fb(){var a=document.createElement("a");a.href=URL.createObjectURL(bl);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1500)}
+   if(typeof claude!=="undefined"&&claude.use){claude.use("downloads").then(function(d){if(d)d.save({filename:name,data:bl}).catch(function(){});else fb()}).catch(fb)}else fb()});
+  draw();
+ })();
+
 sync();route();
 })();</script>
 <script>(function(){
@@ -1028,13 +1115,13 @@ addEventListener("scroll",function(){if(!tk)tk=requestAnimationFrame(onS)},{pass
 var PS=".ph2 img,.trio .a img,.fhero .arch img,.bannerbook .bimg img,.lhero .arch img";
 function par(){if(rm)return;var vh=innerHeight;[].forEach.call(D.querySelectorAll(PS),function(im){if(!im.offsetParent)return;var r=im.parentNode.getBoundingClientRect();if(r.bottom<-50||r.top>vh+50)return;im.classList.add("fxpar");var o=(r.top+r.height/2-vh/2)*-.07;im.style.transform="translate3d(0,"+o.toFixed(1)+"px,0) scale(1.14)"})}
 /* menu plein ecran */
-var ITEMS=[["accueil","Accueil","img/l00.jpg"],["catalogue","Catalogue","img/l19.jpg"],["laboratoire","Notre laboratoire","img/lab1.jpg"],["collaborer","Collaborer","img/lab2.jpg"],["commander","Ma demande","img/l34.jpg"]];
+var ITEMS=[["accueil","Accueil","img/l00.jpg"],["catalogue","Catalogue","img/l19.jpg"],["laboratoire","Notre laboratoire","img/lab1.jpg"],["collaborer","Collaborer","img/lab2.jpg"],["tarifs","Tarifs","img/l12.jpg"],["commander","Ma demande","img/l34.jpg"],["about","Qui sommes-nous","img/lab3.jpg"]];
 if(hd){
  var bg=D.createElement("button");bg.id="bg";bg.setAttribute("aria-label","Menu");bg.setAttribute("aria-expanded","false");bg.innerHTML="<i></i><i></i>";hd.querySelector(".wrap").appendChild(bg);
  var mn=mk("div","fxmenu",ITEMS.map(function(x,i){return'<a href="#'+x[0]+'" data-m="'+x[0]+'" style="--i:'+i+'"><small>0'+(i+1)+'</small>'+x[1]+'<em><img src="'+x[2]+'" alt=""></em></a>'}).join("")+"<p>OLBA B2B Solutions · Riyadh</p>");
  function tm(o){bg.setAttribute("aria-expanded",o?"true":"false");mn.classList.toggle("open",o);B.classList.toggle("menu",o);if(o){var h=(location.hash||"#accueil").slice(1).split("/")[0];if(h==="produit"||h==="livre")h="catalogue";[].forEach.call(mn.querySelectorAll("a"),function(a){a.classList.toggle("on",a.dataset.m===h)})}}
  bg.addEventListener("click",function(){tm(!mn.classList.contains("open"))});
- mn.addEventListener("click",function(e){var a=e.target.closest("a");if(!a)return;e.preventDefault();tm(false);var k=a.dataset.m;setTimeout(function(){if(location.hash==="#"+k)dispatchEvent(new Event("hashchange"));else location.hash="#"+k},300)});
+ mn.addEventListener("click",function(e){var a=e.target.closest("a");if(!a)return;e.preventDefault();tm(false);var k=a.dataset.m;if(k==="about"){setTimeout(function(){window.__about&&window.__about()},300);return}setTimeout(function(){if(location.hash==="#"+k)dispatchEvent(new Event("hashchange"));else location.hash="#"+k},300)});
  addEventListener("keydown",function(e){if(e.key==="Escape")tm(false)});
  addEventListener("resize",function(){if(innerWidth>860)tm(false)});
 }
@@ -1097,6 +1184,25 @@ if(!rm&&!seen&&!deep){
 split();onS();setTimeout(par,300);
 }catch(err){try{document.body.classList.remove("fxlock")}catch(e){}}
 })();
+</script>
+<script>(function(){try{
+var rm=window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;
+var rail=document.getElementById("hrail");if(!rail)return;
+var band=rail.closest(".alt.band"),wrap=band.firstElementChild,dist=0,bar=null;
+bar=document.createElement("div");bar.className="hsbar";bar.innerHTML="<i></i>";rail.parentNode.insertBefore(bar,rail);
+function setup(){
+ rail.style.transform="";
+ if(innerWidth<=900||rm||!band.offsetParent){band.classList.remove("hs");rail.classList.remove("pin");band.style.height="";bar.style.display="none";return}
+ band.classList.add("hs");rail.classList.add("pin");bar.style.display="";
+ var rl=rail.getBoundingClientRect().left;dist=Math.max(0,rail.scrollWidth-(innerWidth-rl)+60);
+ band.style.height=(innerHeight-60+dist+120)+"px";tick()}
+function tick(){if(!band.classList.contains("hs"))return;var r=band.getBoundingClientRect(),m=r.height-(innerHeight-60);var p=m>0?Math.min(1,Math.max(0,(-(r.top-60))/m)):0;rail.style.transform="translate3d("+(-p*dist).toFixed(1)+"px,0,0)";bar.firstChild.style.transform="scaleX("+p.toFixed(3)+")"}
+addEventListener("scroll",function(){requestAnimationFrame(tick)},{passive:true});
+addEventListener("resize",setup);addEventListener("hashchange",function(){setTimeout(setup,150)});addEventListener("load",setup);
+setTimeout(setup,300);setTimeout(setup,1500);
+}catch(e){}})();
+(function(){window.__about=function(){var go=function(){var a=document.getElementById("about");if(a)a.scrollIntoView({behavior:"smooth",block:"start"})};if((location.hash||"#accueil")!=="#accueil"&&location.hash!==""){location.hash="#accueil";setTimeout(go,900)}else go()};
+document.addEventListener("click",function(e){var a=e.target.closest("[data-about]");if(a){e.preventDefault();window.__about()}})})();
 </script>
 </body>
 </html>
