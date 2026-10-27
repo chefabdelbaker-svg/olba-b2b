@@ -1,0 +1,945 @@
+<title>OLBA B2B Solutions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;1,400;1,500&display=swap">
+<style>
+/* Concept: site B2B aligné sur le Capability Book (cacao, vanille, carotte, Lora + Inter). Le cadre en arche du logo sert de forme pour les visuels. Cinq onglets, catalogue en trois vues, demande de devis persistante. */
+:root{--bg:#FFF6EC;--bg2:#F8E4CC;--card:#FFFCF6;--fg:#3E211B;--mute:#7A5A4F;--line:rgba(62,33,27,.16);--acc:#9E5214;--btn:#3E211B;--btnfg:#F8DAB8;--hero:#3E211B;--herofg:#F8DAB8;--carrot:#F7AA54;--soft:#E3C4A0;--shadow:0 16px 44px rgba(62,33,27,.14);--serif:'Lora',Georgia,serif;--sans:'Inter',system-ui,-apple-system,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1F100C;--bg2:#2A1712;--card:#2E1A14;--fg:#F4E3CC;--mute:#C4A68E;--line:rgba(248,218,184,.18);--acc:#F7AA54;--btn:#F7AA54;--btnfg:#2B1612;--hero:#2B1612;--shadow:0 16px 44px rgba(0,0,0,.45);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1F100C;--bg2:#2A1712;--card:#2E1A14;--fg:#F4E3CC;--mute:#C4A68E;--line:rgba(248,218,184,.18);--acc:#F7AA54;--btn:#F7AA54;--btnfg:#2B1612;--hero:#2B1612;--shadow:0 16px 44px rgba(0,0,0,.45);color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:16px/1.6 var(--sans);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#2B1612;z-index:60}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--carrot);outline-offset:2px}
+.wrap{max-width:1200px;margin:0 auto}
+.band{margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.dk{background:var(--hero);color:var(--herofg)}
+.alt{background:var(--bg2)}
+/* header */
+.hd{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:#2B1612;color:#F8DAB8}
+.hd .wrap{display:flex;align-items:center;gap:10px 28px;flex-wrap:wrap;padding-block:10px}
+.hd .logo{height:30px;width:auto;cursor:pointer}
+.tabs{display:flex;overflow-x:auto;scrollbar-width:none;margin-left:auto;max-width:100%}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:12px 14px;font:500 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;white-space:nowrap;opacity:.78}
+.tabs button:hover{opacity:1}
+.tabs button[aria-selected="true"]{opacity:1;color:var(--carrot);border-color:var(--carrot)}
+.badge{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;margin-left:7px;border-radius:9px;background:var(--carrot);color:#2B1612;font:600 10px/1 var(--sans);letter-spacing:0}
+.badge[hidden]{display:none}
+.panel{display:none;animation:in .35s ease}
+.panel.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.panel{animation:none}html{scroll-behavior:auto}.tile img{transition:none}}
+/* type */
+.kick{font:600 11px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--acc);display:flex;gap:12px;align-items:center;margin-bottom:18px}
+.kick::before{content:"";width:32px;height:1px;background:currentColor;flex:none}
+.dk .kick{color:var(--carrot)}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:400;line-height:1.08;text-wrap:balance}
+h2{font-size:clamp(32px,4.4vw,54px);margin-bottom:16px}
+h3{font-size:24px;margin-bottom:8px}
+em{font-style:italic;color:var(--acc)}
+.dk em{color:var(--carrot)}
+.lead{font-size:18px;color:var(--mute);max-width:60ch}
+.dk .lead{color:var(--soft)}
+.sec{padding-block:clamp(52px,7vw,96px)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border:1px solid transparent;background:var(--btn);color:var(--btnfg);font:600 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.btn.ghost{background:transparent;color:inherit;border-color:currentColor}
+.dk .btn{background:var(--carrot);color:#2B1612}
+.dk .btn.ghost{background:transparent;color:var(--herofg);border-color:var(--herofg)}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+.arch{border-radius:999px 999px 0 0;overflow:hidden}
+.ph{display:grid;place-items:center;text-align:center;padding:24px;background:repeating-linear-gradient(135deg,rgba(158,82,20,.07) 0 12px,transparent 12px 24px),var(--bg2);border:1px dashed var(--line);font:600 10px/1.7 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--mute)}
+.note{font-size:12.5px;color:var(--mute);margin-top:16px;max-width:80ch}
+/* hero */
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,5vw,72px);align-items:center;padding-block:clamp(48px,8vw,104px) 0}
+.hero h1{font-size:clamp(44px,6.6vw,88px);letter-spacing:-.012em}
+.hero .sub{margin-top:22px;max-width:46ch;font-size:18px;color:var(--soft)}
+.hero .row{margin-top:32px}
+.hero .em{display:grid;justify-items:center}
+.hero .em img{width:min(300px,70%);height:auto}
+.birds{height:clamp(70px,12vw,150px);background:url(brand/birds.png) center bottom/min(1400px,140%) auto no-repeat;margin-top:clamp(20px,4vw,48px)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));border-bottom:1px solid var(--line)}
+.stats div{padding:30px 20px 30px 0;min-width:0}
+.stats b{display:block;font:400 clamp(34px,4.2vw,52px)/1 var(--serif);color:var(--acc);font-variant-numeric:tabular-nums}
+.stats span{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{background:var(--card);padding:26px;border-top:3px solid var(--acc);min-width:0}
+.card p,.card li{font-size:15px;color:var(--mute)}
+.card ul{list-style:none;padding:0;display:grid;gap:0;margin-top:8px}
+.card li{padding:8px 0;border-bottom:1px solid var(--line)}
+.card li:last-child{border:0}
+.lbl{font:600 11px/1.3 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--acc);margin-bottom:10px;display:block}
+.tag{display:inline-block;border:1px solid currentColor;padding:4px 10px;font:600 10.5px/1.2 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+.tag.solid{background:var(--hero);color:var(--herofg);border-color:var(--hero)}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center}
+.lanes{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);gap:20px;margin-top:32px}
+.now{background:var(--hero);color:var(--herofg);padding:30px;min-width:0}
+.now h3{font-size:34px;margin:10px 0}
+.now p{color:var(--soft);font-size:15px}
+.next{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.next div{border:1.5px dashed var(--line);padding:18px;min-width:0}
+.next b{display:block;font:600 11px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.next span{font-size:14px;color:var(--mute)}
+.levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0;border-top:2px solid var(--fg)}
+.levels div{padding:20px 22px 20px 0}
+.levels b{font:500 22px var(--serif);display:block;margin-bottom:6px}
+.levels span{font-size:14px;color:var(--mute)}
+.quote{font:italic 400 clamp(26px,3.4vw,42px)/1.15 var(--serif);max-width:24ch;text-wrap:balance}
+/* catalogue */
+.seg{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line);width:fit-content;max-width:100%;margin-bottom:34px}
+.seg button{background:none;border:0;padding:14px 22px;font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;color:var(--mute)}
+.seg button[aria-selected="true"]{background:var(--btn);color:var(--btnfg)}
+.view{display:none}.view.on{display:block}
+.fam{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 20px;scroll-snap-type:x proximity}
+.tile{flex:0 0 132px;scroll-snap-align:start;background:none;border:0;padding:0;cursor:pointer;text-align:center;opacity:.72;transition:opacity .2s}
+.tile:hover,.tile[aria-pressed="true"]{opacity:1}
+.tile .arch{aspect-ratio:3/4;border:2px solid transparent;background:var(--bg2)}
+.tile[aria-pressed="true"] .arch{border-color:var(--acc)}
+.tile img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.tile:hover img{transform:scale(1.05)}
+.tile span{display:block;margin-top:8px;font:500 13px/1.25 var(--serif)}
+.tile.all .arch{display:grid;place-items:center;font:400 34px var(--serif);color:var(--acc)}
+.bar{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;margin-bottom:18px}
+.bar input{flex:1 1 240px;max-width:420px;padding:13px 14px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:15px var(--sans);border-radius:0}
+.cnt{font:600 11.5px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.plist{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:0 36px;border-top:2px solid var(--fg)}
+.pi{display:grid;grid-template-columns:62px minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.pi small{font:600 11px var(--sans);letter-spacing:.08em;color:var(--mute);font-variant-numeric:tabular-nums}
+.pi b{font:500 17px/1.25 var(--serif);overflow-wrap:anywhere}
+.add{width:34px;height:34px;border:1px solid var(--line);background:none;cursor:pointer;font-size:20px;line-height:1;color:var(--acc);display:grid;place-items:center}
+.add:hover{background:var(--btn);color:var(--btnfg);border-color:var(--btn)}
+.add.on{background:var(--btn);color:var(--btnfg);border-color:var(--btn)}
+.lh{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:baseline;justify-content:space-between;margin:34px 0 4px}
+.lh h3{font-size:30px;margin:0}
+.empty{padding:40px 0;color:var(--mute)}
+/* flipbook */
+.fb{display:grid;grid-template-columns:240px minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:start}
+.fs{position:sticky;top:calc(env(safe-area-inset-top,0px) + 70px);display:grid;gap:10px;min-width:0}
+.fs ul{list-style:none;padding:0;display:grid;max-height:62vh;overflow-y:auto}
+.fs li button{width:100%;display:flex;justify-content:space-between;gap:8px;padding:10px 8px;background:none;border:0;border-bottom:1px solid var(--line);cursor:pointer;text-align:left;font:500 15px/1.2 var(--serif)}
+.fs li button span{font:500 10.5px var(--sans);letter-spacing:.08em;color:var(--mute);white-space:nowrap}
+.fs li button[aria-current="true"]{background:var(--bg2);color:var(--acc)}
+.stage{position:relative;background:var(--bg2);box-shadow:var(--shadow)}
+.shot{overflow:auto;max-height:76vh;aspect-ratio:16/9}
+.shot img{width:100%;height:auto;cursor:zoom-in}
+.shot.z img{width:190%;max-width:none;cursor:zoom-out}
+.nv{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:0;background:#2B1612;color:#F8DAB8;font-size:22px;cursor:pointer;z-index:2;display:grid;place-items:center}
+.nv:hover{background:var(--carrot);color:#2B1612}
+.nv.p{left:10px}.nv.n{right:10px}
+.ctl{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-top:14px}
+.ctl .btn{padding:11px 16px}
+.strip{display:flex;gap:8px;overflow-x:auto;padding:12px 2px 6px}
+.strip button{flex:0 0 112px;border:2px solid transparent;padding:0;background:none;cursor:pointer;opacity:.7}
+.strip button img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.strip button[aria-current="true"]{border-color:var(--acc);opacity:1}
+.warn{border-left:3px solid var(--carrot);background:var(--bg2);padding:12px 16px;font-size:14px;color:var(--mute);margin-bottom:22px}
+/* labo */
+.plat{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0 44px;counter-reset:p}
+.plat li{counter-increment:p;display:grid;grid-template-columns:42px 1fr;padding:16px 0;border-bottom:1px solid var(--line)}
+.plat li::before{content:counter(p,decimal-leading-zero);font:italic 400 22px var(--serif);color:var(--acc)}
+.plat b{font:600 15px/1.3 var(--sans);display:block}
+.plat span{font-size:14px;color:var(--mute);grid-column:2}
+.photos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px}
+.photos .ph{aspect-ratio:3/4;border-radius:999px 999px 0 0}
+.flow{display:flex;flex-wrap:wrap;gap:0;margin:26px 0;border-top:2px solid var(--carrot)}
+.flow span{flex:1 1 110px;padding:14px 10px 0 0;font:600 11px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.ctrl{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 44px}
+.ctrl div{padding:14px 0;border-bottom:1px solid rgba(248,218,184,.2)}
+.ctrl b{font:600 15px var(--sans)}.ctrl span{font-size:14px;color:var(--soft)}
+.std{font:400 clamp(22px,3vw,34px)/1.3 var(--serif);margin-top:30px;padding:26px 0 0;border-top:1px solid rgba(248,218,184,.3)}
+.docs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0 44px}
+.docs div{display:grid;grid-template-columns:40px 1fr;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.docs div::before{content:attr(data-n);font:italic 400 18px var(--serif);color:var(--acc)}
+/* collaborer */
+.models{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
+.model{text-align:left;background:var(--card);border:2px solid transparent;border-top:3px solid var(--acc);padding:24px;cursor:pointer;display:grid;gap:10px;align-content:start;min-width:0}
+.model[aria-pressed="true"]{border-color:var(--acc);box-shadow:var(--shadow)}
+.model .l{font:400 44px/1 var(--serif);color:var(--acc)}
+.model h3{font-size:22px;margin:0}
+.model p{font-size:14.5px;color:var(--mute)}
+.path{margin-top:30px;background:var(--bg2);padding:clamp(20px,3vw,34px)}
+.path ol{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;margin-top:16px}
+.path li{border-top:2px solid var(--acc);padding-top:10px}
+.path li b{display:block;font:500 19px var(--serif)}
+.path li span{font-size:13px;color:var(--mute)}
+.opm{display:grid;grid-template-columns:minmax(200px,300px) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:start}
+.opm ol{list-style:none;padding:0;display:grid}
+.opm ol button{display:grid;grid-template-columns:38px 1fr;width:100%;text-align:left;padding:11px 6px;background:none;border:0;border-bottom:1px solid var(--line);cursor:pointer;font:500 16px/1.25 var(--serif)}
+.opm ol button i{font:italic 400 18px var(--serif);color:var(--acc)}
+.opm ol button[aria-selected="true"]{background:var(--bg2);color:var(--acc)}
+.opd{background:var(--card);padding:clamp(24px,3vw,40px);border-top:3px solid var(--acc);min-height:240px}
+.opd .big{font:italic 400 64px/1 var(--serif);color:var(--acc)}
+.opd h3{font-size:clamp(26px,3vw,36px);margin:8px 0 12px}
+.opd p{font-size:17px;color:var(--mute);max-width:52ch}
+.tbl{overflow-x:auto;margin-top:26px}
+table{border-collapse:collapse;width:100%;min-width:520px}
+th{background:var(--hero);color:var(--herofg);font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;text-align:left;padding:12px 14px}
+td{padding:12px 14px;border-bottom:1px solid var(--line);font-size:15px;vertical-align:top}
+td:first-child{font-weight:600;white-space:nowrap}
+.offers{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.offers .card{display:grid;gap:12px;align-content:start}
+.offers .btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.found{border:1px solid var(--carrot);padding:clamp(22px,3vw,40px);margin-top:36px}
+.found h3{font-size:clamp(24px,3vw,34px)}
+/* commander */
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0 24px}
+.facts div{border-top:2px solid var(--acc);padding:14px 0 22px}
+.facts small{display:block;font:600 10.5px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--mute)}
+.facts b{font:400 28px/1.15 var(--serif)}
+.facts span{font-size:13px;color:var(--mute);display:block;margin-top:4px}
+.cmd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,60px);align-items:start}
+.recv{display:grid;gap:12px;margin-top:20px}
+.recv div{background:var(--card);border-left:3px solid var(--acc);padding:16px 18px}
+.recv b{display:block;font:600 15px var(--sans)}.recv span{font-size:14px;color:var(--mute)}
+.freq div{display:grid;grid-template-columns:150px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.freq b{font:400 20px var(--serif)}.freq span{font-size:14px;color:var(--mute)}
+.form{background:var(--card);padding:clamp(20px,3vw,34px);box-shadow:var(--shadow);display:grid;gap:16px;min-width:0}
+.form h3{font-size:32px;margin:0}
+.form label{display:grid;gap:6px;font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.form input,.form select,.form textarea{width:100%;padding:12px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:16px var(--sans);border-radius:0;letter-spacing:0;text-transform:none}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cart{border-top:1px solid var(--line);padding-top:14px;display:grid;gap:8px}
+.cart ul{list-style:none;padding:0;display:grid;gap:6px;max-height:220px;overflow-y:auto}
+.cart li{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--bg);padding:8px 12px;font-size:14.5px}
+.cart li button{background:none;border:0;cursor:pointer;color:var(--acc);font-size:20px;line-height:1}
+.cart .e{font-size:14px;color:var(--mute)}
+.out{background:var(--hero);color:var(--herofg);padding:16px;font:14px/1.6 var(--sans);white-space:pre-wrap;overflow-wrap:anywhere;min-width:0}
+.mail{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:15px}
+.mail code{background:var(--bg2);padding:6px 10px;font:500 14px var(--sans);overflow-wrap:anywhere}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:#2B1612;color:#F8DAB8;padding:12px 20px;font-size:14px;opacity:0;pointer-events:none;transition:.3s;z-index:70;max-width:90vw}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.ft .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;padding-block:48px 40px}
+.ft img{height:44px;width:auto}
+.ft h4{font:600 11px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--carrot);margin-bottom:10px}
+.ft p{font-size:14.5px;color:var(--soft)}
+@media (max-width:860px){
+ .hero .wrap,.two,.lanes,.cmd,.opm,.fb{grid-template-columns:1fr}
+ .hero .em{order:-1}.hero .em img{width:150px}
+ .fs{position:static}
+ .fs ul{display:flex;max-height:none;overflow-x:auto;overflow-y:hidden;gap:6px}
+ .fs li button{border:1px solid var(--line);white-space:nowrap}
+ .opm ol{display:flex;overflow-x:auto;gap:6px}
+ .opm ol button{border:1px solid var(--line);white-space:nowrap;width:auto}
+ .f2{grid-template-columns:1fr}
+ .nv{width:40px;height:40px}
+ .freq div{grid-template-columns:1fr;gap:2px}
+}
+
+/* ===== v3 : immersif ===== */
+.js .rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+.js .rvx{opacity:0;transform:scale(.94);transition:opacity 1s ease,transform 1.1s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .rvx.in{opacity:1;transform:none}
+.hero{position:relative;overflow:hidden}
+.hero .hg{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(20px,4vw,60px);align-items:center;padding-block:clamp(36px,6vw,80px) 0;min-height:min(86vh,780px)}
+.hero h1{font-size:clamp(46px,7.4vw,104px);line-height:1;letter-spacing:-.018em}
+.ln{display:block;overflow:hidden;padding-bottom:.08em}
+.ln>*{display:inline-block;transform:translateY(110%);animation:up 1s cubic-bezier(.2,.7,.2,1) forwards}
+.ln:nth-child(2)>*{animation-delay:.12s}.ln:nth-child(3)>*{animation-delay:.24s}
+@keyframes up{to{transform:none}}
+.hero .sub{margin-top:24px;max-width:44ch;font-size:19px;color:var(--soft);opacity:0;animation:fade 1s .5s forwards}
+.hero .row{margin-top:32px;opacity:0;animation:fade 1s .7s forwards}
+@keyframes fade{to{opacity:1}}
+.cap{margin-top:34px;display:flex;gap:16px;align-items:baseline;font:500 12px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.cap b{font:italic 400 22px var(--serif);letter-spacing:0;text-transform:none;color:var(--herofg);min-width:0}
+.hv{position:relative;height:min(74vh,640px);min-height:380px}
+.hv .a{position:absolute;overflow:hidden;border-radius:999px 999px 0 0;background:#3a1f19;box-shadow:0 30px 70px rgba(0,0,0,.35)}
+.hv .a img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity 1.2s ease,transform 6s ease-out}
+.hv .a img.on{opacity:1;transform:scale(1)}
+.hv .a1{left:0;bottom:0;width:30%;height:58%;animation:fl 9s ease-in-out infinite}
+.hv .a2{left:24%;bottom:0;width:52%;height:96%;z-index:2}
+.hv .a3{right:0;bottom:0;width:30%;height:66%;animation:fl 11s ease-in-out infinite reverse}
+@keyframes fl{50%{transform:translateY(-14px)}}
+.hv .halo{position:absolute;inset:auto 10% 0 10%;height:55%;background:radial-gradient(closest-side,rgba(247,170,84,.28),transparent);filter:blur(10px)}
+.birds{position:relative;z-index:1;height:clamp(60px,10vw,130px);background:url(brand/birds.png) center bottom/min(1300px,130%) auto no-repeat;opacity:.9}
+.mq{overflow:hidden;white-space:nowrap;border-block:1px solid var(--line);padding:16px 0;background:var(--bg)}
+.mq div{display:inline-flex;gap:34px;padding-right:34px;animation:mq 60s linear infinite;font:italic 400 clamp(20px,2.6vw,30px) var(--serif)}
+.mq span::after{content:"✦";margin-left:34px;color:var(--carrot);font-style:normal;font-size:.6em;vertical-align:middle}
+.mq:hover div{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-100%)}}
+.story{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,6vw,90px);align-items:start}
+.story .stk{position:sticky;top:calc(env(safe-area-inset-top,0px) + 80px);height:min(78vh,640px)}
+.story .stk .arch{position:absolute;inset:0;background:var(--bg2);box-shadow:var(--shadow)}
+.story .stk img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease,transform 1.2s ease;transform:scale(1.06)}
+.story .stk img.on{opacity:1;transform:none}
+.step{min-height:68vh;display:grid;align-content:center;gap:10px;opacity:.28;transition:opacity .6s}
+.step.on{opacity:1}
+.step i{font:italic 400 clamp(64px,9vw,120px)/1 var(--serif);color:var(--acc)}
+.step h3{font-size:clamp(28px,3.6vw,46px)}
+.step p{font-size:17px;color:var(--mute);max-width:46ch}
+.rail{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 26px;scrollbar-width:thin}
+.rail a{flex:0 0 clamp(200px,24vw,270px);scroll-snap-align:start;text-decoration:none;color:inherit}
+.fc{display:block;text-decoration:none;color:inherit;min-width:0}
+.fc .arch{aspect-ratio:3/4;background:var(--bg2);position:relative}
+.fc img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.fc:hover img{transform:scale(1.08)}
+.fc .nm{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-top:12px;font:400 21px/1.2 var(--serif)}
+.fc .nm small{font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);white-space:nowrap}
+.fc .arch .ix{position:absolute;left:14px;top:34%;font:italic 400 14px var(--serif);color:#fff;mix-blend-mode:difference}
+.pnone{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:10px;background:repeating-linear-gradient(135deg,rgba(158,82,20,.06) 0 12px,transparent 12px 24px),var(--bg2);font:600 10px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--mute);text-align:center;padding:16px}
+.pnone img{width:44px;height:auto;opacity:.5;object-fit:contain}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:clamp(22px,3vw,40px) 24px}
+.fgrid .fc:nth-child(3n+2){margin-top:34px}
+@media (max-width:700px){.fgrid .fc:nth-child(3n+2){margin-top:0}}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:26px 20px}
+.pc{position:relative;min-width:0}
+.pc a{display:block;text-decoration:none;color:inherit}
+.pc .im{aspect-ratio:4/5;background:var(--bg2);overflow:hidden;position:relative}
+.pc .im img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.pc:hover .im img{transform:scale(1.07)}
+.pc .tx{padding:12px 44px 0 0}
+.pc small{font:600 10.5px var(--sans);letter-spacing:.12em;color:var(--mute);display:block}
+.pc b{font:500 18px/1.25 var(--serif);display:block;overflow-wrap:anywhere}
+.pc .add{position:absolute;right:0;bottom:2px;background:var(--card)}
+.pc .fl{position:absolute;left:10px;top:10px;background:var(--hero);color:var(--herofg);font:600 10px var(--sans);letter-spacing:.14em;text-transform:uppercase;padding:5px 9px}
+.crumb{font:600 11.5px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-bottom:26px;display:flex;flex-wrap:wrap;gap:8px}
+.crumb a{color:var(--acc);text-decoration:none}
+.crumb a:hover{text-decoration:underline}
+.fhero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,5vw,70px);align-items:end;margin-bottom:44px}
+.fhero .arch{aspect-ratio:4/5;max-height:560px;background:var(--bg2);position:relative;box-shadow:var(--shadow);justify-self:end;width:min(100%,440px)}
+.fhero .arch img{width:100%;height:100%;object-fit:cover}
+.fhero h2{font-size:clamp(40px,6vw,84px)}
+.pj{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,80px);align-items:center}
+.pj .arch{aspect-ratio:4/5;background:var(--bg2);position:relative;box-shadow:var(--shadow);width:min(100%,520px)}
+.pj .arch img{width:100%;height:100%;object-fit:cover}
+.pj h2{font-size:clamp(36px,5vw,68px)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 22px}
+.spec{margin:26px 0;border-top:2px solid var(--fg)}
+.spec div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.spec b{font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.spec span{text-align:right;color:var(--fg)}
+.pn{display:flex;justify-content:space-between;gap:14px;margin-top:46px;flex-wrap:wrap}
+.pn a{text-decoration:none;color:var(--acc);font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.srch{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;margin:0 0 30px}
+.srch input{flex:1 1 260px;max-width:460px;padding:15px 16px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:16px var(--sans);border-radius:0}
+.lrow{display:flex;gap:18px;overflow-x:auto;padding:4px 2px 20px;scroll-snap-type:x proximity}
+.lrow .pc{flex:0 0 190px;scroll-snap-align:start}
+.cv{animation:in .5s ease}
+.bigcta{display:grid;gap:26px;justify-items:start}
+.parallax{will-change:transform}
+@media (max-width:860px){
+ .hero .hg,.story,.fhero,.pj{grid-template-columns:1fr}
+ .hv{height:52vh;min-height:320px;order:-1}
+ .hero .hg{min-height:0}
+ .story .stk{position:relative;top:0;height:46vh}
+ .step{min-height:auto;padding:30px 0;opacity:1}
+ .fhero .arch{justify-self:start}
+}
+@media (prefers-reduced-motion:reduce){
+ .js .rv,.js .rvx{opacity:1;transform:none;transition:none}
+ .ln>*,.hero .sub,.hero .row{animation:none;transform:none;opacity:1}
+ .mq div,.hv .a1,.hv .a3{animation:none}
+ .hv .a img{transition:opacity .3s;transform:none}
+}
+.pill{border:1px solid var(--line);background:var(--card);color:var(--fg);padding:9px 14px;font:600 11.5px var(--sans);letter-spacing:.06em;cursor:pointer;transition:.2s}
+.pill:hover{border-color:var(--acc)}
+/* ===== v3.1 onglets haut de gamme ===== */
+.big{font-size:clamp(42px,6.4vw,92px);line-height:1;letter-spacing:-.015em}
+.big2{font-size:clamp(34px,5.2vw,72px);line-height:1.05}
+.lhero{overflow:hidden}
+.lhg{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(24px,5vw,70px);align-items:center;padding-block:clamp(44px,7vw,96px) 30px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;margin-top:36px;border-top:1px solid rgba(248,218,184,.25);padding-top:22px}
+.kpis b{display:block;font:400 clamp(30px,3.6vw,46px)/1 var(--serif);color:var(--carrot)}
+.kpis span{font:500 11px/1.4 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--soft);display:block;margin-top:6px}
+.trio{position:relative;height:min(62vh,540px);min-height:340px}
+.trio .a{position:absolute;overflow:hidden;border-radius:999px 999px 0 0;background:#3a1f19;box-shadow:0 30px 70px rgba(0,0,0,.35)}
+.trio .a1{left:0;bottom:0;width:32%;height:60%;animation:fl 9s ease-in-out infinite}
+.trio .a2{left:28%;bottom:0;width:44%;height:96%;z-index:2}
+.trio .a3{right:0;bottom:0;width:32%;height:68%;animation:fl 11s ease-in-out infinite reverse}
+.dk .pnone{background:repeating-linear-gradient(135deg,rgba(248,218,184,.06) 0 12px,transparent 12px 24px),#3a1f19;color:var(--soft)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:34px}
+.duoc{background:var(--card);padding:clamp(22px,3vw,36px);border-top:3px solid var(--acc);display:grid;gap:10px;align-content:start}
+.duoc h3{font-size:clamp(26px,3vw,38px);margin:0}.duoc p{color:var(--mute)}
+.ph2{aspect-ratio:16/10;position:relative;margin-top:10px;border-radius:999px 999px 0 0;overflow:hidden}
+.flow2{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:0;margin:34px 0 10px;border-top:2px solid rgba(248,218,184,.25)}
+.flow2 span{position:relative;padding:18px 10px 0 0;font:600 11px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--soft);transition:color .5s}
+.flow2 span::before{content:"";position:absolute;left:0;top:-7px;width:12px;height:12px;border-radius:50%;background:#2B1612;border:2px solid var(--carrot);transform:scale(0);transition:transform .5s}
+.flow2.in span{color:var(--herofg)}.flow2.in span::before{transform:scale(1);background:var(--carrot)}
+.ctl2{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:40px 0}
+.cc{border:1px solid rgba(248,218,184,.22);padding:18px;transition:border-color .3s,transform .3s,background .3s;min-width:0}
+.cc:hover{border-color:var(--carrot);transform:translateY(-4px);background:rgba(248,218,184,.05)}
+.cc b{display:block;font:500 19px var(--serif);margin-bottom:6px}.cc span{font-size:14px;color:var(--soft)}
+.six{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0;border-top:2px solid var(--carrot)}
+.six div{padding:22px 14px 8px 0}.six b{display:block;font:italic 400 clamp(38px,5vw,60px)/1 var(--serif);color:var(--carrot)}.six span{font:600 12px var(--sans);letter-spacing:.16em;text-transform:uppercase}
+.dossier{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px;margin-top:30px}
+.dossier div{background:var(--card);padding:18px;border-left:3px solid var(--acc);min-width:0;transition:transform .3s,box-shadow .3s}
+.dossier div:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.dossier i{font:italic 400 24px var(--serif);color:var(--acc);display:block}.dossier b{display:block;font:600 15px var(--sans)}.dossier span{font-size:13.5px;color:var(--mute)}
+.opbar{height:3px;background:var(--line);margin-bottom:22px}.opbar i{display:block;height:100%;width:12.5%;background:var(--acc);transition:width .5s}
+.offers2{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:26px;margin-top:30px}
+.of{display:grid;gap:12px;align-content:start;min-width:0}
+.of .arch{aspect-ratio:4/5;background:var(--bg2);box-shadow:var(--shadow)}
+.of .arch img{width:100%;height:100%;object-fit:cover;transition:transform 1s}
+.of:hover .arch img{transform:scale(1.07)}
+.of h3{font-size:26px;margin:6px 0 0}.of p{font-size:15px;color:var(--mute)}
+.of .btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.found2{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(24px,5vw,70px);align-items:center}
+.chero .kick,.lhero .kick{margin-bottom:22px}
+.opts{display:grid;gap:10px}
+.opt{text-align:left;background:var(--card);border:1.5px solid var(--line);padding:16px 18px;cursor:pointer;display:grid;gap:4px;transition:border-color .25s,transform .25s,box-shadow .25s;min-width:0}
+.opt:hover{border-color:var(--acc);transform:translateX(4px)}
+.opt[aria-pressed="true"]{border-color:var(--acc);box-shadow:inset 4px 0 0 var(--acc);background:var(--bg2)}
+.opt b{font:500 20px var(--serif)}.opt span{font-size:14px;color:var(--mute)}
+.fb .fs ul li button{transition:background .2s}
+.bk{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin:0 0 22px}
+.bannerbook{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(20px,4vw,56px);align-items:center;background:var(--hero);color:var(--herofg);padding:clamp(24px,4vw,48px);margin:10px 0 44px;text-decoration:none}
+.bannerbook h3{font-size:clamp(28px,3.6vw,46px);color:var(--herofg)}
+.bannerbook p{color:var(--soft);margin:10px 0 20px;max-width:46ch}
+.bannerbook .bimg{aspect-ratio:16/10;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.bannerbook .bimg img{width:100%;height:100%;object-fit:cover;transition:transform 1s}
+.bannerbook:hover .bimg img{transform:scale(1.05)}
+.bannerbook .btn{background:var(--carrot);color:#2B1612}
+@media (max-width:860px){.lhg,.found2,.bannerbook,.duo{grid-template-columns:1fr}.trio{height:40vh;order:-1}.duo{gap:16px}}
+.fb>*{min-width:0}.fs ul{max-width:100%}.fs input{max-width:100%}
+#models{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}.fs ul li{flex:0 0 auto}@media(min-width:861px){.fs ul li{flex:initial}}
+</style>
+</head>
+<body>
+<header class="hd band"><div class="wrap">
+ <img class="logo" src="brand/wordmark-cream.png" alt="OLBA, Baked En Harmonie" data-go="accueil" width="84" height="30">
+ <nav class="tabs" role="tablist" aria-label="Navigation du site">
+  <button role="tab" data-k="accueil" id="t-accueil">Accueil</button>
+  <button role="tab" data-k="catalogue" id="t-catalogue">Catalogue</button>
+  <button role="tab" data-k="laboratoire" id="t-laboratoire">Notre laboratoire</button>
+  <button role="tab" data-k="collaborer" id="t-collaborer">Collaborer</button>
+  <button role="tab" data-k="commander" id="t-commander">Ma demande<span class="badge" id="bd" hidden>0</span></button>
+ </nav>
+</div></header>
+
+<main>
+<!-- ACCUEIL -->
+<section class="panel" id="p-accueil" role="tabpanel" aria-labelledby="t-accueil">
+ <div class="hero dk band">
+  <div class="wrap hg">
+   <div class="hc">
+    <div class="kick">OLBA B2B Solutions · Riyad</div>
+    <h1><span class="ln"><span>L'excellence</span></span><span class="ln"><span>artisanale,</span></span><span class="ln"><em>à l'échelle.</em></span></h1>
+    <p class="sub">Conçu avec expertise. Produit avec régularité. Livré avec fiabilité.</p>
+    <div class="row"><a class="btn" href="#catalogue">Découvrir la gamme</a><a class="btn ghost" href="#commander">Parlez-nous de votre cuisine</a></div>
+    <div class="cap" aria-hidden="true"><b id="hn"></b><span id="hi"></span></div>
+   </div>
+   <div class="hv" id="hv" aria-hidden="true"><div class="halo"></div><div class="a a1" data-i="0"></div><div class="a a2" data-i="1"></div><div class="a a3" data-i="2"></div></div>
+  </div>
+  <div class="birds" role="presentation"></div>
+ </div>
+ <div class="mq" aria-hidden="true"><div id="mq"></div></div>
+ <div class="wrap">
+  <div class="stats">
+   <div class="rv"><b data-n="450" data-s=" m²">450 m²</b><span>Laboratoire de production</span></div>
+   <div class="rv" style="--d:.1s"><b data-n="10000" data-s="">10 000</b><span>Pièces par jour, toutes catégories*</span></div>
+   <div class="rv" style="--d:.2s"><b data-n="199" data-s="">199</b><span>Références au catalogue</span></div>
+   <div class="rv" style="--d:.3s"><b data-n="500" data-s=" SAR">500 SAR</b><span>Commande minimum</span></div>
+  </div>
+  <p class="note" style="margin-top:10px">*La capacité s'exprime toutes catégories confondues et varie selon le type de produit, la complexité, la finition, la taille des lots et l'emballage.</p>
+ </div>
+ <div class="wrap sec">
+  <div class="story">
+   <div class="stk"><div class="arch" id="stk"><img src="img/l01.jpg" alt="" class="on"><img src="img/n0.jpg" alt=""><img src="img/l55.jpg" alt=""></div></div>
+   <div>
+    <div class="step on" data-s="0"><div class="kick" style="margin:0">Notre philosophie</div><i>01</i><h3>Un partenaire, <em>pas un fournisseur.</em></h3><p>Confier une partie de sa production ne doit jamais vouloir dire baisser sa qualité. Nous analysons votre concept, votre exploitation et votre économie avant toute proposition.</p></div>
+    <div class="step" data-s="1"><i>02</i><h3>Chaque produit <em>est un système.</em></h3><p>Un goût, une identité, un coût matière maîtrisé et un process documenté qui se reproduit à l'identique, lot après lot, par n'importe quelle équipe formée.</p></div>
+    <div class="step" data-s="2"><i>03</i><h3>La qualité doit <em>arriver à l'heure.</em></h3><p>Le bon produit, en bonne quantité, dans les bonnes conditions, à l'heure convenue, à chaque fois. Livraison quotidienne, trois fois ou deux fois par semaine, ou sur demande.</p><p><a class="btn ghost" href="#laboratoire" style="color:var(--fg)">Visiter le laboratoire</a></p></div>
+   </div>
+  </div>
+ </div>
+ <div class="alt band"><div class="wrap sec">
+  <div class="kick rv">Le catalogue</div>
+  <h2 class="rv">Quinze familles, <em>une seule exigence.</em></h2>
+  <p class="lead rv" style="margin-bottom:30px">Faites défiler, ouvrez une famille, choisissez vos produits : ils rejoignent votre demande.</p>
+  <div class="rail" id="hrail"></div>
+  <p><a class="btn" href="#catalogue">Tout le catalogue</a></p>
+ </div></div>
+ <div class="wrap sec">
+  <div class="kick rv">Ce que nous produisons</div>
+  <h2 class="rv">Un standard, <em>plusieurs formats.</em></h2>
+  <p class="lead rv">La 10<sup>e</sup>, la 100<sup>e</sup> ou la 1 000<sup>e</sup> pièce doit offrir la même expérience.</p>
+  <div class="lanes">
+   <div class="now rv"><span class="tag" style="color:var(--carrot)">Disponible aujourd'hui</span><h3>Produit frais</h3><p>Cuit et fini, prêt à vendre, livré le jour même. Durée de vie de 4 à 12 h.</p></div>
+   <div class="rv" style="--d:.15s">
+    <span class="lbl">Capacité future · déploiement rapide, à discuter selon vos besoins</span>
+    <div class="next">
+     <div><b>Surgelé cru</b><span>Pousse et cuisson sur place</span></div>
+     <div><b>Surgelé précuit</b><span>Finition de cuisson sur place</span></div>
+     <div><b>Surgelé cuit</b><span>Décongeler et servir</span></div>
+     <div><b>Pâtisserie surgelée</b><span>Décongeler et servir</span></div>
+     <div><b>Composants de pâtisserie</b><span>Assembler et finir sur place</span></div>
+    </div>
+    <p class="note">Déploiement rapide, après validation de la chaîne du froid.</p>
+   </div>
+  </div>
+ </div>
+ <div class="alt band"><div class="wrap sec">
+  <div class="kick rv">Quatre niveaux de production</div>
+  <h2 class="rv">Le bon niveau pour <em>votre projet.</em></h2>
+  <div class="levels rv" style="margin-top:28px">
+   <div><b>Premium Craft</b><span>Process artisan complet OLBA : beurre AOP, laminage manuel, finition à la main.</span></div>
+   <div><b>Standard</b><span>Recette OLBA complète, optimisée pour un volume B2B régulier.</span></div>
+   <div><b>Essential</b><span>Recette simplifiée et process allégé pour l'efficacité en volume.</span></div>
+   <div><b>Recette sur mesure</b><span>Votre recette, fabriquée selon votre cahier des charges. Validation R&amp;D incluse ; vous gardez la propriété intellectuelle.</span></div>
+  </div>
+ </div></div>
+ <div class="dk band"><div class="wrap sec bigcta">
+  <div class="kick rv" style="margin:0">La qualité commence par les ingrédients</div>
+  <p class="quote rv">Nous optimisons le coût. <em>Jamais la qualité.</em></p>
+  <p class="lead rv" style="max-width:62ch">Le coût s'optimise par un meilleur sourcing, l'efficacité de production, le rendement, les achats en volume, la réduction des pertes, l'ingénierie des recettes et la planification, jamais en remplaçant un chocolat, un beurre, une farine ou une préparation de fruits par une qualité inférieure.</p>
+  <a class="btn rv" href="#commander">Démarrer une demande</a>
+ </div></div>
+</section>
+
+<!-- CATALOGUE -->
+<section class="panel" id="p-catalogue" role="tabpanel" aria-labelledby="t-catalogue">
+ <div class="wrap sec" id="cv"></div>
+</section>
+
+<!-- LABORATOIRE -->
+<section class="panel" id="p-laboratoire" role="tabpanel" aria-labelledby="t-laboratoire">
+ <div class="dk band lhero"><div class="wrap lhg">
+  <div>
+   <div class="kick">Notre laboratoire · Riyad</div>
+   <h1 class="big"><span class="ln"><span>Production</span></span><span class="ln"><span>professionnelle.</span></span><span class="ln"><em>Esprit artisan.</em></span></h1>
+   <p class="lead" style="margin-top:22px">Un laboratoire professionnel de boulangerie, de pâtisserie et de production alimentaire, organisé comme une plateforme de production structurée plutôt que comme une cuisine unique.</p>
+   <div class="kpis"><div><b data-n="450" data-s=" m²">450 m²</b><span>Laboratoire</span></div><div><b data-n="10000" data-s="">10 000</b><span>Pièces par jour*</span></div><div><b data-n="10" data-s="">10</b><span>Éléments de plateforme</span></div><div><b data-n="6" data-s="">6</b><span>Standards qualité</span></div></div>
+  </div>
+  <div class="trio" aria-hidden="true"><div class="a a1"><img src="img/lab3.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><div class="a a2"><img src="img/lab2.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><div class="a a3"><img src="img/lab1.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div></div>
+ </div>
+ <div class="wrap"><p class="note" style="color:var(--soft);margin:0 0 28px">*Capacité exprimée toutes catégories confondues, selon le type de produit, la complexité, la finition, la taille de lot et l'emballage. Visuels d’illustration ; photographies du laboratoire après le shooting de marque du mercredi 28 octobre.</p></div></div>
+
+ <div class="wrap sec">
+  <div class="kick rv">Ce que comprend la plateforme</div>
+  <h2 class="rv">Dix éléments, <em>un seul standard.</em></h2>
+  <div class="opm" style="margin-top:34px"><ol id="pll"></ol><div class="opd" id="pld" aria-live="polite"></div></div>
+ </div>
+
+ <div class="alt band"><div class="wrap sec">
+  <div class="kick rv">L'artisanat à l'échelle</div>
+  <h2 class="rv big2">Mécaniser le process. <em>Préserver le geste.</em></h2>
+  <p class="lead rv">L'équipement professionnel et la mécanisation sélective n'interviennent que là où ils améliorent la précision, la régularité et la capacité, jamais à la place du jugement d'un chef formé.</p>
+  <div class="duo">
+   <div class="duoc rv"><span class="lbl">Le savoir-faire</span><h3>Le geste français</h3><p>Technique, finition, goût et texture : ce qu'une machine ne sait pas juger seule. Le chef décide, la machine répète.</p><div class="ph2"><img src="img/lab2.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div></div>
+   <div class="duoc rv" style="--d:.15s"><span class="lbl">La capacité</span><h3>L'équipement professionnel</h3><p>Précision répétable, régularité d'un lot à l'autre, capacité de servir le retail et le B2B ensemble, avec des fours Bongard.</p><div class="ph2"><img src="img/lab1.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div></div>
+  </div>
+ </div></div>
+
+ <div class="dk band"><div class="wrap sec">
+  <div class="kick rv">Qualité et sécurité alimentaire</div>
+  <h2 class="rv">La qualité est contrôlée. <em>Pas supposée.</em></h2>
+  <p class="lead rv">Des procédures fondées sur le HACCP, appuyées par des SOP, un suivi, de la formation et des contrôles, sous une supervision Sécurité alimentaire, Hygiène et Qualité indépendante de la production.</p>
+  <div class="flow2 rv" id="fl2"></div>
+  <div class="ctl2" id="ctrl"></div>
+  <div class="six rv" id="six"></div>
+ </div></div>
+
+ <div class="wrap sec">
+  <div class="kick rv">Standardisation</div>
+  <h2 class="rv">La recette appartient <em>au système.</em></h2>
+  <p class="lead rv">Une fois un produit approuvé, il est documenté pour être reproduit à l'identique, par n'importe quelle équipe formée et à n'importe quelle taille de lot, sans dépendre de la mémoire d'un seul chef. Chaque produit approuvé a son dossier :</p>
+  <div class="dossier" id="docs"></div>
+  <p class="quote rv" style="margin-top:56px">Un partenaire n'achète pas le talent d'un chef un jour donné. Il achète un système documenté et maîtrisé qui reproduit le même produit, que la commande soit de <em>dix pièces ou de dix mille.</em></p>
+  <p class="rv" style="margin-top:30px"><a class="btn" href="#collaborer">Choisir un modèle de collaboration</a></p>
+ </div>
+</section>
+
+<!-- COLLABORER -->
+<section class="panel" id="p-collaborer" role="tabpanel" aria-labelledby="t-collaborer">
+ <div class="dk band chero"><div class="wrap sec" style="padding-bottom:30px">
+  <div class="kick">Modèles de collaboration</div>
+  <h1 class="big"><span class="ln"><span>Choisissez votre niveau</span></span><span class="ln"><em>d'intégration.</em></span></h1>
+  <p class="lead" style="margin-top:20px">Quatre façons de travailler avec OLBA, du catalogue prêt à produire au développement sur mesure. Sélectionnez un modèle pour voir le parcours.</p>
+ </div></div>
+ <div class="wrap sec" style="padding-top:44px">
+  <div class="models" id="models"></div>
+  <div class="path" id="path" aria-live="polite"></div>
+  <p class="note">Les partenariats de fabrication B2B reposent sur une durée de contrat, des volumes minimum, une grille de prix par produit, une clause de révision du prix des matières et des engagements qualité définis ensemble. Les conditions tarifaires sont communiquées sur devis.</p>
+ </div>
+
+ <div class="alt band"><div class="wrap sec">
+  <div class="kick rv">R&amp;D · méthode OPM</div>
+  <h2 class="rv">D'une idée à un produit <em>prêt à produire.</em></h2>
+  <p class="lead rv" style="margin-bottom:30px">Une seule méthode : OPM, OLBA Product Methodology, en huit phases. Optimiser le produit. Ne jamais le dégrader.</p>
+  <div class="opbar"><i id="opf"></i></div>
+  <div class="opm"><ol id="opl"></ol><div class="opd" id="opd" aria-live="polite"></div></div>
+  <div class="row" style="margin-top:20px"><button class="btn ghost" id="opp" style="color:var(--fg)">← Précédent</button><button class="btn" id="opn">Suivant →</button></div>
+ </div></div>
+
+ <div class="wrap sec">
+  <div class="kick rv">Livrables et ingénierie des coûts</div>
+  <h2 class="rv">Ce que vous recevez, <em>et ce que cela coûte.</em></h2>
+  <p class="lead rv">À l'issue d'un développement, vous détenez un dossier produit complet, structuré et immédiatement exploitable, bien au-delà d'un simple jeu de recettes.</p>
+  <div class="grid" style="margin-top:28px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+   <div class="card rv"><span class="lbl">Produits et recettes</span><ul><li>Produits signature développés de zéro</li><li>Recettes standardisées, testées en production</li><li>Poids et rendements validés</li><li>Liste d'ingrédients et fournisseurs recommandés</li></ul></div>
+   <div class="card rv" style="--d:.08s"><span class="lbl">Performance économique</span><ul><li>Food cost optimisé par produit</li><li>Prix de vente recommandé</li><li>Objectif de marge documenté</li></ul></div>
+   <div class="card rv" style="--d:.16s"><span class="lbl">Documentation de production</span><ul><li>Fiches techniques complètes</li><li>Fiches process et SOP</li><li>Temps opératoires et points de contrôle</li><li>Conditions de stockage et durée de vie</li></ul></div>
+   <div class="card rv" style="--d:.24s"><span class="lbl">Documentation commerciale</span><ul><li>Fiches vendeur et argumentaires</li><li>Allergènes, valeurs nutritionnelles (sur demande)</li><li>Conseils de conservation et de présentation</li><li>Éléments de storytelling</li></ul></div>
+  </div>
+  <div class="tbl rv"><table><tr><th>Paramètre défini ensemble</th><th>Ce qu'il détermine</th></tr>
+   <tr><td>Prix de vente cible</td><td>Le positionnement du produit dans la gamme et face au marché.</td></tr>
+   <tr><td>Food cost cible</td><td>Le budget ingrédients par produit et le choix des matières.</td></tr>
+   <tr><td>Marge brute attendue</td><td>La contribution du produit à votre rentabilité.</td></tr>
+   <tr><td>Niveau de qualité souhaité</td><td>La référence matière : premium, signature ou accessible.</td></tr>
+   <tr><td>Volumes prévus</td><td>Les choix de process et le dimensionnement de la production.</td></tr>
+   <tr><td>Contraintes de production</td><td>La complexité maximale acceptable de la recette.</td></tr></table></div>
+ </div>
+
+ <div class="alt band"><div class="wrap sec">
+  <div class="kick rv">Au-delà du catalogue</div>
+  <h2 class="rv">Des offres <em>pour aller plus loin.</em></h2>
+  <div class="offers2">
+   <div class="of rv"><div class="arch"><img loading="lazy" src="img/h1.jpg" alt=""></div><h3>Abonnements B2B</h3><p>Un approvisionnement régulier, sans y penser. Livraison quotidienne, 3 fois, 2 fois par semaine ou hebdomadaire. Sélection ajustable avec 48 h de préavis, tarif adapté au volume et à la durée.</p><div class="btns"><span class="tag">Sur demande · sur devis</span><button class="btn" data-add="Abonnement B2B">Ajouter</button></div></div>
+   <div class="of rv" style="--d:.1s"><div class="arch"><img loading="lazy" src="img/k1.jpg" alt=""></div><h3>Event Box</h3><p>Votre événement clé en main : location de notre box et de nos plateaux, avec ou sans notre équipe. Hôtels, mariages, réunions, lancements.</p><div class="btns"><span class="tag">Sur demande · sur devis</span><button class="btn" data-add="Event Box">Ajouter</button></div></div>
+   <div class="of rv" style="--d:.2s"><div class="arch"><img loading="lazy" src="img/k0.jpg" alt=""></div><h3>Box cadeaux</h3><p>Assortiments de pâtisseries, pralinés et confitures maison. Cadeaux d'entreprise, fêtes et Ramadan, personnalisables. Box pour réceptions : desserts individuels et mignardises.</p><div class="btns"><span class="tag">Sur demande · sur devis</span><button class="btn" data-add="Box cadeaux">Ajouter</button></div></div>
+   <div class="of rv" style="--d:.3s"><div class="arch"><img loading="lazy" src="img/h0.jpg" alt=""></div><h3>Marque blanche</h3><p>Deux façons de travailler sous votre nom. Votre recette, notre production. Ou notre recette, votre marque : une recette OLBA, ou développée pour vous par notre R&amp;D.</p><div class="btns"><span class="tag">Sur demande · sur devis</span><button class="btn" data-add="Marque blanche">Ajouter</button></div></div>
+  </div>
+  <p class="note">Dans tous les cas : conformité SFDA, fiches techniques et allergènes, durée de vie validée, régularité de production. Volumes minimum, étiquetage et délais sur devis. Les offres sont déployées progressivement, au rythme de la capacité du laboratoire.</p>
+ </div></div>
+
+ <div class="wrap sec">
+  <div class="kick rv">Approvisionnement et services</div>
+  <h2 class="rv">La régularité commence <em>à l'achat.</em></h2>
+  <p class="lead rv">Un produit validé en R&amp;D ne reste fidèle en production que si ses ingrédients le restent aussi. Nous sécurisons ce maillon : sélection et qualification des matières premières et des fournisseurs, standardisation des références, mise en relation avec notre réseau de partenaires, mutualisation des volumes lorsque c'est possible.</p>
+  <div class="grid" style="margin-top:28px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+   <div class="card rv"><span class="lbl">Formation à la production</span><ul><li>Formation des équipes de production</li><li>Transmission des process et conformité des poids</li><li>Contrôle qualité et organisation de la production</li></ul></div>
+   <div class="card rv" style="--d:.08s"><span class="lbl">Formation à la vente</span><ul><li>Argumentaires et storytelling produit</li><li>Présentation client et traitement des objections</li><li>Conseils de stockage en point de vente</li></ul></div>
+   <div class="card rv" style="--d:.16s"><span class="lbl">Suivi qualité</span><ul><li>Audits de production et contrôle des standards</li><li>Amélioration continue et correction des écarts</li><li>Suivi de la performance produit</li></ul></div>
+   <div class="card rv" style="--d:.24s"><span class="lbl">Développement de gamme</span><ul><li>Éditions limitées et produits de saison</li><li>Nouvelles gammes et variantes de recettes</li><li>Optimisation des produits existants</li></ul></div>
+  </div>
+ </div>
+ <div class="dk band"><div class="wrap sec found2">
+  <div><span class="lbl" style="color:var(--carrot)">Le programme partenaire fondateur</span><h2 class="rv">Soyez parmi les premiers à <em>façonner la gamme OLBA.</em></h2><p class="lead rv">Un nombre limité de partenaires est invité à construire le programme avec nous. Les conditions se discutent en tête-à-tête avec notre équipe B2B.</p><a class="btn rv" href="#commander">Parlons-en</a></div>
+  <div class="arch rvx" style="aspect-ratio:4/5;max-width:360px;justify-self:end;width:100%"><img src="img/k2.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+ </div></div>
+</section>
+
+<!-- DEMANDE -->
+<section class="panel" id="p-commander" role="tabpanel" aria-labelledby="t-commander">
+ <div class="dk band chero"><div class="wrap sec" style="padding-bottom:36px">
+  <div class="kick">Logistique et fiabilité B2B</div>
+  <h1 class="big"><span class="ln"><span>La qualité doit</span></span><span class="ln"><em>arriver à l'heure.</em></span></h1>
+  <p class="lead" style="margin-top:20px">Le bon produit, en bonne quantité, dans les bonnes conditions, à l'heure convenue, à chaque fois.</p>
+  <div class="kpis"><div><b data-n="500" data-s=" SAR">500 SAR</b><span>Commande minimum</span></div><div><b>48 h</b><span>Délai sur demande · dernière commande à 17 h la veille</span></div><div><b>Jour même*</b><span>Produits frais, dans Riyad</span></div></div>
+  <p class="note" style="color:var(--soft)">*Selon le type de produit, la quantité, l'heure limite de commande, le temps de préparation et la capacité disponible.</p>
+ </div></div>
+ <div class="wrap sec" style="padding-top:44px">
+  <div class="cmd">
+   <div>
+    <span class="lbl">1 · Fréquence de livraison</span>
+    <div class="opts" data-set="s3">
+     <button class="opt" data-val="Quotidienne"><b>Quotidienne</b><span>Chaque jour d'activité. Recommandée pour le produit frais.</span></button>
+     <button class="opt" data-val="3 fois par semaine"><b>3 fois par semaine</b><span>Lundi, mercredi, vendredi. Volume modéré.</span></button>
+     <button class="opt" data-val="2 fois par semaine"><b>2 fois par semaine</b><span>Dimanche, mercredi, ou selon accord. Comptes à plus faible volume.</span></button>
+     <button class="opt" data-val="Sur demande"><b>Sur demande</b><span>Commande par commande. Délai minimum de 48 h.</span></button>
+    </div>
+    <span class="lbl" style="margin-top:34px">2 · Mode de réception</span>
+    <div class="opts" data-set="s2">
+     <button class="opt" data-val="Livraison OLBA"><b>Livraison OLBA</b><span>Au démarrage, livraison confiée à un transporteur partenaire pour les petits volumes ; flotte réfrigérée OLBA à mesure que les volumes montent.</span></button>
+     <button class="opt" data-val="Retrait au laboratoire"><b>Retrait par le client</b><span>Au laboratoire OLBA, sur un créneau convenu.</span></button>
+     <button class="opt" data-val="Transporteur tiers"><b>Transporteur tiers</b><span>Votre transporteur ou coursier ; OLBA prépare et emballe à quai.</span></button>
+    </div>
+    <p class="note">Conformité SFDA : composition, allergènes, durée de vie et conditions de conservation fournis pour chaque produit.</p>
+   </div>
+   <form class="form" id="fm" onsubmit="return false">
+    <div class="kick" style="margin:0">3 · Parlez-nous de votre cuisine</div>
+    <h3>Votre demande</h3>
+    <p class="note" style="margin:0">Indiquez vos produits, volumes, format de fourniture, stockage, fours et organisation de livraison de votre site : nous confirmons les formats que votre cuisine peut accueillir.</p>
+    <div class="cart"><span class="lbl" style="margin:0">Ma sélection</span><ul id="cu"></ul><p class="e" id="ce">Rien pour l'instant. Ajoutez des produits depuis le <a href="#catalogue" style="color:var(--acc)">catalogue</a> ou des offres depuis l'onglet Collaborer.</p></div>
+    <div class="f2"><label for="n1">Société<input id="n1" autocomplete="organization"></label><label for="n2">Contact<input id="n2" autocomplete="name"></label></div>
+    <div class="f2">
+     <label for="s1">Activité<select id="s1"><option>Café ou boulangerie</option><option>Hôtel ou restaurant</option><option>Traiteur ou événementiel</option><option>Franchise ou chaîne</option><option>Autre</option></select></label>
+     <label for="v1">Volumes estimés<input id="v1" placeholder="Pièces par jour ou par semaine"></label>
+    </div>
+    <div style="display:none"><select id="s2"><option>Livraison OLBA</option><option>Retrait au laboratoire</option><option>Transporteur tiers</option></select><select id="s3"><option>Quotidienne</option><option>3 fois par semaine</option><option>2 fois par semaine</option><option>Sur demande</option></select></div>
+    <label for="e1">Stockage, fours, livraison<textarea id="e1" rows="2" placeholder="Équipement de votre site, stockage froid, horaires de réception"></textarea></label>
+    <label for="m1">Message<textarea id="m1" rows="2" placeholder="Votre projet en quelques lignes"></textarea></label>
+    <div class="out" id="out" aria-live="polite"></div>
+    <div class="row"><button class="btn" id="cp" type="button">Copier la demande</button><button class="btn ghost" id="cl" type="button" style="color:var(--fg)">Vider la sélection</button></div>
+    <div class="mail"><span>Envoyez-la à</span><code id="em">partnerships@olbabakehouse.com</code><button class="btn ghost" id="ce2" type="button" style="padding:9px 14px;color:var(--fg)">Copier l'adresse</button></div>
+   </form>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer class="ft dk band"><div class="wrap">
+ <div><img src="brand/wordmark-cream.png" alt="OLBA, Baked En Harmonie" width="120" height="43"><p style="margin-top:14px">D'une idée. À un produit. À l'échelle.</p></div>
+ <div><h4>Contact</h4><p>partnerships@olbabakehouse.com<br>Riyad, Arabie saoudite</p></div>
+ <div><h4>Conditions</h4><p>Commande minimum 500 SAR<br>Délai de 48 h sur demande</p></div>
+</div></footer>
+<div class="toast" id="ts" role="status"></div>
+
+<script>(function(){var $=function(s){return document.querySelector(s)};var esc=function(s){return String(s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})};document.documentElement.classList.add("js");
+ var LAUNCH=[["Viennoiserie",["Croissant","Pain au chocolat","Croissant aux amandes","Danish"]],["Boulangerie",["Pain au levain","Challah","Pain coca","Focaccia","Focaccia arc-en-ciel","Pain bun homard","Bun","Bun burger sésame","Pain hot-dog","English muffin","Pain brioché","Bagels","Pain aux olives"]]];
+ var FAM=[
+  ["cheesecakes","Les cheesecakes","CHS",4,["Cheesecake nature","Cheesecake Madrid","Cheesecake San Sebastian","San Sebastian individuel","Cheesecake japonais","Cheesecake café","Cheesecake Lotus","Cheesecake safran","Cheesecake dattes & caramel de pécan","Cheesecake pistache, cardamome & rose","Cheesecake Oreo","Cheesecake Snickers","Cheesecake Galaxy chocolat","Cheesecake red velvet","Cheesecake rond fruits rouges","Cheesecake rond myrtille","Cheesecake myrtille","Cheesecake rond fraise","Cheesecake fraise tranché","Cheesecake renversé"]],
+  ["gateaux","Les gâteaux","GAT",12,["Gâteau Dolce","Gâteau London","Gâteau Galaxy chocolat","Gâteau chocolat fruits rouges","Gâteau choco-vanille glacé","Gâteau Snickers carré","Crunch chocolat","Coco Berry","Tiramisu rond","Tiramisu carré","Gâteau au miel rond","Gâteau au miel carré","Gâteau red velvet","Carrot cake","Gâteau lavande","English cake marbré","Mille-feuille","Fraisier","Framboisier pistache","Opéra","Forêt-noire","Saint-Honoré","Sticky date cake","Entremets safran & pistache"]],
+  ["tartes","Tartes et tartelettes","TAR",21,["Tarte aux fruits de saison","Tartelette citron meringuée","Tartelette citron","Tartelette chocolat","Tartelette framboise","Tartelette fraise","Tartelette fruits rouges","Tarte aux noix de pécan","Tartelette pistache & framboise","Tartelette safran & poire","Tartelette dattes, caramel & tahini"]],
+  ["fondants","Fondants et moelleux","FON",26,["Fondant chocolat","Lava cake","Moelleux chocolat","Moelleux dattes","Fondant café arabe & cardamome","Fondant tahini & sésame","Moelleux Lotus","Moelleux pistache","Moelleux red velvet"]],
+  ["individuels","Individuels et snacking","IND",30,["Cheesecake pécan en boîte","Pudding chocolat-noisette","Gâteau chocolat en boîte","Pudding chocolat","Muffin vanille enrobé","Muffin chocolat enrobé","Brownie","Brownie dattes & tahini","Cookies pépites de chocolat","Éclairs","Éclair dattes & café arabe","Religieuses","Paris-Brest","Chouquettes","Profiteroles","Flan pâtissier","Crumble aux pommes","Verrines"]],
+  ["viennoiserie","Viennoiserie","VIE",37,["Croissant","Croissant zaatar","Croissant halloumi","Croissant dattes & cannelle","Croissant wheel","Pain au chocolat","Pain suisse","Pain au lait","Pain aux raisins","Croissant aux amandes","Chausson aux pommes","Danish à l'abricot","Cinnamon roll","Kouign-amann","Brioche feuilletée","Babka au chocolat"]],
+  ["boulangerie","Boulangerie","BOU",44,["Baguette au levain","Pain au levain","Pain de campagne","Pain complet","Pain de seigle","Pain rustique","Ciabatta","Focaccia","Fougasse olives","Pain pita","Manakish zaatar","Pain dattes & noix","Pain halloumi & menthe","Bagels","Buns burger briochés","Pain hot-dog","Pain brioché","Pain de mie","Petit pain de table"]],
+  ["sale","Le salé","SAL",52,["Quiche lorraine","Tartelettes halloumi & tomate","Feuilletés au fromage","Roulés labneh & zaatar","Croque-monsieur","Sandwich halloumi","Sandwich poulet","Pizza","Cake salé olives & tomates","Sambousek fromage & herbes"]],
+  ["biscuits","Biscuits et petits gâteaux","BIS",57,["Pâte à cookies à cuire","Gaufre belge","Macarons français","Madeleines","Financiers pistache & safran","Travel cake marbré","Mini marble cake","Mini cakes","Cake citron","Sablés cardamome & pistache","Tuiles aux amandes","Meringues","Granola dattes & noix"]],
+  ["saveurs","Saveurs locales","LOC",63,["Baklava pistache","Kunafa","Maamoul dattes","Basbousa","Umm Ali","Qatayef","Dattes fourrées","Luqaimat"]],
+  ["chocolat","Chocolat : coques et décors","CHO",67,["Coques chocolat noir","Coques chocolat au lait","Coques chocolat blanc & safran","Décors chocolat"]],
+  ["pralines","Pralinés, pâtes et confitures maison","MAL",70,["Praliné maison amande","Praliné maison noix de pécan","Praliné maison cacahuète","Praliné maison pistache","Praliné maison noisette","Praliné maison mixte","Praliné maison tahini","Pâte de dattes maison","Confiture de fruits rouges","Confiture de fraise","Confiture de framboise","Confiture d'abricot","Confiture de figue & cardamome"]],
+  ["cremes","Crèmes et garnitures","CRE",76,["Crème pâtissière","Ganache chocolat","Crème d'amande","Crème safran & cardamome","Crème pistache","Crème labneh citron","Lemon curd","Chantilly vanille","Coulis fruits rouges","Glaçage miroir chocolat","Caramel beurre salé","Caramel de dattes"]],
+  ["semifinis","Semi-finis et assemblés","SEM",81,["Entremets assemblés, à finir","Fond génoise vanille","Fond génoise chocolat","Base biscuit aux dattes","Biscuit joconde","Dacquoise amande-noisette","Biscuit à la cuillère","Feuilletage pur beurre","Pâton croissant cru","Pâte à brioche","Pâte à choux","Fonds de tarte","Fonds de tarte crus","Kataifi"]],
+  ["box","Box et coffrets","BOX",87,["Box mignardises","Box cadeau entreprise","Box réception","Box viennoiserie du matin","Box salé","Box Ramadan","Box Aïd","Box d'automne"]]
+ ];
+
+
+ /* ===== catalogue v3 ===== */
+ var INTRO={cheesecakes:"Du nature au signature : San Sebastian, japonais, Lotus, safran, pistache, fruits rouges.",gateaux:"Entremets et gâteaux de partage : tiramisu, red velvet, carrot cake, fraisier, opéra.",tartes:"Tartes et tartelettes aux fruits, au chocolat, aux noix de pécan, à la pistache et au safran.",fondants:"Fondants, lava cakes et moelleux : chocolat, dattes, Lotus, pistache, café arabe.",individuels:"Formats individuels et snacking : brownies, muffins, éclairs, puddings, cookies, verrines.",viennoiserie:"Croissants, pains au chocolat et viennoiseries signature au zaatar, au halloumi, aux dattes.",boulangerie:"Du pain au levain aux buns, à la focaccia, à la pita et au manakish : la base d'une boulangerie.",sale:"Quiches, feuilletés, sandwichs et pizzas pour la restauration et le snacking.",biscuits:"Biscuits, macarons, madeleines, financiers, gaufres et pâte à cookies à cuire.",saveurs:"Baklava, kunafa, maamoul, basbousa, umm ali : les saveurs locales, signées OLBA.",chocolat:"Coques et décors en chocolat noir, au lait et blanc.",pralines:"Pralinés, pâte de dattes et confitures maison, de la noisette à la figue.",cremes:"Crèmes et garnitures : pâtissière, ganache, pistache, lemon curd, caramels.",semifinis:"Semi-finis et bases : génoises, dacquoise, feuilletage, pâtes crues, fonds de tarte.",box:"Box mignardises, cadeaux, réception, Ramadan et Aïd."};
+ var FIMG={cheesecakes:"l00",gateaux:"l19",tartes:"gTart",fondants:"l34",individuels:"l42",viennoiserie:"l53",boulangerie:"n3",biscuits:"l51",saveurs:"v_bak",chocolat:"gChoc",pralines:"n4",cremes:"gCrem",semifinis:"gSemi",box:"k0",sale:"gSale"};
+ var PH={
+  cheesecakes:{0:"l00",1:"l01",2:"l02",3:"l03",4:"l04",5:"l05",6:"l06",7:"l07",8:"l41",9:"ck_pis",10:"l08",11:"l09",12:"l10",13:"l11",14:"l12",15:"l13",16:"l14",17:"l15",18:"l16",19:"l17"},
+  gateaux:{0:"l18",1:"l19",2:"l20",3:"l21",4:"l22",5:"l23",6:"l24",7:"l25",8:"l26",9:"l27",10:"l28",11:"l29",12:"l30",13:"l31",14:"l32",15:"l33",16:"g_mil",17:"g_fra",18:"g_fmb",19:"g_ope",20:"g_for",21:"g_sth",22:"g_stk",23:"g_saf"},
+  tartes:{0:"t_fru",1:"t_lmg",2:"t_lem",3:"t_cho",4:"t_ras",5:"t_str",6:"t_mix",7:"t_pec",8:"t_pis",9:"t_saf",10:"t_dat"},
+  fondants:{0:"l34",1:"l35",2:"l36",3:"l37",4:"fd_caf",5:"fd5",6:"l38",7:"l39",8:"l40"},
+  individuels:{0:"l41",1:"l42",2:"l43",3:"l44",4:"l45",5:"l46",6:"l47",7:"i_bro",8:"l48",9:"i_ecl",10:"i_ecd",11:"i_rel",12:"i_par",13:"i_chq",14:"i_pro",15:"i_fla",16:"i_cru",17:"i_ver"},
+  viennoiserie:{11:"vi_dan",12:"vi_cin",13:"vi_kou",0:"l53",1:"vi_zaa",2:"vi_hal",3:"vi_dat",4:"l52",5:"n0",6:"n1",7:"vi_lai",8:"n2",9:"h3",10:"vi_cha",14:"vi_bri",15:"vi_bab"},
+  boulangerie:{7:"bo_foc",18:"bo_pet",0:"n3",1:"h4",2:"bo_cam",3:"bo_com",4:"bo_sei",5:"bo_rus",6:"bo_cia",8:"bo_fou",9:"bo_pit",10:"bo_man",11:"bo_dat",12:"bo_hal",13:"bo_bag",14:"h6",15:"bo_hot",16:"l54",17:"h5"},
+  biscuits:{0:"l49",1:"l50",2:"l51",3:"h7",4:"b_fin",5:"h8",6:"h8",7:"h9",8:"h9",9:"b_sab",10:"b_tuil",11:"b_mer",12:"b_gran"},
+  pralines:{0:"n4",1:"n5",2:"p_pea",3:"n6",4:"h10",5:"n7",6:"p_tah",7:"p_dat",8:"n11",9:"n8",10:"h11",11:"n9",12:"n10"},
+  sale:{0:"sa_qui",1:"sa_tar",2:"sa_feu",3:"sa_rou",4:"sa_cro",5:"sa_hal",6:"sa_chi",7:"sa_piz",8:"sa_cak",9:"sa_sam"},
+  saveurs:{0:"v_bak",1:"v_kun",2:"v_maa",3:"v_bas",4:"v_umm",5:"v_qat",6:"v_dat",7:"v_luq"},
+  chocolat:{0:"ch_dk",1:"ch_mk",2:"ch_wh",3:"ch_dec"},
+  cremes:{0:"c_pat",1:"c_gan",2:"c_alm",3:"c_saf",4:"c_pist",5:"c_lab",6:"c_lem",7:"c_cha",8:"c_cou",9:"c_mir",10:"c_sal",11:"c_dat"},
+  semifinis:{0:"s_ent",1:"s_gva",2:"s_gch",3:"s_date",4:"s_joc",5:"s_dac",6:"s_cui",7:"s_puf",8:"s_cro",9:"s_bri",10:"s_chx",11:"s_tsh",12:"s_raw",13:"s_kat"},
+  box:{0:"bx0",1:"bx1",2:"bx2",3:"bx3",4:"bx4",5:"bx5",6:"bx6",7:"bx7"}
+ };
+ var ALL=[];FAM.forEach(function(f,fi){f[4].forEach(function(n,i){var m=PH[f[0]]&&PH[f[0]][i];ALL.push({c:f[2]+"-"+(i<9?"0":"")+(i+1),n:n,f:fi,i:i,img:m||null})})});
+ var LSET={};LAUNCH.forEach(function(g){g[1].forEach(function(n){LSET[n.toLowerCase()]=1})});
+ function isL(p){return(FAM[p.f][0]==="viennoiserie"||FAM[p.f][0]==="boulangerie")&&LSET[p.n.toLowerCase()]}
+ function byCode(c){for(var i=0;i<ALL.length;i++)if(ALL[i].c===c)return ALL[i]}
+ function pic(id,alt,w){return'<img loading="lazy" src="img/'+id+'.jpg" alt="'+esc(alt||"")+'"'+(w?' width="'+w+'"':"")+'>'}
+ function none(){return'<div class="pnone"><img src="brand/emblem-cocoa.png" alt="">Photo à venir</div>'}
+ function fcard(i,d){var f=FAM[i],im=FIMG[f[0]];return'<a class="fc rv" style="--d:'+(d||0)+'s" href="#catalogue/'+f[0]+'"><div class="arch">'+(im?pic(im,f[1]):none())+'</div><div class="nm"><span>'+f[1]+'</span><small>'+f[4].length+'</small></div></a>'}
+ function pcard(p,d){return'<div class="pc rv" style="--d:'+(d||0)+'s"><a href="#produit/'+p.c+'"><div class="im">'+(p.img?pic(p.img,p.n):none())+(isL(p)?'<span class="fl">Frais</span>':"")+'</div><div class="tx"><small>'+p.c+'</small><b>'+esc(p.n)+'</b></div></a><button class="add" data-add="'+p.c+' '+esc(p.n)+'" aria-label="Ajouter '+esc(p.n)+'">+</button></div>'}
+ var cv=$("#cv");
+ function setCv(h){cv.innerHTML='<div class="cv">'+h+'</div>'}
+ function catHome(){
+  var h='<div class="kick">Catalogue</div><h2>Ce que nous livrons, <em>ce que nous construisons.</em></h2><p class="lead" style="margin-bottom:30px">Quinze familles, '+ALL.length+' références. On commence avec ce que l\'on maîtrise : 17 produits frais. On élargit au rythme de la qualité.</p>';
+  h+='<a class="bannerbook rv" href="#livre"><div><span class="lbl" style="color:var(--carrot)">Édition complète</span><h3>Le catalogue à feuilleter</h3><p>Les 100 pages du catalogue OLBA B2B, familles, formats et récapitulatif. À parcourir en ligne, à imprimer ou à enregistrer en PDF.</p><span class="btn">Ouvrir le catalogue</span></div><div class="bimg"><img loading="lazy" src="pages/p-01.jpg" alt="Couverture du catalogue OLBA"></div></a>';
+  h+='<div class="srch"><input id="gq" type="search" placeholder="Chercher un produit ou une référence" aria-label="Chercher un produit"><span class="cnt" id="gc"></span></div>';
+  h+='<div id="gres" hidden><div class="pgrid" id="gg"></div><p class="empty" id="ge" hidden>Aucun produit ne correspond. Essayez un autre mot, ou demandez un développement sur mesure.</p></div>';
+  h+='<div id="gfam"><span class="lbl">Gamme de lancement · produits frais, disponibles dès maintenant</span><div class="chips">';
+  LAUNCH.forEach(function(g){g[1].forEach(function(n){h+='<button class="pill" data-t="'+esc(n)+'" data-add="'+esc(n)+' (frais)">+ '+esc(n)+'</button>'})});
+  h+='</div><div class="lh"><h3>Les familles</h3><span class="cnt">'+FAM.length+' familles</span></div><div class="fgrid" style="margin-top:20px">';
+  FAM.forEach(function(f,i){h+=fcard(i,(i%3)*.08)});
+  h+='</div><div class="warn" style="margin-top:44px">Catalogue en construction : l\'ordre de déploiement des familles et les formats surgelés sont à confirmer avec chaque partenaire, selon ses besoins. Photos indicatives ; le shooting de marque complétera la bibliothèque.</div></div>';
+  setCv(h);
+  var q=$("#gq");q.addEventListener("input",function(){
+   var t=q.value.trim().toLowerCase(),on=!!t;$("#gres").hidden=!on;$("#gfam").hidden=on;if(!on){$("#gc").textContent="";return}
+   var r=ALL.filter(function(p){return p.n.toLowerCase().indexOf(t)>-1||p.c.toLowerCase().indexOf(t)>-1});
+   $("#gc").textContent=r.length+" résultat"+(r.length>1?"s":"");
+   $("#gg").innerHTML=r.slice(0,60).map(function(p){return pcard(p).replace("pc rv","pc rv in")}).join("");$("#ge").hidden=!!r.length;sync();
+  });
+ }
+ function famPage(key){
+  var fi=-1;FAM.forEach(function(f,i){if(f[0]===key)fi=i});if(fi<0){location.hash="#catalogue";return}
+  var f=FAM[fi],prev=FAM[(fi+FAM.length-1)%FAM.length],next=FAM[(fi+1)%FAM.length],im=FIMG[key];
+  var h='<div class="crumb"><a href="#catalogue">Catalogue</a><span>/</span><span>'+f[1]+'</span></div><div class="fhero"><div><div class="kick">Famille '+(fi<9?"0":"")+(fi+1)+' sur '+FAM.length+'</div><h2>'+f[1]+'</h2><p class="lead">'+INTRO[key]+'</p><div class="chips"><span class="tag">'+f[4].length+' références</span><span class="tag">Prix et formats sur devis</span></div></div><div class="arch">'+(im?pic(im,f[1]):none())+'</div></div>';
+  h+='<div class="srch"><input id="fq" type="search" placeholder="Chercher dans '+esc(f[1].toLowerCase())+'" aria-label="Chercher dans la famille"><span class="cnt" id="fc2"></span></div><div class="pgrid" id="fg"></div><p class="empty" id="fe" hidden>Aucun produit ne correspond.</p>';
+  h+='<div class="pn"><a href="#catalogue/'+prev[0]+'">← '+prev[1]+'</a><a href="#catalogue/'+next[0]+'">'+next[1]+' →</a></div>';
+  setCv(h);
+  var list=ALL.filter(function(p){return p.f===fi});
+  function draw(){var t=$("#fq").value.trim().toLowerCase();var r=list.filter(function(p){return!t||p.n.toLowerCase().indexOf(t)>-1||p.c.toLowerCase().indexOf(t)>-1});
+   $("#fg").innerHTML=r.map(function(p,i){return pcard(p,(i%6)*.05)}).join("");$("#fe").hidden=!!r.length;$("#fc2").textContent=r.length+" référence"+(r.length>1?"s":"");sync();reveal()}
+  $("#fq").addEventListener("input",draw);draw();
+ }
+ function prodPage(code){
+  var p=byCode(code);if(!p){location.hash="#catalogue";return}
+  var f=FAM[p.f],list=ALL.filter(function(x){return x.f===p.f}),k=list.indexOf(p),pv=list[(k+list.length-1)%list.length],nx=list[(k+1)%list.length];
+  var rel=list.filter(function(x){return x!==p}).sort(function(a,b){return(b.img?1:0)-(a.img?1:0)}).slice(0,4);
+  var h='<div class="crumb"><a href="#catalogue">Catalogue</a><span>/</span><a href="#catalogue/'+f[0]+'">'+f[1]+'</a><span>/</span><span>'+p.c+'</span></div><div class="pj"><div class="arch rvx">'+(p.img?pic(p.img,p.n):none())+'</div><div><div class="kick">'+f[1]+'</div><h2>'+esc(p.n)+'</h2><div class="chips"><span class="tag">'+p.c+'</span>'+(isL(p)?'<span class="tag solid">Frais · dès le lancement</span>':'<span class="tag">Catalogue en déploiement</span>')+'</div>';
+  h+='<p class="lead">'+INTRO[f[0]]+'</p><div class="spec"><div><b>Référence</b><span>'+p.c+'</span></div><div><b>Famille</b><span><a href="#catalogue/'+f[0]+'" style="color:var(--acc)">'+f[1]+'</a></span></div><div><b>Format et conditionnement</b><span>Sur devis</span></div><div><b>Prix</b><span>Sur devis, selon volume et durée</span></div><div><b>Composition, allergènes, durée de vie</b><span>Fiche technique SFDA fournie</span></div></div>';
+  h+='<div class="row"><button class="btn" data-add="'+p.c+' '+esc(p.n)+'">Ajouter</button><a class="btn ghost" href="#commander" style="color:var(--fg)">Ma demande</a></div>'+(p.img?'<p class="note">Visuel indicatif. La photo définitive suivra le shooting de marque.</p>':'<p class="note">Photo à venir, après le shooting de marque.</p>')+'</div></div>';
+  h+='<div class="lh" style="margin-top:64px"><h3>Dans la même famille</h3><a href="#catalogue/'+f[0]+'" style="color:var(--acc);font:600 12px var(--sans);letter-spacing:.14em;text-transform:uppercase;text-decoration:none">Voir les '+list.length+' références</a></div><div class="pgrid" style="margin-top:20px">'+rel.map(function(x,i){return pcard(x,i*.06)}).join("")+'</div>';
+  h+='<div class="pn"><a href="#produit/'+pv.c+'">← '+esc(pv.n)+'</a><a href="#produit/'+nx.c+'">'+esc(nx.n)+' →</a></div>';
+  setCv(h);
+ }
+ function renderCat(k,a){if(k==="livre")bookPage();else if(k==="produit")prodPage(a);else if(a)famPage(a);else catHome();sync();reveal()}
+
+ /* ===== catalogue à feuilleter ===== */
+ var PAGES=[1];for(var bi=3;bi<=102;bi++)PAGES.push(bi);
+ var BS=[["Présentation",1,3]].concat(FAM.map(function(f,i){var next=FAM[i+1]?FAM[i+1][3]-1:90;return[f[1],f[3],next]})).concat([["Choisissez votre format",91,92],["Récapitulatif des références",93,98],["Event Box",99,99],["Sur mesure et R&D",100,100],["Marque blanche",101,101],["La méthode OPM",102,102]]);
+ var bsec=1,bpos=PAGES.indexOf(BS[1][1]),bkeys=false;
+ function pn(n){return(n<10?"0":"")+n}
+ function secOf(p){for(var i=0;i<BS.length;i++){if(p>=BS[i][1]&&p<=BS[i][2])return i}return 0}
+ function bl(f){var q=(f||"").toLowerCase();$("#bl").innerHTML=BS.map(function(s,i){return{s:s,i:i}}).filter(function(o){return!q||o.s[0].toLowerCase().indexOf(q)>-1}).map(function(o){return'<li><button data-i="'+o.i+'" aria-current="'+(o.i===bsec)+'">'+o.s[0]+'<span>p. '+o.s[1]+'</span></button></li>'}).join("")}
+ function openBook(i,keep){
+  bsec=i;var s=BS[i],p=PAGES[bpos];if(!keep||p<s[1]||p>s[2])bpos=PAGES.indexOf(s[1]===2?3:s[1]);
+  $("#bt").textContent=s[0];
+  var h="";PAGES.forEach(function(pg){if(pg>=s[1]&&pg<=s[2])h+='<button data-p="'+pg+'" aria-label="Page '+pg+'"><img loading="lazy" src="th/t-'+pn(pg)+'.jpg" alt="Page '+pg+'"></button>'});
+  $("#st").innerHTML=h;bl($("#bq").value);bdraw();
+ }
+ function bdraw(){
+  var p=PAGES[bpos];
+  $("#pg").src="pages/p-"+pn(p)+".jpg";$("#pg").alt="Catalogue OLBA, page "+p;
+  $("#pc").textContent="Page "+(bpos+1)+" sur "+PAGES.length;
+  $("#bm").textContent=BS[bsec][1]===BS[bsec][2]?"page "+BS[bsec][1]:"pages "+BS[bsec][1]+" à "+BS[bsec][2];
+  [].forEach.call($("#st").children,function(b){var on=+b.dataset.p===p;b.setAttribute("aria-current",on)});
+  $("#shot").classList.remove("z");$("#zm").textContent="Zoom";
+  [bpos+1,bpos-1].forEach(function(n){if(PAGES[n]){var im=new Image();im.src="pages/p-"+pn(PAGES[n])+".jpg"}});
+ }
+ function bgo(d){var n=bpos+d;if(n<0||n>=PAGES.length)return;bpos=n;var i=secOf(PAGES[bpos]);if(i!==bsec)openBook(i,true);else bdraw()}
+ function bookPage(){
+  setCv('<a class="crumb" href="#catalogue">← Catalogue</a><div class="kick" style="margin-top:14px">Édition complète</div><h2>Le catalogue <em>à feuilleter</em></h2>'+
+  '<div class="bk"><button class="btn" id="prt" hidden>Télécharger le PDF</button><span class="note" id="pnote">Le PDF enregistré s\'imprime depuis votre lecteur (Ctrl/Cmd + P).</span></div>'+
+  '<div class="warn">Le catalogue complet tel que publié. Les prix, formats et conditions sont confirmés lors de votre demande. Les formats surgelés et précuits sont à confirmer avec chaque partenaire.</div>'+
+  '<div class="fb"><aside class="fs"><input id="bq" type="search" placeholder="Chercher une famille" aria-label="Chercher une famille" style="width:100%;padding:12px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:15px var(--sans);border-radius:0"><ul id="bl"></ul></aside><div>'+
+  '<div class="lh" style="margin:0 0 12px"><h3 id="bt">Catalogue</h3><span class="cnt" id="bm"></span></div>'+
+  '<div class="stage"><button class="nv p" id="pv" aria-label="Page précédente">‹</button><button class="nv n" id="nx" aria-label="Page suivante">›</button><div class="shot" id="shot"><img id="pg" alt="Page du catalogue" src="pages/p-03.jpg"></div></div>'+
+  '<div class="ctl"><span class="cnt" id="pc"></span><span class="row"><button class="btn ghost" id="zm">Zoom</button></span></div><div class="strip" id="st"></div><p class="note">Flèches gauche et droite du clavier pour tourner les pages.</p></div></div>');
+  $("#pv").onclick=function(){bgo(-1)};$("#nx").onclick=function(){bgo(1)};
+  $("#bl").addEventListener("click",function(e){var b=e.target.closest("[data-i]");if(!b)return;var s=BS[+b.dataset.i];bsec=+b.dataset.i;bpos=PAGES.indexOf(s[1]===2?3:s[1]);openBook(bsec)});
+  $("#bq").addEventListener("input",function(){bl(this.value)});
+  $("#st").addEventListener("click",function(e){var b=e.target.closest("[data-p]");if(b){bpos=PAGES.indexOf(+b.dataset.p);bdraw()}});
+  function zoom(){var z=$("#shot").classList.toggle("z");$("#zm").textContent=z?"Réduire":"Zoom"}
+  $("#pg").addEventListener("click",zoom);$("#zm").onclick=zoom;
+  if(!(window.claude&&claude.use)){var _p=$("#prt");if(_p){_p.outerHTML='<a class="btn" href="catalogue-olba-b2b.pdf" target="_blank" rel="noopener" download>Télécharger le PDF</a>';$("#pnote").textContent="Le PDF s\'imprime depuis votre lecteur (Ctrl/Cmd + P)."}}
+  try{if(window.claude&&claude.use){claude.use("downloads").then(function(d){if(!d||!$("#prt"))return;$("#prt").hidden=false;$("#prt").onclick=function(){var n=$("#pnote");n.textContent="Préparation du PDF…";fetch("catalogue-olba-b2b.pdf").then(function(r){if(!r.ok)throw 0;return r.blob()}).then(function(b){return d.save({filename:"Catalogue-OLBA-B2B.pdf",data:b})}).then(function(){n.textContent="PDF enregistré. Ouvrez-le puis Ctrl/Cmd + P pour imprimer."}).catch(function(e){n.textContent=e&&e.code==="declined"?"Téléchargement annulé.":"Téléchargement indisponible ici."})}}).catch(function(){})}}catch(e){}
+  openBook(bsec,true);
+  if(!bkeys){bkeys=true;document.addEventListener("keydown",function(e){
+   if(!$("#pg")||(location.hash||"").indexOf("#livre")!==0||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;
+   if(e.key==="ArrowRight")bgo(1);if(e.key==="ArrowLeft")bgo(-1)})}
+ }
+
+/* demande */
+ var sel=[];
+ try{sel=JSON.parse(localStorage.getItem("olba-b2b-sel")||"[]")}catch(e){sel=[]}
+ function save(){try{localStorage.setItem("olba-b2b-sel",JSON.stringify(sel))}catch(e){}}
+ function toast(t){var el=$("#ts");el.textContent=t;el.classList.add("on");clearTimeout(toast.h);toast.h=setTimeout(function(){el.classList.remove("on")},2000)}
+ function toggle(l){var i=sel.indexOf(l);if(i>-1){sel.splice(i,1);toast("Retiré de votre demande")}else{sel.push(l);toast("Ajouté à votre demande")}save();sync()}
+ function sync(){
+  var n=sel.length;$("#bd").hidden=!n;$("#bd").textContent=n;$("#ce").hidden=!!n;
+  $("#cu").innerHTML=sel.map(function(x,i){return '<li><span>'+esc(x)+'</span><button type="button" data-rm="'+i+'" aria-label="Retirer '+esc(x)+'">×</button></li>'}).join("");
+  [].forEach.call(document.querySelectorAll("[data-add]"),function(b){var on=sel.indexOf(b.dataset.add)>-1;b.classList.toggle("on",on);if(b.dataset.t)b.textContent=(on?"✓ ":"+ ")+b.dataset.t;else if(b.classList.contains("add"))b.textContent=on?"✓":"+";else b.textContent=on?"Ajouté ✓":"Ajouter"});
+  summary();
+ }
+ $("#cu").addEventListener("click",function(e){var b=e.target.closest("[data-rm]");if(!b)return;sel.splice(+b.dataset.rm,1);save();sync()});
+ function v(id){return $(id).value.trim()}
+ function summary(){
+  var t="Demande OLBA B2B Solutions\nSociété : "+(v("#n1")||"à préciser")+"\nContact : "+(v("#n2")||"à préciser")+"\nActivité : "+v("#s1")+"\nRéception : "+v("#s2")+" · Fréquence : "+v("#s3")+"\nVolumes estimés : "+(v("#v1")||"à préciser")+"\nSélection : "+(sel.length?sel.join(" ; "):"à définir")+"\n";
+  if(v("#e1"))t+="Stockage, fours, livraison : "+v("#e1")+"\n";
+  if(v("#m1"))t+="Message : "+v("#m1")+"\n";
+  t+="Conditions : commande minimum 500 SAR, délai de 48 h sur demande.";
+  $("#out").textContent=t;return t;
+ }
+ ["#n1","#n2","#s1","#s2","#s3","#v1","#e1","#m1"].forEach(function(id){$(id).addEventListener("input",summary);$(id).addEventListener("change",summary)});
+ function copy(t,ok){try{navigator.clipboard.writeText(t).then(function(){toast(ok)},function(){toast("Sélectionnez le texte pour le copier")})}catch(e){toast("Sélectionnez le texte pour le copier")}}
+ $("#cp").onclick=function(){copy(summary(),"Demande copiée")};
+ $("#ce2").onclick=function(){copy($("#em").textContent,"Adresse copiée")};
+ $("#cl").onclick=function(){sel=[];save();sync()};
+ 
+ /* ===== laboratoire ===== */
+ var PLAT=[["Production boulangerie et pâtisserie dédiée","Deux savoir-faire séparés, chacun avec son propre process, sa température et son timing."],["Équipement professionnel","Matériel européen de boulangerie et de pâtisserie, dont des fours Bongard, pour une précision de cuisson constante d'une équipe à l'autre."],["Flux organisés","La production est séquencée par famille de produits et type de commande, du réassort retail quotidien aux lots B2B planifiés."],["Équipes formées","Chefs et équipes formés aux recettes, SOP et standards de finition OLBA."],["R&D interne","Une fonction dédiée pour développer, tester et ajuster les produits avant la production."],["Sécurité alimentaire et supervision qualité","Une fonction indépendante de la production, chargée de contrôler et de faire respecter les standards."],["Recettes et SOP standardisées","Chaque produit approuvé est documenté pour être reproduit à l'identique, à toute échelle."],["Planification de la production","La capacité est planifiée par type de commande pour que les volumes B2B ne perturbent pas la production retail quotidienne."],["Contrôle qualité","Des points de contrôle tout au long de la production, pas seulement à la fin."],["Emballage et expédition","Les produits finis sont emballés et préparés selon le standard de chaque compte B2B."]];
+ var pcur=0;
+ function drawPl(){
+  $("#pll").innerHTML=PLAT.map(function(o,i){return'<li><button data-p="'+i+'" aria-selected="'+(i===pcur)+'"><i>'+(i<9?"0":"")+(i+1)+'</i><span>'+o[0]+'</span></button></li>'}).join("");
+  $("#pld").innerHTML='<div class="big">'+(pcur<9?"0":"")+(pcur+1)+'</div><h3>'+PLAT[pcur][0]+'</h3><p>'+PLAT[pcur][1]+'</p>';
+ }
+ $("#pll").addEventListener("click",function(e){var b=e.target.closest("[data-p]");if(!b)return;pcur=+b.dataset.p;drawPl()});
+ drawPl();
+ var FL=["Réception","Stockage","Production","Contrôle process","QC finition","Emballage","Expédition"];
+ $("#fl2").innerHTML=FL.map(function(t){return"<span>"+t+"</span>"}).join("");
+ var CT=[["Contrôle à réception","Les ingrédients entrants sont vérifiés par rapport à la spécification."],["Suivi des températures","Les températures critiques sont suivies du stockage à l'expédition."],["Chaîne du froid","Les produits réfrigérés restent dans les plages requises."],["Nettoyage","Procédures de nettoyage planifiées et consignées dans tout le laboratoire."],["Hygiène","Standards d'hygiène personnelle appliqués à toute l'équipe de production."],["Allergènes","Ingrédients allergènes identifiés, maîtrisés et étiquetés."],["Identification des lots","Chaque lot est identifié pour la traçabilité et le suivi."],["Traçabilité","Ingrédients et produits finis tracés tout au long de la chaîne."],["QC en production","Points de contrôle pendant la production, pas seulement à la fin."],["QC produit fini","Goût, texture, aspect et poids vérifiés avant expédition."],["Actions correctives","Écarts documentés et corrigés par des actions suivies."]];
+ $("#ctrl").innerHTML=CT.map(function(c,i){return'<div class="cc rv" style="--d:'+((i%4)*.06)+'s"><b>'+c[0]+'</b><span>'+c[1]+'</span></div>'}).join("");
+ var SX=["Goût","Texture","Aspect","Poids","Sécurité alimentaire","Régularité"];
+ $("#six").innerHTML=SX.map(function(t,i){return'<div><b>0'+(i+1)+'</b><span>'+t+'</span></div>'}).join("");
+ var DC=[["Recette maître","la formulation exacte approuvée"],["Fiche technique","la référence utilisée en production"],["Ingrédients","liste et spécification approuvées"],["Grammages","poids exacts par composant"],["Rendement","production attendue par lot"],["Process","la méthode approuvée, étape par étape"],["Paramètres de production","durées, températures, équipements"],["Finition","finition et présentation approuvées"],["Référence visuelle","image ou échantillon de comparaison"],["Critères QC","les contrôles qu'un produit fini doit passer"],["Emballage","format et matériaux approuvés"],["Stockage","conditions requises"],["Durée de vie","validée dans les conditions indiquées"],["Allergènes et traçabilité","déclaration et données de lot"]];
+ $("#docs").innerHTML=DC.map(function(d,i){return'<div class="rv" style="--d:'+((i%4)*.06)+'s"><i>'+(i<9?"0":"")+(i+1)+'</i><b>'+d[0]+'</b><span>'+d[1]+'</span></div>'}).join("");
+ /* collaborer */
+ var MD=[["A","Développement","Étape suivante · sur demande","Développement exclusif de recettes et transfert","Produits sur mesure créés via l'OPM, avec transfert complet des recettes et de la documentation. Vous produisez avec vos propres équipes : autonomie totale.","B"],["B","Développement + production","Dès le lancement","Développer, transférer et fabriquer","Vous êtes propriétaire des recettes ; OLBA les produit dans le laboratoire où elles ont été développées, sans rupture entre R&D et production. L'engagement B2B long terme permet des frais de développement réduits.","B"],["C","Production","Dès le lancement","Fourniture B2B depuis le catalogue","Pas de développement, pas d'attente. OLBA conserve la propriété des recettes et produit ; mise en service en 1 à 2 semaines environ.","A"],["D","Sur mesure","Étape suivante · sur demande","Marque blanche · saisonnier · sous-traitance","Production sous votre marque, gammes saisonnières, sous-traitance partielle ou développement complet de nouvelles lignes.","B"]];
+ var PA=[["Voie A · Fourniture sur catalogue · en service en 1 à 2 semaines environ",[["Sélection","1 à 2 jours"],["Échantillons","2 à 5 jours"],["Livraison et cadence","3 à 5 jours"],["Première livraison","Semaine 1 à 2"]]],["Voie B · Développement sur mesure · 5 à 7 semaines environ",[["Brief","1 à 2 jours"],["R&D","2 à 3 semaines"],["Validation","1 semaine"],["Coûts","3 à 5 jours"],["Documentation","1 semaine"],["Lancement","2 à 3 semaines"]]]];
+ var mcur=2;
+ $("#models").innerHTML=MD.map(function(m,i){return'<button class="model" data-m="'+i+'" aria-pressed="'+(i===mcur)+'"><span class="l">'+m[0]+'</span><span class="tag'+(m[2]==="Dès le lancement"?" solid":"")+'" style="justify-self:start">'+m[2]+'</span><span class="lbl" style="margin:0">'+m[1]+'</span><h3>'+m[3]+'</h3><p>'+m[4]+'</p></button>'}).join("");
+ function drawPath(){var p=PA[MD[mcur][5]==="A"?0:1];$("#path").innerHTML='<span class="lbl">'+p[0]+'</span><ol>'+p[1].map(function(s,i){return'<li style="animation:in .5s '+(i*.08)+'s both"><b>'+s[0]+'</b><span>'+s[1]+'</span></li>'}).join("")+'</ol>'}
+ $("#models").addEventListener("click",function(e){var b=e.target.closest("[data-m]");if(!b)return;mcur=+b.dataset.m;[].forEach.call($("#models").children,function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});drawPath()});
+ drawPath();
+ var OP=[["Brief stratégique","Cadrage complet : ADN de marque, cible, positionnement, prix de vente et food cost visés, contraintes, volumes."],["Recherche et développement","Inspiration, choix des matières, premières recettes et prototypes. Plusieurs pistes explorées."],["Validation goût et visuel","Goût, texture, équilibre, finition. La qualité d'abord : aucune optimisation économique avant validation complète."],["Optimisation économique","Food cost, grammages, rendements, réduction des pertes, alternatives matières, sans altérer l'équilibre final."],["Ingénierie de production","La recette devient un standard : grammages, rendements, étapes, temps, points de contrôle, conditions de stockage."],["Documentation technique","Fiches recette et process, SOP, rendements, durée de vie, points de contrôle qualité."],["Documentation commerciale","Fiche de vente, description, arguments, allergènes, conseils de conservation, storytelling."],["Validation finale et lancement","Derniers ajustements, validation des fiches, du process et du food cost, préparation du lancement."]];
+ var ocur=0;
+ function drawOp(){
+  $("#opl").innerHTML=OP.map(function(o,i){return'<li><button data-o="'+i+'" aria-selected="'+(i===ocur)+'"><i>0'+i+'</i><span>'+o[0]+'</span></button></li>'}).join("");
+  $("#opd").innerHTML='<div class="big">0'+ocur+'</div><h3>'+OP[ocur][0]+'</h3><p>'+OP[ocur][1]+'</p><p class="note" style="margin-top:20px">Étape '+(ocur+1)+' sur 8 · objectifs : goût visé, coût visé, volume visé.</p>';
+  $("#opf").style.width=((ocur+1)/OP.length*100)+"%";
+ }
+ $("#opl").addEventListener("click",function(e){var b=e.target.closest("[data-o]");if(!b)return;ocur=+b.dataset.o;drawOp()});
+ $("#opp").onclick=function(){ocur=(ocur+OP.length-1)%OP.length;drawOp()};$("#opn").onclick=function(){ocur=(ocur+1)%OP.length;drawOp()};
+ drawOp();
+ /* options de commande */
+ [].forEach.call(document.querySelectorAll(".opts"),function(g){
+  var sel=$("#"+g.dataset.set);
+  function mark(){[].forEach.call(g.children,function(b){b.setAttribute("aria-pressed",b.dataset.val===sel.value?"true":"false")})}
+  g.addEventListener("click",function(e){var b=e.target.closest(".opt");if(!b)return;sel.value=b.dataset.val;mark();summary()});
+  mark();
+ });
+
+
+ /* ===== routeur et animations ===== */
+ var ROUTES=["accueil","catalogue","laboratoire","collaborer","commander"];
+ var tabs=[].slice.call(document.querySelectorAll(".tabs button"));
+ var io=null;
+ function reveal(){
+  var els=document.querySelectorAll(".rv:not(.in),.rvx:not(.in)");
+  if(!("IntersectionObserver" in window)){[].forEach.call(els,function(e){e.classList.add("in")});return}
+  if(!io)io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target);var c=x.target.querySelector&&x.target.querySelector("[data-n]");if(x.target.dataset&&x.target.dataset.n)count(x.target)}})},{threshold:.12,rootMargin:"0px 0px -6% 0px"});
+  [].forEach.call(els,function(e){io.observe(e)});
+ }
+ function count(b){
+  if(b._d)return;b._d=1;var n=+b.dataset.n,s=b.dataset.s||"",t0=null;
+  if(window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  function f(t){if(!t0)t0=t;var k=Math.min(1,(t-t0)/1300),e=1-Math.pow(1-k,3);b.textContent=Math.round(n*e).toLocaleString("fr-FR")+s;if(k<1)requestAnimationFrame(f)}
+  requestAnimationFrame(f);
+ }
+ function route(){
+  var p=(location.hash||"#accueil").slice(1).split("/"),k=p[0],tab=(k==="produit"||k==="livre")?"catalogue":k;
+  if(ROUTES.indexOf(tab)<0){tab="accueil";k="accueil";p=["accueil"]}
+  tabs.forEach(function(b){b.setAttribute("aria-selected",b.dataset.k===tab?"true":"false")});
+  ROUTES.forEach(function(x){$("#p-"+x).classList.toggle("on",x===tab)});
+  if(tab==="catalogue")renderCat(k,p[1]?decodeURIComponent(p[1]):"");
+  try{window.scrollTo({top:0,behavior:"instant"})}catch(e){window.scrollTo(0,0)}
+  document.title=tab==="accueil"?"OLBA B2B Solutions":"OLBA B2B Solutions · "+({catalogue:"Catalogue",laboratoire:"Notre laboratoire",collaborer:"Collaborer",commander:"Ma demande"}[tab]);
+  sync();reveal();
+ }
+ function show(k){if(location.hash==="#"+k)route();else location.hash="#"+k}
+ tabs.forEach(function(b){b.addEventListener("click",function(){show(b.dataset.k)})});
+ window.addEventListener("hashchange",route);
+ document.addEventListener("click",function(e){
+  var g=e.target.closest("[data-go]");if(g){e.preventDefault();show(g.dataset.go);return}
+  var a=e.target.closest("[data-add]");if(a){e.preventDefault();toggle(a.dataset.add)}
+ });
+ /* hero */
+ var SEQ=[["l00","Cheesecake nature"],["l53","Croissant"],["l34","Fondant chocolat"],["l19","Gâteau London"],["l12","Cheesecake rond fruits rouges"],["l51","Macarons français"],["l26","Tiramisu rond"],["n3","Baguette au levain"],["v_kun","Kunafa"],["g_ope","Opéra"],["sa_chi","Sandwich poulet"]];
+ var hv=$("#hv"),hk=0;
+ [].forEach.call(hv.querySelectorAll(".a"),function(a,ai){a.innerHTML=SEQ.map(function(s,i){return'<img src="img/'+s[0]+'.jpg" alt=""'+(i?' loading="lazy"':"")+'>'}).join("")});
+ var offs=[3,0,5];
+ function hero(){
+  [].forEach.call(hv.querySelectorAll(".a"),function(a,ai){var ix=(hk+offs[ai])%SEQ.length;[].forEach.call(a.children,function(im,i){im.classList.toggle("on",i===ix)})});
+  $("#hn").textContent=SEQ[hk%SEQ.length][1];$("#hi").textContent="0"+(hk%SEQ.length+1)+" / 0"+SEQ.length;
+ }
+ hero();
+ var rm=window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;
+ if(!rm)setInterval(function(){if(!document.hidden&&$("#p-accueil").classList.contains("on")){hk=(hk+1)%SEQ.length;hero()}},4300);
+ /* marquee */
+ var MQ=["Cheesecake San Sebastian","Croissant","Tiramisu","Baklava pistache","Pain au levain","Fondant chocolat","Red velvet","Macarons français","Praliné maison","Kunafa","Carrot cake","Cookies pépites de chocolat","Pain au chocolat","Gaufre belge"];
+ $("#mq").innerHTML=MQ.map(function(t){return"<span>"+t+"</span>"}).join("");
+ $("#mq").parentNode.appendChild($("#mq").cloneNode(true));
+ /* rail accueil */
+ $("#hrail").innerHTML=FAM.map(function(f,i){var im=FIMG[f[0]];return'<a class="fc" href="#catalogue/'+f[0]+'"><div class="arch">'+(im?pic(im,f[1]):none())+'</div><div class="nm"><span>'+f[1]+'</span><small>'+f[4].length+'</small></div></a>'}).join("");
+ /* histoire */
+ var stp=[].slice.call(document.querySelectorAll(".step")),simg=[].slice.call($("#stk").children);
+ if("IntersectionObserver" in window){
+  var so=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){var n=+x.target.dataset.s;stp.forEach(function(s,i){s.classList.toggle("on",i===n)});simg.forEach(function(im,i){im.classList.toggle("on",i===n)})}})},{rootMargin:"-40% 0px -40% 0px"});
+  stp.forEach(function(s){so.observe(s)});
+ }
+ /* parallaxe */
+ var tk=0;
+ window.addEventListener("scroll",function(){if(tk||rm)return;tk=requestAnimationFrame(function(){tk=0;if($("#p-accueil").classList.contains("on")){var y=Math.min(window.scrollY,900);hv.style.transform="translateY("+(y*.08)+"px)"}})},{passive:true});
+
+sync();route();
+})();</script>
+</body>
+</html>
