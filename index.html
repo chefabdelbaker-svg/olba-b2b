@@ -505,6 +505,27 @@ body.fxc.fxv #fxd,body.fxc.fxv #fxr{opacity:1}
 .rail.pin a{flex:0 0 clamp(250px,23vw,340px)}
 .hsbar{height:2px;background:var(--line);margin:6px 0 22px;position:relative}
 .hsbar i{position:absolute;left:0;top:0;bottom:0;width:100%;background:var(--acc);transform-origin:0 50%;transform:scaleX(0)}
+/* ===== v11 immersion laboratoire ===== */
+.imm{height:340vh;position:relative;background:#1b0f0c;margin-inline:calc(-1*max(16px,env(safe-area-inset-left,0px)))}
+.imm-st{position:sticky;top:60px;height:calc(100vh - 60px);height:calc(100dvh - 60px);overflow:hidden;color:#F8DAB8}
+.imm-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity 1.1s ease}
+.imm-bg img.on{opacity:1}
+.imm-sh{position:absolute;inset:0;background:linear-gradient(90deg,rgba(27,15,12,.86) 0%,rgba(27,15,12,.42) 52%,rgba(27,15,12,.08) 100%),linear-gradient(0deg,rgba(27,15,12,.75),transparent 42%)}
+.imm-tx{position:absolute;left:max(22px,calc((100vw - 1200px)/2));right:22px;bottom:11vh;max-width:540px}
+.imm-k{font:600 11px var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--carrot);display:flex;gap:12px;align-items:center;margin-bottom:22px}
+.imm-k:before{content:"";width:32px;height:1px;background:currentColor}
+.imm-ss{display:grid}
+.imm-s{grid-area:1/1;opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .9s cubic-bezier(.2,.7,.2,1);pointer-events:none}
+.imm-s.on{opacity:1;transform:none;transition-delay:.25s}
+.imm-s i{display:block;font:italic 400 clamp(64px,9vw,120px)/1 var(--serif);color:var(--carrot)}
+.imm-s h3{font:400 clamp(30px,4.4vw,56px)/1.08 var(--serif);margin:6px 0 14px;color:#FFF3E3}
+.imm-s h3 em{color:var(--carrot)}
+.imm-s p{font:17px/1.6 var(--sans);color:#EBD3B8;max-width:46ch;margin:0}
+.imm-dots{position:absolute;right:max(22px,calc((100vw - 1200px)/2));top:50%;transform:translateY(-50%);display:grid;gap:10px}
+.imm-dots b{display:block;width:3px;height:54px;background:rgba(248,218,184,.28);position:relative;overflow:hidden}
+.imm-dots b i{position:absolute;left:0;right:0;top:0;height:100%;background:var(--carrot);transform-origin:0 0;transform:scaleY(0)}
+.imm-cap{position:absolute;right:22px;bottom:14px;font:500 10px var(--sans);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,243,227,.7)}
+@media (max-width:860px){.imm{height:300vh}.imm-sh{background:linear-gradient(0deg,rgba(27,15,12,.92) 0%,rgba(27,15,12,.55) 48%,rgba(27,15,12,.1) 100%)}.imm-tx{bottom:9vh}.imm-dots{display:none}.imm-cap{left:22px;right:auto;top:14px;bottom:auto}}
 </style>
 </head>
 <body>
@@ -632,6 +653,19 @@ body.fxc.fxv #fxd,body.fxc.fxv #fxr{opacity:1}
   <div class="trio" aria-hidden="true"><div class="a a1"><img src="img/lab3.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><div class="a a2"><img src="img/lab2.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><div class="a a3"><img src="img/lab1.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div></div>
  </div>
  <div class="wrap"><p class="note" style="color:var(--soft);margin:0 0 28px">*Capacité exprimée toutes catégories confondues, selon le type de produit, la complexité, la finition, la taille de lot et l'emballage. Visuels d’illustration ; photographies du laboratoire après le shooting de marque du mercredi 28 octobre.</p></div></div>
+
+<section class="imm" id="imm" aria-label="Visite du laboratoire"><div class="imm-st">
+ <div class="imm-bg"><img class="on" src="img/lab_a.jpg" alt="Matières premières et plan de travail du laboratoire OLBA"><img src="img/lab_b.jpg" alt="Four professionnel et chef du laboratoire OLBA" loading="lazy"><img src="img/pack.jpg" alt="Coffret d'éclairs OLBA, étiquettes en français et en arabe" loading="lazy"></div>
+ <div class="imm-sh"></div>
+ <div class="imm-tx"><div class="imm-k">Visite du laboratoire</div>
+  <div class="imm-ss">
+   <div class="imm-s on"><i>01</i><h3>Tout se décide <em>avant le four.</em></h3><p>Beurre, farine, œufs, lait : sélectionnés, pesés et tracés avant chaque lot. La régularité commence au plan de travail.</p></div>
+   <div class="imm-s"><i>02</i><h3>La cuisson, <em>réglée au détail.</em></h3><p>Des fours professionnels à pilotage numérique et des programmes de cuisson définis produit par produit, pour retrouver le même résultat lot après lot.</p></div>
+   <div class="imm-s"><i>03</i><h3>Prêt à vendre, <em>à votre image.</em></h3><p>Chaque référence part finie et emballée : coffrets, boîtes, étiquettes en français et en arabe, sous votre marque ou la nôtre selon le modèle de partenariat.</p></div>
+  </div></div>
+ <div class="imm-dots"><b><i></i></b><b><i></i></b><b><i></i></b></div>
+ <div class="imm-cap">Visuels d'illustration</div>
+</div></section>
 
  <div class="wrap sec">
   <div class="kick rv">Ce que comprend la plateforme</div>
@@ -834,7 +868,7 @@ body.fxc.fxv #fxd,body.fxc.fxv #fxr{opacity:1}
 
  /* ===== catalogue v3 ===== */
  var INTRO={cheesecakes:"Du nature au signature : San Sebastian, japonais, Lotus, safran, pistache, fruits rouges.",gateaux:"Entremets et gâteaux de partage : tiramisu, red velvet, carrot cake, fraisier, opéra.",tartes:"Tartes et tartelettes aux fruits, au chocolat, aux noix de pécan, à la pistache et au safran.",fondants:"Fondants, lava cakes et moelleux : chocolat, dattes, Lotus, pistache, café arabe.",individuels:"Formats individuels et snacking : brownies, muffins, éclairs, puddings, cookies, verrines.",viennoiserie:"Croissants, pains au chocolat et viennoiseries signature au zaatar, au halloumi, aux dattes.",boulangerie:"Du pain au levain aux buns, à la focaccia, à la pita et au manakish : la base d'une boulangerie.",sale:"Quiches, feuilletés, sandwichs et pizzas pour la restauration et le snacking.",biscuits:"Biscuits, macarons, madeleines, financiers, gaufres et pâte à cookies à cuire.",saveurs:"Baklava, kunafa, maamoul, basbousa, umm ali : les saveurs locales, signées OLBA.",chocolat:"Coques et décors en chocolat noir, au lait et blanc.",pralines:"Pralinés, pâte de dattes et confitures maison, de la noisette à la figue.",cremes:"Crèmes et garnitures : pâtissière, ganache, pistache, lemon curd, caramels.",semifinis:"Semi-finis et bases : génoises, dacquoise, feuilletage, pâtes crues, fonds de tarte.",box:"Box mignardises, cadeaux, réception, Ramadan et Aïd."};
- var FIMG={cheesecakes:"l00",gateaux:"l19",tartes:"gTart",fondants:"l34",individuels:"l42",viennoiserie:"l53",boulangerie:"n3",biscuits:"l51",saveurs:"v_bak",chocolat:"gChoc",pralines:"n4",cremes:"gCrem",semifinis:"gSemi",box:"k0",sale:"gSale"};
+ var FIMG={cheesecakes:"l00",gateaux:"l19",tartes:"gTart",fondants:"l34",individuels:"l42",viennoiserie:"l53",boulangerie:"n3",biscuits:"l51",saveurs:"v_bak",chocolat:"gChoc",pralines:"n4",cremes:"gCrem",semifinis:"gSemi",box:"pack",sale:"gSale"};
  var PH={
   cheesecakes:{0:"l00",1:"l01",2:"l02",3:"l03",4:"l04",5:"l05",6:"l06",7:"l07",8:"l41",9:"ck_pis",10:"l08",11:"l09",12:"l10",13:"l11",14:"l12",15:"l13",16:"l14",17:"l15",18:"l16",19:"l17"},
   gateaux:{0:"l18",1:"l19",2:"l20",3:"l21",4:"l22",5:"l23",6:"l24",7:"l25",8:"l26",9:"l27",10:"l28",11:"l29",12:"l30",13:"l31",14:"l32",15:"l33",16:"g_mil",17:"g_fra",18:"g_fmb",19:"g_ope",20:"g_for",21:"g_sth",22:"g_stk",23:"g_saf"},
@@ -1203,6 +1237,16 @@ setTimeout(setup,300);setTimeout(setup,1500);
 }catch(e){}})();
 (function(){window.__about=function(){var go=function(){var a=document.getElementById("about");if(a)a.scrollIntoView({behavior:"smooth",block:"start"})};if((location.hash||"#accueil")!=="#accueil"&&location.hash!==""){location.hash="#accueil";setTimeout(go,900)}else go()};
 document.addEventListener("click",function(e){var a=e.target.closest("[data-about]");if(a){e.preventDefault();window.__about()}})})();
+</script>
+<script>(function(){try{
+var s=document.getElementById("imm");if(!s)return;
+var im=[].slice.call(s.querySelectorAll(".imm-bg img")),st=[].slice.call(s.querySelectorAll(".imm-s")),dt=[].slice.call(s.querySelectorAll(".imm-dots b i")),cur=-1;
+function tick(){if(!s.offsetParent)return;var r=s.getBoundingClientRect(),m=r.height-(innerHeight-60),p=m>0?Math.min(1,Math.max(0,-(r.top-60)/m)):0,n=im.length,x=p*n,i=Math.min(n-1,Math.floor(x));
+ if(i!==cur){cur=i;im.forEach(function(e,k){e.classList.toggle("on",k===i)});st.forEach(function(e,k){e.classList.toggle("on",k===i)})}
+ im[i].style.transform="scale("+(1.06+(x-i)*.07).toFixed(3)+")";
+ dt.forEach(function(e,k){e.style.transform="scaleY("+(k<i?1:k===i?(x-i):0).toFixed(3)+")"})}
+addEventListener("scroll",function(){requestAnimationFrame(tick)},{passive:true});addEventListener("resize",tick);addEventListener("hashchange",function(){setTimeout(tick,200)});tick();
+}catch(e){}})();
 </script>
 </body>
 </html>
