@@ -1018,7 +1018,7 @@ sync();route();
 try{
 var D=document,B=D.body,H=D.documentElement;
 var rm=window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches;
-var fine=window.matchMedia&&matchMedia("(pointer:fine)").matches;
+var fine=window.matchMedia&&matchMedia("(any-pointer:fine)").matches;
 function mk(t,id,h){var e=D.createElement(t);if(id)e.id=id;if(h)e.innerHTML=h;B.appendChild(e);return e}
 /* barre de progression + entete */
 var pr=mk("div","fxprog"),hd=D.querySelector(".hd"),tk=0;
@@ -1067,7 +1067,7 @@ if(fine&&!rm){
  B.classList.add("fxc");var d=mk("div","fxd"),r=mk("div","fxr"),mx=0,my=0,rx=0,ry=0,run=0;
  function lp(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;r.style.transform="translate("+rx+"px,"+ry+"px)";if(Math.abs(mx-rx)+Math.abs(my-ry)>.3)requestAnimationFrame(lp);else run=0}
  var HV="a,button,[data-go],.pc,.fc,label,summary,.opt,.step";
- addEventListener("pointermove",function(e){if(e.pointerType!=="mouse")return;mx=e.clientX;my=e.clientY;B.classList.add("fxv");d.style.transform="translate("+mx+"px,"+my+"px)";if(!run){run=1;requestAnimationFrame(lp)}
+ addEventListener("pointermove",function(e){if(e.pointerType==="touch")return;mx=e.clientX;my=e.clientY;B.classList.add("fxv");d.style.transform="translate("+mx+"px,"+my+"px)";if(!run){run=1;requestAnimationFrame(lp)}
   var t=e.target.closest&&e.target.closest(HV);r.classList.toggle("h",!!t&&!t.classList.contains("step"));
   var m=e.target.closest&&e.target.closest(".btn,.tabs button,#bg");
   if(m){var b=m.getBoundingClientRect(),cx=b.left+b.width/2,cy=b.top+b.height/2;m.style.transform="translate("+((e.clientX-cx)*.22).toFixed(1)+"px,"+((e.clientY-cy)*.3).toFixed(1)+"px)"}
@@ -1085,7 +1085,7 @@ if(fine&&!rm){
  D.addEventListener("click",function(e){if(mv&&e.target.closest(".rail,.lrow,.fam")){e.preventDefault();e.stopPropagation();mv=0}},true);
 })();
 /* intro */
-var seen=0;try{seen=sessionStorage.getItem("olba_intro")}catch(e){}
+var seen=0;
 var deep=(location.hash&&location.hash!=="#accueil");
 if(!rm&&!seen&&!deep){
  B.classList.add("fxlock");
