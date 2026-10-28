@@ -839,13 +839,13 @@ if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleap
  <div class="kick">Tarif dégressif</div>
  <h3>Plus vous commandez, <em>moins vous payez.</em></h3>
  <div class="tiers">
-  <div class="tier"><b>1 – 19</b><span>pièces</span><i>Tarif catalogue</i></div>
-  <div class="tier"><b>20 – 49</b><span>pièces</span><i>−5 %</i></div>
-  <div class="tier"><b>50 – 99</b><span>pièces</span><i>−8 %</i></div>
-  <div class="tier"><b>100 – 199</b><span>pièces</span><i>−12 %</i></div>
-  <div class="tier top"><b>200 – 500</b><span>pièces</span><i>−15 %</i></div>
+  <div class="tier"><b>1 – 19</b><span>pièces</span><i>Prix communiqué</i></div>
+  <div class="tier"><b>20 – 49</b><span>pièces</span><i>Prix communiqué</i></div>
+  <div class="tier"><b>50 – 99</b><span>pièces</span><i>Prix communiqué</i></div>
+  <div class="tier"><b>100 – 199</b><span>pièces</span><i>Prix communiqué</i></div>
+  <div class="tier top"><b>200 – 500</b><span>pièces</span><i>Prix communiqué</i></div>
  </div>
- <p class="note">Remise appliquée par référence et par commande, sur le tarif catalogue. Au-delà de 500 pièces : tarif sur devis. Pourcentages indicatifs, confirmés sur devis.</p>
+ <p class="note">Prix unitaire dégressif selon la quantité commandée, par référence et par commande. Tarifs communiqués sur demande. Au-delà de 500 pièces : tarif sur devis.</p>
 </section>
  <div class="tf-top"><input id="tq" type="search" placeholder="Chercher un code ou un produit" aria-label="Chercher un code ou un produit"><span id="tc" class="note"></span></div>
  <div class="tf-chips" id="tch"></div>
@@ -1547,5 +1547,6 @@ addEventListener("hashchange",stop);document.addEventListener("visibilitychange"
 @media (max-width:860px){.tiers{grid-template-columns:repeat(2,minmax(0,1fr))}.tier.top{grid-column:1/-1}}
 </style>
 <script>(function(){var wa=document.getElementById("wa");if(!wa)return;wa.addEventListener("click",function(){var b=(document.getElementById("out")||{}).textContent||"";this.href="https://wa.me/966507881567?text="+encodeURIComponent(b)})})();</script>
+<style id="v21">.tier i,.tier:first-child i{font:600 12px/1.5 var(--sans);letter-spacing:.08em;text-transform:uppercase}</style>
 </body>
 </html>
