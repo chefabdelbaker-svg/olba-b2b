@@ -591,7 +591,7 @@ if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleap
     <div class="kick">OLBA B2B Solutions · Riyad</div>
     <h1><span class="ln"><span>L'excellence</span></span><span class="ln"><span>artisanale,</span></span><span class="ln"><em>à l'échelle.</em></span></h1>
     <p class="sub">Conçu avec expertise. Produit avec régularité. Livré avec fiabilité.</p>
-    <div class="row"><a class="btn" href="#catalogue">Découvrir la gamme</a><a class="btn ghost" href="#commander">Parlez-nous de votre cuisine</a></div>
+    <div class="row"><a class="btn" href="#catalogue">Découvrir la gamme</a><a class="btn ghost" href="#commander">Parlez-nous de votre cuisine</a><button class="vo" id="vo" type="button" aria-pressed="false"><b class="pl"></b><span>Écouter la présentation</span><em class="eq"><i></i><i></i><i></i></em></button></div>
     <div class="cap" aria-hidden="true"><b id="hn"></b><span id="hi"></span></div>
    </div>
    <div class="hv" id="hv" aria-hidden="true"><div class="halo"></div><div class="a a1" data-i="0"></div><div class="a a2" data-i="1"></div><div class="a a3" data-i="2"></div></div>
@@ -1406,5 +1406,27 @@ var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isInter
 @media (min-width:861px){.hd .wrap{flex-wrap:nowrap;gap:12px 14px}.hd .tabs{display:flex;flex:1;justify-content:center;gap:0}.hd .tabs button{padding:12px 10px;letter-spacing:.12em}}
 @media (min-width:861px) and (max-width:1120px){.hd .tabs button{padding:12px 6px;font-size:10.5px;letter-spacing:.08em}.lock span{display:none}}
 </style>
+<style id="v15">
+.row .vo{display:inline-flex;align-items:center;gap:12px;background:none;border:1px solid rgba(248,218,184,.35);color:var(--herofg);border-radius:999px;padding:0 20px 0 8px;min-height:46px;font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .3s,border-color .3s}
+.vo:hover{background:rgba(248,218,184,.1);border-color:var(--carrot)}
+.vo .pl{width:32px;height:32px;border-radius:50%;background:var(--carrot);display:grid;place-items:center;flex:none}
+.vo .pl::before{content:"";border-left:10px solid #2B1612;border-block:6px solid transparent;margin-inline-start:3px}
+.vo.on .pl::before{border:0;width:10px;height:10px;background:#2B1612;margin:0;border-radius:2px}
+.vo small{opacity:.6;font:500 11px var(--sans);letter-spacing:.08em}
+html.l-ar .vo .pl::before{border-left:0;border-right:10px solid #2B1612;margin-inline-start:0;margin-inline-end:3px}
+html.l-ar .vo.on .pl::before{border:0}
+.vo.on .eq{display:inline-flex}
+.eq{display:none;gap:2px;align-items:flex-end;height:14px}.eq i{width:3px;background:var(--carrot);animation:eq .9s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:.2s}.eq i:nth-child(3){animation-delay:.4s}
+@keyframes eq{0%,100%{height:3px}50%{height:14px}}
+@media (prefers-reduced-motion:reduce){.eq i{animation:none;height:8px}}
+</style>
+<script>(function(){var b=document.getElementById("vo");if(!b)return;var L=window.__lang==="ar"?"ar":"en",V=(/[?&]v=b/.test(location.search))?"b":"a",a=null;
+function stop(){if(a){a.pause();a.currentTime=0}b.classList.remove("on");b.setAttribute("aria-pressed","false");b.querySelector("span").textContent=lab(false)}
+function lab(on){var k=on?"Arrêter":"Écouter la présentation",T=window.__T||{};return T[k]||k}
+b.addEventListener("click",function(){if(b.classList.contains("on")){stop();return}
+if(!a){a=new Audio("audio/"+L+"_"+V+".mp3");a.preload="auto";a.addEventListener("ended",stop)}
+a.play().then(function(){b.classList.add("on");b.setAttribute("aria-pressed","true");b.querySelector("span").textContent=lab(true)}).catch(function(){})});
+addEventListener("hashchange",stop);document.addEventListener("visibilitychange",function(){if(document.hidden)stop()})})();</script>
 </body>
 </html>
