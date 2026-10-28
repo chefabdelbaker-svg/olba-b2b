@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://chefabdelbaker-svg.github.io/olba-b2b/sitemap.xml
