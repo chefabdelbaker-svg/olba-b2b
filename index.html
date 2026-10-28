@@ -565,9 +565,9 @@ body.fxc.fxv #fxd,body.fxc.fxv #fxr{opacity:1}
 </style>
 </head>
 <body>
-<script>(function(){var L="fr";try{var m=/[?&]lang=(en|ar|fr)/.exec(location.search);L=m?m[1]:(localStorage.getItem("olba-lang")||"fr");if(m)localStorage.setItem("olba-lang",L)}catch(e){}
-if(L!=="en"&&L!=="ar")L="fr";window.__lang=L;var h=document.documentElement;
-if(L!=="fr"){h.lang=L;h.dir=L==="ar"?"rtl":"ltr";h.classList.add("l-"+L);document.write('<script src="lang/'+L+'.js"><\/script>');
+<script>(function(){var L="en";try{var m=/[?&]lang=(en|ar|fr)/.exec(location.search);L=m?m[1]:(localStorage.getItem("olba-lang")||"en");if(m)localStorage.setItem("olba-lang",L)}catch(e){}
+if(L!=="en"&&L!=="ar"&&L!=="fr")L="en";window.__lang=L;var h=document.documentElement;h.lang=L;
+if(L!=="fr"){h.dir=L==="ar"?"rtl":"ltr";h.classList.add("l-"+L);document.write('<script src="lang/'+L+'.js"><\/script>');
 if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap">')}}})();</script>
 <header class="hd band"><div class="wrap">
  <div class="lock" data-go="accueil" role="link" tabindex="0" aria-label="OLBA B2B Solutions"><img class="logo" src="brand/wordmark-b2b.png" alt="" width="90" height="25"><span>B2B Solutions</span></div>
