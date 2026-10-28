@@ -1421,7 +1421,7 @@ html.l-ar .vo.on .pl::before{border:0}
 @keyframes eq{0%,100%{height:3px}50%{height:14px}}
 @media (prefers-reduced-motion:reduce){.eq i{animation:none;height:8px}}
 </style>
-<script>(function(){var b=document.getElementById("vo");if(!b)return;var L=window.__lang==="ar"?"ar":"en",V=(/[?&]v=b/.test(location.search))?"b":"a",a=null;
+<script>(function(){var b=document.getElementById("vo");if(!b)return;var L=window.__lang==="ar"?"ar":"en",V=((location.search.match(/[?&]v=([abc])/)||[])[1])||"a",a=null;
 function stop(){if(a){a.pause();a.currentTime=0}b.classList.remove("on");b.setAttribute("aria-pressed","false");b.querySelector("span").textContent=lab(false)}
 function lab(on){var k=on?"Arrêter":"Écouter la présentation",T=window.__T||{};return T[k]||k}
 b.addEventListener("click",function(){if(b.classList.contains("on")){stop();return}
