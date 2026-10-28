@@ -565,7 +565,7 @@ body.fxc.fxv #fxd,body.fxc.fxv #fxr{opacity:1}
 </style>
 </head>
 <body>
-<script>(function(){var L="en";try{var m=/[?&]lang=(en|ar|fr)/.exec(location.search);L=m?m[1]:(localStorage.getItem("olba-lang")||"en");if(m)localStorage.setItem("olba-lang",L)}catch(e){}
+<script>(function(){var L="en";try{var m=/[?&]lang=(en|ar|fr)/.exec(location.search);L=m?m[1]:(localStorage.getItem("olba-lang2")||"en");if(m)localStorage.setItem("olba-lang2",L)}catch(e){}
 if(L!=="en"&&L!=="ar"&&L!=="fr")L="en";window.__lang=L;var h=document.documentElement;h.lang=L;
 if(L!=="fr"){h.dir=L==="ar"?"rtl":"ltr";h.classList.add("l-"+L);document.write('<script src="lang/'+L+'.js"><\/script>');
 if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap">')}}})();</script>
@@ -1395,7 +1395,7 @@ html.l-ar .rail *,html.l-ar .hs *,html.l-ar #hrail *{direction:rtl}
 </style>
 <script>(function(){var L=window.__lang||"fr";
 [].forEach.call(document.querySelectorAll("[data-lg]"),function(b){b.classList.toggle("on",b.dataset.lg===L);b.setAttribute("aria-pressed",b.dataset.lg===L?"true":"false")});
-document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-lg]");if(!b)return;var n=b.dataset.lg;if(n===L)return;try{localStorage.setItem("olba-lang",n);sessionStorage.setItem("olba-sw","1")}catch(x){}location.reload()});
+document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-lg]");if(!b)return;var n=b.dataset.lg;if(n===L)return;try{localStorage.setItem("olba-lang2",n);sessionStorage.setItem("olba-sw","1")}catch(x){}location.reload()});
 document.addEventListener("click",function(e){var s=e.target.closest&&e.target.closest("[data-sample]");if(!s)return;e.preventDefault();window.__sample&&window.__sample(s.dataset.sample)});
 })();</script>
 <style id="v13">
