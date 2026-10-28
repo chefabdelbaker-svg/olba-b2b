@@ -1295,6 +1295,8 @@ var deep=(location.hash&&location.hash!=="#accueil");
 if(!rm&&!seen&&!deep){
  B.classList.add("fxlock");
  var sp=mk("div","fxsplash",'<div class="s2"><div class="a2"><img class="on" src="img/l12.jpg" alt=""><img src="img/l53.jpg" alt=""><img src="img/lab_a.jpg" alt=""></div><div class="w2"><span class="on">Une <em>idée.</em></span><span>Un <em>produit.</em></span><span>À <em>l\'échelle.</em></span></div></div><div class="f2"><img src="brand/wordmark-cream.png" alt="OLBA"><p>B2B Solutions · Riyad</p></div><div class="sk">Cliquer pour passer</div><div class="pg2"><i></i></div>');
+ var Z=({en:["An <em>idea.</em>","A <em>product.</em>","At <em>scale.</em>","B2B Solutions · Riyadh","Click to skip"],ar:["<em>فكرة.</em>","<em>منتج.</em>","<em>على نطاق واسع.</em>","B2B Solutions · الرياض","انقر للتخطي"]})[window.__lang];
+ if(Z){var zs=sp.querySelectorAll(".w2 span");for(var zi=0;zi<3;zi++)zs[zi].innerHTML=Z[zi];sp.querySelector(".f2 p").textContent=Z[3];sp.querySelector(".sk").textContent=Z[4]}
  var a2=sp.querySelector(".a2"),ims=a2.querySelectorAll("img"),ws=sp.querySelectorAll(".w2 span"),f2=sp.querySelector(".f2"),w2=sp.querySelector(".w2"),pg=sp.querySelector(".pg2"),done=0,T=[];
  function step(i){[].forEach.call(ims,function(e,k){e.classList.toggle("on",k===i)});[].forEach.call(ws,function(e,k){e.classList.toggle("on",k===i)});a2.classList.toggle("k2",i===1);a2.classList.toggle("k3",i===2)}
  function fin(){if(done)return;done=1;T.forEach(clearTimeout);sp.classList.add("out");B.classList.remove("fxlock");setTimeout(function(){if(sp.parentNode)sp.parentNode.removeChild(sp)},1400)}
