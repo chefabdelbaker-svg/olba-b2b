@@ -1193,8 +1193,8 @@ var FAM=[
   var PRIX={},cur="",q="";
   var ch=$("#tch"),tl=$("#tl");
   ch.innerHTML='<button class="on" data-f="">Toutes</button>'+FAM.map(function(f,i){return'<button data-f="'+i+'">'+f[1].replace(/^Les /,"")+'</button>'}).join("");
-  function row(p){return'<div class="tf-r"><code>'+p.c+'</code><b>'+esc(p.n)+'</b><span class="f">'+FAM[p.f][1]+'</span><span class="p">'+(PRIX[p.c]?PRIX[p.c]+" SAR":"Sur devis")+'</span><button class="btn" data-add="'+p.c+' '+esc(p.n)+'">Ajouter</button></div>'}
-  function draw(){var r=ALL.filter(function(p){return(cur===""||String(p.f)===cur)&&(!q||p.n.toLowerCase().indexOf(q)>-1||p.c.toLowerCase().indexOf(q)>-1)});tl.innerHTML=r.map(row).join("");$("#tc").textContent=r.length+" référence"+(r.length>1?"s":"");sync()}
+  function row(p){return'<div class="tf-r"><code>'+p.c+'</code><b>'+esc(p.n)+'</b><span class="f">'+FAM[p.f][1]+'</span><span class="p'+(PRIX[p.c]?"":" sd")+'">'+(PRIX[p.c]?PRIX[p.c]+" SAR":"Sur devis")+'</span><button class="btn" data-add="'+p.c+' '+esc(p.n)+'">Ajouter</button></div>'}
+  function draw(){var r=ALL.filter(function(p){return(cur===""||String(p.f)===cur)&&(!q||p.n.toLowerCase().indexOf(q)>-1||p.c.toLowerCase().indexOf(q)>-1)});tl.innerHTML=(cur===""&&!q)?FAM.map(function(f,i){var g=r.filter(function(p){return p.f===i});return g.length?'<div class="tf-g"><span>'+f[1]+'</span><i>'+g.length+'</i></div>'+g.map(row).join(""):""}).join(""):r.map(row).join("");$("#tc").textContent=r.length+" référence"+(r.length>1?"s":"");sync()}
   ch.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;cur=b.dataset.f;[].forEach.call(ch.children,function(x){x.classList.toggle("on",x===b)});draw()});
   $("#tq").addEventListener("input",function(){q=this.value.trim().toLowerCase();draw()});
   $("#tcsv").addEventListener("click",function(){
@@ -1465,5 +1465,46 @@ addEventListener("hashchange",stop);document.addEventListener("visibilitychange"
 })();
 </script>
 <style id="v17">#fxd,#fxr{display:none!important}body.fxc{cursor:auto!important}body.fxc a,body.fxc button,body.fxc [data-go],body.fxc label,body.fxc summary{cursor:pointer!important}</style>
+<style id="v18">
+/* 1. un seul langage de formes : pilules pour les actions, 22px pour les cartes, arches pour les photos */
+.btn,.btn.ghost,.tf-top input,.ctl .btn{border-radius:999px}
+.btn{padding:15px 28px}
+.tf-top input,#cv input[type=search],.fs input{border-radius:999px;padding-inline:22px}
+.model,.opt,.bannerbook{border-radius:24px}
+.model{border:1.5px solid rgba(158,82,20,.3)}.model[aria-pressed="true"]{border-color:var(--acc)}
+.bannerbook{overflow:hidden}
+.bannerbook .bimg{border-radius:16px}
+.bannerbook .bimg img{object-position:left center}
+.tf-r .btn{border-radius:999px;padding:10px 16px}
+.tf-r:hover{border-radius:14px}
+/* 2. cartes Collaborer alignées */
+.models{align-items:stretch}
+.model{grid-template-rows:auto auto minmax(2.6em,auto) minmax(3.7em,auto) 1fr}
+.model .lbl{align-self:start}
+@media (max-width:860px){.model{grid-template-rows:none}}
+/* 3. rangee d'actions de l'accueil */
+.hero .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hero .row .vo{flex-basis:100%;justify-self:start;margin-top:6px;border:0;background:none;padding:6px 0;width:max-content}
+/* 4. hero mobile : le titre d'abord, les arches ensuite */
+@media (max-width:860px){
+ .hero .hv{order:2;height:300px;min-height:0;margin-top:26px}
+ .hero .hg{padding-block:28px 0}
+ .hero .row .btn{flex:1 1 100%;justify-content:center}
+}
+/* 5. chaque page a sa propre ouverture */
+#p-tarifs>.dk,#p-collaborer .chero{position:relative;overflow:hidden}
+#p-tarifs>.dk::after{content:"SAR";position:absolute;right:max(16px,4vw);bottom:-.22em;font:italic 500 clamp(120px,22vw,300px)/1 var(--serif);color:rgba(248,218,184,.06);pointer-events:none;letter-spacing:-.02em}
+#p-collaborer .chero::after{content:"A B C D";position:absolute;right:max(16px,4vw);bottom:-.2em;font:italic 500 clamp(80px,15vw,220px)/1 var(--serif);color:rgba(248,218,184,.06);pointer-events:none;white-space:nowrap}
+#p-tarifs>.dk{background:linear-gradient(115deg,#2B1612 0%,#4A2A20 100%)}
+#p-collaborer .chero{background:linear-gradient(245deg,#2B1612 0%,#4A2A20 100%)}
+#p-tarifs>.dk .sec{padding-bottom:34px}
+#p-tarifs>.dk+.wrap{padding-top:28px}
+/* 6. Tarifs groupes par famille */
+.tf-g{display:flex;align-items:baseline;gap:12px;margin:34px 0 4px;padding:0 8px;font:500 24px/1.2 var(--serif);color:var(--fg)}
+.tf-g i{font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--acc);font-style:normal}
+.tf-g:first-child{margin-top:10px}
+.tf-r .p.sd{display:inline-flex;justify-self:start;padding:5px 12px;border-radius:999px;background:var(--bg2);font:600 11px var(--sans);letter-spacing:.08em;text-transform:uppercase}
+.tf-g~.tf-r .f{opacity:.55}
+</style>
 </body>
 </html>
