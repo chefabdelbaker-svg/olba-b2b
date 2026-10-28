@@ -26,7 +26,7 @@ button{font:inherit;color:inherit}
 /* header */
 .hd{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:#2B1612;color:#F8DAB8}
 .hd .wrap{display:flex;align-items:center;gap:10px 28px;flex-wrap:wrap;padding-block:10px}
-.hd .logo{height:30px;width:auto;cursor:pointer}
+.hd .logo{height:25px;width:auto;cursor:pointer}
 .tabs{display:flex;overflow-x:auto;scrollbar-width:none;margin-left:auto;max-width:100%}
 .tabs::-webkit-scrollbar{display:none}
 .tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:12px 14px;font:500 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;white-space:nowrap;opacity:.78}
@@ -570,7 +570,7 @@ if(L!=="en"&&L!=="ar")L="fr";window.__lang=L;var h=document.documentElement;
 if(L!=="fr"){h.lang=L;h.dir=L==="ar"?"rtl":"ltr";h.classList.add("l-"+L);document.write('<script src="lang/'+L+'.js"><\/script>');
 if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap">')}}})();</script>
 <header class="hd band"><div class="wrap">
- <img class="logo" src="brand/wordmark-cream.png" alt="OLBA B2B Solutions" data-go="accueil" width="84" height="30">
+ <div class="lock" data-go="accueil" role="link" tabindex="0" aria-label="OLBA B2B Solutions"><img class="logo" src="brand/wordmark-b2b.png" alt="" width="90" height="25"><span>B2B Solutions</span></div>
  <nav class="tabs" role="tablist" aria-label="Navigation du site">
   <button role="tab" data-k="accueil" id="t-accueil">Accueil</button>
   <button role="tab" data-k="catalogue" id="t-catalogue">Catalogue</button>
@@ -893,7 +893,7 @@ if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleap
 </main>
 
 <footer class="ft dk band"><div class="wrap">
- <div><img src="brand/wordmark-cream.png" alt="OLBA B2B Solutions" width="120" height="43"><p style="margin-top:14px">D'une idée. À un produit. À l'échelle.</p></div>
+ <div><div class="lock"><img src="brand/wordmark-b2b.png" alt="" width="120" height="33" style="height:32px;width:auto"><span>B2B Solutions</span></div><p style="margin-top:14px">D'une idée. À un produit. À l'échelle.</p></div>
  <div><h4>Contact</h4><p>partnerships@olbabakehouse.com<br>Riyad, Arabie saoudite</p></div>
  <div><h4>OLBA</h4><p><a href="#accueil" data-about style="color:inherit">Qui sommes-nous</a><br><a href="#tarifs" data-go="tarifs" style="color:inherit">Tarifs</a></p></div>
  <div><h4>Conditions</h4><p>Commande minimum 500 SAR<br>Délai de 48 h sur demande</p></div>
@@ -1395,5 +1395,16 @@ html.l-ar .dk.band.hasv::after{background:linear-gradient(270deg,rgba(43,22,18,.
 </style>
 <script>(function(){var v=document.querySelector(".amb");if(!v)return;var rm=matchMedia("(prefers-reduced-motion:reduce)").matches,sd=navigator.connection&&navigator.connection.saveData;if(rm||sd||!("IntersectionObserver" in window)){v.remove();return}
 var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){if(!v.src)v.src=v.dataset.src;v.play&&v.play().catch(function(){})}else v.pause&&v.pause()})},{threshold:.15});io.observe(v)})();</script>
+<style id="v14">
+.lock{display:flex;align-items:center;gap:12px;cursor:pointer;text-decoration:none}
+.lock .logo{height:25px;width:auto}
+.lock span{border-inline-start:1px solid rgba(248,218,184,.4);padding-inline-start:12px;font:600 10.5px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--carrot);white-space:nowrap}
+.ft .lock span{font-size:11px}
+@media (max-width:430px){.lock{gap:9px}.lock span{font-size:9px;letter-spacing:.16em;padding-inline-start:9px}.lock .logo{height:22px}}
+</style>
+<style id="v14b">
+@media (min-width:861px){.hd .wrap{flex-wrap:nowrap;gap:12px 14px}.hd .tabs{display:flex;flex:1;justify-content:center;gap:0}.hd .tabs button{padding:12px 10px;letter-spacing:.12em}}
+@media (min-width:861px) and (max-width:1120px){.hd .tabs button{padding:12px 6px;font-size:10.5px;letter-spacing:.08em}.lock span{display:none}}
+</style>
 </body>
 </html>
