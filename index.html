@@ -835,6 +835,18 @@ if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleap
  <p class="lead rv">Chaque référence porte un code unique, à reprendre dans votre demande. Les prix dépendent du volume, du niveau de production et de la durée du contrat : nous les établissons produit par produit.</p>
 </div></div>
 <div class="wrap sec">
+<section class="degr" aria-label="Tarif dégressif">
+ <div class="kick">Tarif dégressif</div>
+ <h3>Plus vous commandez, <em>moins vous payez.</em></h3>
+ <div class="tiers">
+  <div class="tier"><b>1 – 19</b><span>pièces</span><i>Tarif catalogue</i></div>
+  <div class="tier"><b>20 – 49</b><span>pièces</span><i>−5 %</i></div>
+  <div class="tier"><b>50 – 99</b><span>pièces</span><i>−8 %</i></div>
+  <div class="tier"><b>100 – 199</b><span>pièces</span><i>−12 %</i></div>
+  <div class="tier top"><b>200 – 500</b><span>pièces</span><i>−15 %</i></div>
+ </div>
+ <p class="note">Remise appliquée par référence et par commande, sur le tarif catalogue. Au-delà de 500 pièces : tarif sur devis. Pourcentages indicatifs, confirmés sur devis.</p>
+</section>
  <div class="tf-top"><input id="tq" type="search" placeholder="Chercher un code ou un produit" aria-label="Chercher un code ou un produit"><span id="tc" class="note"></span></div>
  <div class="tf-chips" id="tch"></div>
  <div class="tf-h"><span>Code</span><span>Produit</span><span>Famille</span><span>Prix</span><span></span></div>
@@ -884,7 +896,7 @@ if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleap
     <label for="e1">Stockage, fours, livraison<textarea id="e1" rows="2" placeholder="Équipement de votre site, stockage froid, horaires de réception"></textarea></label>
     <label for="m1">Message<textarea id="m1" rows="2" placeholder="Votre projet en quelques lignes"></textarea></label>
     <div class="out" id="out" aria-live="polite"></div>
-    <div class="row"><a class="btn" id="mt" href="mailto:partnerships@olbabakehouse.com">Envoyer par e-mail</a><button class="btn ghost" id="cp" type="button" style="color:var(--fg)">Copier la demande</button><button class="btn ghost" id="cl" type="button" style="color:var(--fg)">Vider la sélection</button></div>
+    <div class="row"><a class="btn" id="mt" href="mailto:partnerships@olbabakehouse.com">Envoyer par e-mail</a><a class="btn ghost" id="wa" href="https://wa.me/966507881567" target="_blank" rel="noopener" style="color:var(--fg)">WhatsApp</a><button class="btn ghost" id="cp" type="button" style="color:var(--fg)">Copier la demande</button><button class="btn ghost" id="cl" type="button" style="color:var(--fg)">Vider la sélection</button></div>
     <div class="mail"><span>Envoyez-la à</span><code id="em">partnerships@olbabakehouse.com</code><button class="btn ghost" id="ce2" type="button" style="padding:9px 14px;color:var(--fg)">Copier l'adresse</button></div>
    </form>
   </div>
@@ -894,7 +906,7 @@ if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleap
 
 <footer class="ft dk band"><div class="wrap">
  <div><div class="lock"><img src="brand/wordmark-b2b.png" alt="" width="120" height="33" style="height:32px;width:auto"><span>B2B Solutions</span></div><p style="margin-top:14px">D'une idée. À un produit. À l'échelle.</p></div>
- <div><h4>Contact</h4><p>partnerships@olbabakehouse.com<br>Riyad, Arabie saoudite<br><a href="#commander" data-go="commander" style="color:var(--carrot)">Démarrer un projet</a></p></div>
+ <div><h4>Contact</h4><p>partnerships@olbabakehouse.com<br>Riyad, Arabie saoudite<br><a href="https://wa.me/966507881567" target="_blank" rel="noopener" style="color:inherit" dir="ltr">WhatsApp +966 50 788 1567</a><br><a href="#commander" data-go="commander" style="color:var(--carrot)">Démarrer un projet</a></p></div>
  <div><h4>OLBA</h4><p><a href="#accueil" data-about style="color:inherit">Qui sommes-nous</a><br><a href="#tarifs" data-go="tarifs" style="color:inherit">Tarifs</a></p></div>
  <div><h4>Conditions</h4><p>Commande minimum 500 SAR<br>Délai de 48 h sur demande</p></div>
 </div></footer>
@@ -1518,5 +1530,22 @@ addEventListener("hashchange",stop);document.addEventListener("visibilitychange"
 }
 </style>
 <script>(function(){var mt=document.getElementById("mt");if(!mt)return;mt.addEventListener("click",function(){var b=(document.getElementById("out")||{}).textContent||"";this.href="mailto:partnerships@olbabakehouse.com?subject="+encodeURIComponent("Demande OLBA B2B Solutions")+"&body="+encodeURIComponent(b)})})();</script>
+<style id="v20">
+.degr{margin-bottom:46px;padding:clamp(22px,3.4vw,40px);border-radius:28px;background:var(--hero);color:var(--herofg)}
+.degr h3{font-size:clamp(26px,3.4vw,40px);margin:8px 0 22px;color:var(--herofg)}
+.degr h3 em{color:var(--carrot)}
+.degr .note{color:var(--soft);margin:20px 0 0}
+.tiers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.tier{display:flex;flex-direction:column;gap:2px;padding:20px 18px;border-radius:20px;background:rgba(248,218,184,.08);border:1px solid rgba(248,218,184,.18);transition:transform .3s,background .3s}
+.tier:hover{transform:translateY(-4px);background:rgba(248,218,184,.14)}
+.tier b{font:500 clamp(22px,2.4vw,30px)/1.1 var(--serif);white-space:nowrap}
+.tier span{font:600 11px var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+.tier i{margin-top:14px;font:600 20px var(--sans);font-style:normal;color:var(--carrot);font-variant-numeric:tabular-nums}
+.tier:first-child i{font-size:13px;letter-spacing:.06em;text-transform:uppercase;line-height:1.6}
+.tier.top{background:linear-gradient(180deg,#FFD79B,var(--carrot));border-color:transparent;color:#2B1612}
+.tier.top i{color:#2B1612}.tier.top span{opacity:.8}
+@media (max-width:860px){.tiers{grid-template-columns:repeat(2,minmax(0,1fr))}.tier.top{grid-column:1/-1}}
+</style>
+<script>(function(){var wa=document.getElementById("wa");if(!wa)return;wa.addEventListener("click",function(){var b=(document.getElementById("out")||{}).textContent||"";this.href="https://wa.me/966507881567?text="+encodeURIComponent(b)})})();</script>
 </body>
 </html>
