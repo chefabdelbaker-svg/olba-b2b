@@ -1179,9 +1179,9 @@ function par(){if(rm)return;var vh=innerHeight;[].forEach.call(D.querySelectorAl
 /* menu plein ecran */
 var ITEMS=[["accueil","Accueil","img/l00.jpg"],["catalogue","Catalogue","img/l19.jpg"],["laboratoire","Notre laboratoire","img/lab1.jpg"],["collaborer","Collaborer","img/lab2.jpg"],["tarifs","Tarifs","img/l12.jpg"],["commander","Ma demande","img/l34.jpg"],["about","Qui sommes-nous","img/lab3.jpg"]];
 if(hd){
- var bg=D.createElement("button");bg.id="bg";bg.setAttribute("aria-label","Menu");bg.setAttribute("aria-expanded","false");bg.innerHTML="<i></i><i></i>";hd.querySelector(".wrap").appendChild(bg);
+ var bg=D.createElement("button");bg.id="bg";bg.setAttribute("aria-label","Menu");bg.setAttribute("aria-expanded","false");bg.innerHTML="<i></i><i></i><span>Menu</span>";B.appendChild(bg);
  var mn=mk("div","fxmenu",ITEMS.map(function(x,i){return'<a href="#'+x[0]+'" data-m="'+x[0]+'" style="--i:'+i+'"><small>0'+(i+1)+'</small>'+x[1]+'<em><img src="'+x[2]+'" alt=""></em></a>'}).join("")+"<p>OLBA B2B Solutions · Riyadh</p>");
- function tm(o){bg.setAttribute("aria-expanded",o?"true":"false");mn.classList.toggle("open",o);B.classList.toggle("menu",o);if(o){var h=(location.hash||"#accueil").slice(1).split("/")[0];if(h==="produit"||h==="livre")h="catalogue";[].forEach.call(mn.querySelectorAll("a"),function(a){a.classList.toggle("on",a.dataset.m===h)})}}
+ function tm(o){bg.setAttribute("aria-expanded",o?"true":"false");bg.lastChild.textContent=o?"Fermer":"Menu";mn.classList.toggle("open",o);B.classList.toggle("menu",o);if(o){var h=(location.hash||"#accueil").slice(1).split("/")[0];if(h==="produit"||h==="livre")h="catalogue";[].forEach.call(mn.querySelectorAll("a"),function(a){a.classList.toggle("on",a.dataset.m===h)})}}
  bg.addEventListener("click",function(){tm(!mn.classList.contains("open"))});
  mn.addEventListener("click",function(e){var a=e.target.closest("a");if(!a)return;e.preventDefault();tm(false);var k=a.dataset.m;if(k==="about"){setTimeout(function(){window.__about&&window.__about()},300);return}setTimeout(function(){if(location.hash==="#"+k)dispatchEvent(new Event("hashchange"));else location.hash="#"+k},300)});
  addEventListener("keydown",function(e){if(e.key==="Escape")tm(false)});
@@ -1282,5 +1282,17 @@ function tick(){if(!s.offsetParent)return;var r=s.getBoundingClientRect(),m=r.he
 addEventListener("scroll",function(){requestAnimationFrame(tick)},{passive:true});addEventListener("resize",tick);addEventListener("hashchange",function(){setTimeout(tick,200)});tick();
 }catch(e){}})();
 </script>
+<style id="menupill">
+@media (max-width:860px){
+#bg{position:fixed;left:50%;right:auto;bottom:max(18px,env(safe-area-inset-bottom));top:auto;margin:0;transform:translateX(-50%);z-index:70;width:auto;height:54px;padding:0 24px 0 56px;border-radius:999px;background:#F8DAB8;border:1px solid rgba(62,33,27,.18);box-shadow:0 14px 34px rgba(0,0,0,.38);display:flex;align-items:center;gap:0;color:#3E211B;transition:background .4s,color .4s,transform .4s}
+#bg i{left:22px;right:auto;width:20px}
+#bg i{background:#3E211B}#bg i:first-child{top:23px}#bg i:nth-child(2){top:29px}
+#bg[aria-expanded="true"] i:first-child,#bg[aria-expanded="true"] i:nth-child(2){top:26px}#bg[aria-expanded="true"] i:nth-child(2){transform:rotate(-45deg)}#fxmenu{padding-bottom:110px;box-sizing:border-box}
+#bg span{font:600 13px/1 var(--sans,Inter,sans-serif);letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
+#bg[aria-expanded="true"]{background:#F7AA54;color:#3E211B;border-color:#F7AA54}
+#fxsplash~#bg,body.fxs #bg{opacity:0;pointer-events:none}
+body{padding-bottom:0}
+}
+</style>
 </body>
 </html>
