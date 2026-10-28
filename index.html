@@ -1425,7 +1425,7 @@ html.l-ar .vo.on .pl::before{border:0}
 function stop(){if(a){a.pause();a.currentTime=0}b.classList.remove("on");b.setAttribute("aria-pressed","false");b.querySelector("span").textContent=lab(false)}
 function lab(on){var k=on?"Arrêter":"Écouter la présentation",T=window.__T||{};return T[k]||k}
 b.addEventListener("click",function(){if(b.classList.contains("on")){stop();return}
-if(!a){a=new Audio("audio/"+L+"_"+V+".mp3");a.preload="auto";a.addEventListener("ended",stop)}
+if(!a){a=new Audio("audio/"+L+"_"+(L==="ar"?"a":V)+".mp3");a.preload="auto";a.addEventListener("ended",stop)}
 a.play().then(function(){b.classList.add("on");b.setAttribute("aria-pressed","true");b.querySelector("span").textContent=lab(true)}).catch(function(){})});
 addEventListener("hashchange",stop);document.addEventListener("visibilitychange",function(){if(document.hidden)stop()})})();</script>
 </body>
