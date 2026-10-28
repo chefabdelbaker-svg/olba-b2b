@@ -588,10 +588,10 @@ if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleap
  <div class="hero dk band">
   <div class="wrap hg">
    <div class="hc">
-    <div class="kick">OLBA B2B Solutions · Riyad</div>
+    <div class="kr"><div class="kick">OLBA B2B Solutions · Riyad</div><button class="vo" id="vo" type="button" aria-pressed="false"><b class="pl"></b><span>Écouter la présentation</span><em class="eq"><i></i><i></i><i></i></em></button></div>
     <h1><span class="ln"><span>L'excellence</span></span><span class="ln"><span>artisanale,</span></span><span class="ln"><em>à l'échelle.</em></span></h1>
     <p class="sub">Conçu avec expertise. Produit avec régularité. Livré avec fiabilité.</p>
-    <div class="row"><a class="btn" href="#catalogue">Découvrir la gamme</a><a class="btn ghost" href="#commander">Parlez-nous de votre cuisine</a><button class="vo" id="vo" type="button" aria-pressed="false"><b class="pl"></b><span>Écouter la présentation</span><em class="eq"><i></i><i></i><i></i></em></button></div>
+    <div class="row"><a class="btn" href="#catalogue">Découvrir la gamme</a><a class="btn ghost" href="#commander">Parlez-nous de votre cuisine</a></div>
     <div class="cap" aria-hidden="true"><b id="hn"></b><span id="hi"></span></div>
    </div>
    <div class="hv" id="hv" aria-hidden="true"><div class="halo"></div><div class="a a1" data-i="0"></div><div class="a a2" data-i="1"></div><div class="a a3" data-i="2"></div></div>
@@ -1421,7 +1421,7 @@ var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isInter
 @media (min-width:861px) and (max-width:1120px){.hd .tabs button{padding:12px 6px;font-size:10.5px;letter-spacing:.08em}.lock span{display:none}}
 </style>
 <style id="v15">
-.row .vo{display:inline-flex;align-items:center;gap:12px;background:none;border:1px solid rgba(248,218,184,.35);color:var(--herofg);border-radius:999px;padding:0 20px 0 8px;min-height:46px;font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .3s,border-color .3s}
+.vo{display:inline-flex;align-items:center;gap:12px;background:none;border:1px solid rgba(248,218,184,.35);color:var(--herofg);border-radius:999px;padding:0 20px 0 8px;min-height:46px;font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .3s,border-color .3s}
 .vo:hover{background:rgba(248,218,184,.1);border-color:var(--carrot)}
 .vo .pl{width:32px;height:32px;border-radius:50%;background:var(--carrot);display:grid;place-items:center;flex:none}
 .vo .pl::before{content:"";border-left:10px solid #2B1612;border-block:6px solid transparent;margin-inline-start:3px}
@@ -1573,6 +1573,16 @@ addEventListener("hashchange",stop);document.addEventListener("visibilitychange"
 #fxsplash .pg2 i{transition-duration:2.9s}
 #fxsplash.pt .lk,#fxsplash.pt .ct,#fxsplash.pt .sk,#fxsplash.pt .pg2{opacity:0;animation:none}
 #fxsplash .sk,#fxsplash .pg2{transition:opacity .4s}
+</style>
+<style id="v23">
+.kr{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;margin-bottom:6px}
+.kr .kick{margin:0}
+.kr .vo{min-height:40px;padding:0 16px 0 6px;font-size:11px}
+@media (max-width:860px){.kr{flex-direction:column-reverse;align-items:flex-start}}
+/* changement d'onglet : plus de rideau, un fondu court */
+#fxcur{display:none!important}
+.panel.on{animation:fxfade .4s cubic-bezier(.2,.7,.2,1)!important}
+@keyframes fxfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 </style>
 </body>
 </html>
