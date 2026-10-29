@@ -768,6 +768,30 @@ html.l-ar .vo.on .pl::before{border:0}
 #fxcur{display:none!important}
 .panel.on{animation:fxfade .4s cubic-bezier(.2,.7,.2,1)!important}
 @keyframes fxfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* v24 partenaires */
+@media (min-width:861px){.hd .wrap{max-width:1400px}}
+@media (min-width:861px) and (max-width:1500px){.tabs button{padding:12px 9px;letter-spacing:.08em;font-size:12px}.hd .lock span,.hd .brand span{letter-spacing:.2em}}
+#p-partenaires>.dk{position:relative;overflow:hidden;background:linear-gradient(115deg,#2B1612 0%,#4A2A20 100%)}
+#p-partenaires>.dk::after{content:"&";position:absolute;right:max(16px,4vw);bottom:-.28em;font:italic 500 clamp(140px,24vw,320px)/1 var(--serif);color:rgba(248,218,184,.06);pointer-events:none}
+#p-partenaires>.dk .sec{padding-bottom:34px}
+.pt-feat{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,5vw,64px);align-items:center;margin-top:34px}
+.pt-ph{aspect-ratio:6/5;max-width:540px;width:100%;border-radius:240px 240px 18px 18px;overflow:hidden;background:var(--bg2);box-shadow:var(--shadow)}
+.pt-ph img{width:100%;height:100%;object-fit:cover;object-position:22% 8%}
+.pt-tx{display:grid;gap:14px;justify-items:start}
+.pt-tx .lbl{font:600 12px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--acc)}
+.pt-tx h3{font:500 clamp(40px,6vw,72px)/1 var(--serif);margin:0}
+.pt-tx p{color:var(--mute);max-width:52ch}
+.pt-tag{display:inline-block;border:1px solid var(--acc);color:var(--acc);border-radius:999px;padding:9px 16px;font:600 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase}
+.pt-g{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:34px}
+.pt-c{background:var(--card);border-top:3px solid var(--acc);border-radius:0 0 18px 18px;padding:26px 24px 28px;display:grid;gap:10px;align-content:start;box-shadow:var(--shadow)}
+.pt-c small{font:600 11px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--acc)}
+.pt-c h3{font:500 clamp(26px,2.4vw,32px)/1.15 var(--serif);margin:0}
+.pt-c p{color:var(--mute);font-size:15px}
+a.lnk{color:var(--acc);font-weight:600;text-decoration:none;justify-self:start}
+@media (max-width:1000px){.pt-g{grid-template-columns:1fr 1fr}}
+@media (max-width:860px){.pt-feat{grid-template-columns:1fr}.pt-ph{max-width:360px;margin-inline:auto}}
+@media (max-width:560px){.pt-g{grid-template-columns:1fr}}
+html.l-ar .pt-tx .lbl,html.l-ar .pt-c small,html.l-ar .pt-tag{letter-spacing:0}
 </style>
 </head>
 <body>
@@ -781,6 +805,7 @@ if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleap
   <button role="tab" data-k="accueil" id="t-accueil">Accueil</button>
   <button role="tab" data-k="catalogue" id="t-catalogue">Catalogue</button>
   <button role="tab" data-k="laboratoire" id="t-laboratoire">Notre laboratoire</button>
+  <button role="tab" data-k="partenaires" id="t-partenaires">Partenaires</button>
   <button role="tab" data-k="collaborer" id="t-collaborer">Collaborer</button>
   <button role="tab" data-k="tarifs" id="t-tarifs">Tarifs</button>
   <button role="tab" data-k="commander" id="t-commander">Démarrer un projet<span class="badge" id="bd" hidden>0</span></button>
@@ -940,7 +965,7 @@ if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleap
   <p class="lead rv">L'équipement professionnel et la mécanisation sélective n'interviennent que là où ils améliorent la précision, la régularité et la capacité, jamais à la place du jugement d'un chef formé.</p>
   <div class="duo">
    <div class="duoc rv"><span class="lbl">Le savoir-faire</span><h3>Le geste français</h3><p>Technique, finition, goût et texture : ce qu'une machine ne sait pas juger seule. Le chef décide, la machine répète.</p><div class="ph2"><img src="img/lab2.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div></div>
-   <div class="duoc rv" style="--d:.15s"><span class="lbl">La capacité</span><h3>L'équipement professionnel</h3><p>Précision répétable, régularité d'un lot à l'autre, capacité de servir le retail et le B2B ensemble, avec des fours Bongard.</p><div class="ph2"><img src="img/lab1.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div></div>
+   <div class="duoc rv" style="--d:.15s"><span class="lbl">La capacité</span><h3>L'équipement professionnel</h3><p>Précision répétable, régularité d'un lot à l'autre, capacité de servir le retail et le B2B ensemble. Nos fours sont des Bongard, choisis avec BME, Bongard Middle East, notre partenaire équipement.</p><a class="lnk" href="#partenaires" data-go="partenaires">Voir nos partenaires →</a><div class="ph2"><img src="img/lab_b_s.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:40% 55%"></div></div>
   </div>
  </div></div>
 
@@ -964,6 +989,34 @@ if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleap
 </section>
 
 <!-- COLLABORER -->
+<section class="panel" id="p-partenaires" role="tabpanel" aria-labelledby="t-partenaires">
+<div class="dk band"><div class="wrap sec">
+ <div class="kick rv">Nos partenaires</div>
+ <h2 class="rv">Des marques de référence, <em>un standard constant.</em></h2>
+ <p class="lead rv">Chaque produit OLBA repose sur des matières premières et des équipements de référence, choisis auprès de maisons reconnues pour leur régularité.</p>
+</div></div>
+<div class="wrap sec">
+ <div class="kick rv">Équipement</div>
+ <h2 class="rv">La précision de cuisson, <em>signée Bongard.</em></h2>
+ <div class="pt-feat rv">
+  <div class="pt-ph"><img src="img/lab_b_s.jpg" alt="Four Bongard dans le laboratoire OLBA" loading="lazy"></div>
+  <div class="pt-tx"><span class="lbl">Partenaire équipement</span><h3>Bongard</h3><p>Fours professionnels français de boulangerie et de pâtisserie. Nous les avons choisis pour la précision et la régularité de cuisson, avec BME, Bongard Middle East, notre partenaire équipement dans la région.</p><span class="pt-tag">Via BME · Bongard Middle East</span></div>
+ </div>
+</div>
+<div class="alt band"><div class="wrap sec">
+ <div class="kick rv">Ingrédients</div>
+ <h2 class="rv">Des ingrédients <em>de référence.</em></h2>
+ <div class="pt-g">
+  <div class="pt-c rv"><small>Farine</small><h3>Grands Moulins de Paris</h3><p>Farines françaises pour la boulangerie et la pâtisserie.</p></div>
+  <div class="pt-c rv" style="--d:.08s"><small>Chocolat</small><h3>Valrhona</h3><p>Chocolats de couverture pour la pâtisserie professionnelle.</p></div>
+  <div class="pt-c rv" style="--d:.16s"><small>Beurre et crème</small><h3>Elle &amp; Vire</h3><p>Beurres et crèmes pour la pâtisserie et la viennoiserie.</p></div>
+  <div class="pt-c rv" style="--d:.24s"><small>Produits laitiers</small><h3>Président</h3><p>Produits laitiers français pour les professionnels.</p></div>
+ </div>
+ <p class="note" style="margin-top:26px">Les marques citées appartiennent à leurs propriétaires respectifs.</p>
+ <div class="row" style="margin-top:22px"><a class="btn" href="#commander" data-go="commander">Démarrer un projet</a></div>
+</div></div>
+</section>
+
 <section class="panel" id="p-collaborer" role="tabpanel" aria-labelledby="t-collaborer">
  <div class="dk band chero"><div class="wrap sec" style="padding-bottom:30px">
   <div class="kick">Modèles de collaboration</div>
@@ -1113,7 +1166,7 @@ if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleap
 <footer class="ft dk band"><div class="wrap">
  <div><div class="lock"><img src="brand/wordmark-b2b.png" alt="" width="120" height="33" style="height:32px;width:auto"><span>B2B Solutions</span></div><p style="margin-top:14px">D'une idée. À un produit. À l'échelle.</p></div>
  <div><h4>Contact</h4><p>partnerships@olbabakehouse.com<br>Riyad, Arabie saoudite<br><a href="https://wa.me/966507881567" target="_blank" rel="noopener" style="color:inherit" dir="ltr">WhatsApp +966 50 788 1567</a><br><a href="#commander" data-go="commander" style="color:var(--carrot)">Démarrer un projet</a></p></div>
- <div><h4>OLBA</h4><p><a href="#accueil" data-about style="color:inherit">Qui sommes-nous</a><br><a href="#tarifs" data-go="tarifs" style="color:inherit">Tarifs</a></p></div>
+ <div><h4>OLBA</h4><p><a href="#accueil" data-about style="color:inherit">Qui sommes-nous</a><br><a href="#partenaires" data-go="partenaires" style="color:inherit">Partenaires</a><br><a href="#tarifs" data-go="tarifs" style="color:inherit">Tarifs</a></p></div>
  <div><h4>Conditions</h4><p>Commande minimum 500 SAR<br>Délai de 48 h sur demande</p></div>
 </div></footer>
 <div class="toast" id="ts" role="status"></div>
@@ -1346,7 +1399,7 @@ var FAM=[
 
 
  /* ===== routeur et animations ===== */
- var ROUTES=["accueil","catalogue","laboratoire","collaborer","tarifs","commander"];
+ var ROUTES=["accueil","catalogue","laboratoire","partenaires","collaborer","tarifs","commander"];
  var tabs=[].slice.call(document.querySelectorAll(".tabs button"));
  var io=null;
  function reveal(){
@@ -1368,7 +1421,7 @@ var FAM=[
   ROUTES.forEach(function(x){$("#p-"+x).classList.toggle("on",x===tab)});
   if(tab==="catalogue")renderCat(k,p[1]?decodeURIComponent(p[1]):"");
   try{window.scrollTo({top:0,behavior:"instant"})}catch(e){window.scrollTo(0,0)}
-  document.title=tab==="accueil"?"OLBA B2B Solutions":"OLBA B2B Solutions · "+({catalogue:"Catalogue",laboratoire:"Notre laboratoire",collaborer:"Collaborer",tarifs:"Tarifs",commander:"Démarrer un projet"}[tab]);
+  document.title=tab==="accueil"?"OLBA B2B Solutions":"OLBA B2B Solutions · "+({catalogue:"Catalogue",laboratoire:"Notre laboratoire",partenaires:"Partenaires",collaborer:"Collaborer",tarifs:"Tarifs",commander:"Démarrer un projet"}[tab]);
   sync();reveal();
  }
  function show(k){if(location.hash==="#"+k)route();else location.hash="#"+k}
@@ -1439,7 +1492,7 @@ addEventListener("scroll",function(){if(!tk)tk=requestAnimationFrame(onS)},{pass
 var PS=".ph2 img,.trio .a img,.fhero .arch img,.bannerbook .bimg img,.lhero .arch img";
 function par(){if(rm)return;var vh=innerHeight;[].forEach.call(D.querySelectorAll(PS),function(im){if(!im.offsetParent)return;var r=im.parentNode.getBoundingClientRect();if(r.bottom<-50||r.top>vh+50)return;im.classList.add("fxpar");var o=(r.top+r.height/2-vh/2)*-.07;im.style.transform="translate3d(0,"+o.toFixed(1)+"px,0) scale(1.14)"})}
 /* menu plein ecran */
-var ITEMS=[["accueil","Accueil","img/l00.jpg"],["catalogue","Catalogue","img/l19.jpg"],["laboratoire","Notre laboratoire","img/lab1.jpg"],["collaborer","Collaborer","img/lab2.jpg"],["tarifs","Tarifs","img/l12.jpg"],["commander","Démarrer un projet","img/l34.jpg"],["about","Qui sommes-nous","img/lab3.jpg"]];
+var ITEMS=[["accueil","Accueil","img/l00.jpg"],["catalogue","Catalogue","img/l19.jpg"],["laboratoire","Notre laboratoire","img/lab1.jpg"],["partenaires","Partenaires","img/lab_b_s.jpg"],["collaborer","Collaborer","img/lab2.jpg"],["tarifs","Tarifs","img/l12.jpg"],["commander","Démarrer un projet","img/l34.jpg"],["about","Qui sommes-nous","img/lab3.jpg"]];
 if(hd){
  var bg=D.createElement("button");bg.id="bg";bg.setAttribute("aria-label","Menu");bg.setAttribute("aria-expanded","false");bg.innerHTML="<i></i><i></i><span>Menu</span>";B.appendChild(bg);
  var mn=mk("div","fxmenu",ITEMS.map(function(x,i){return'<a href="#'+x[0]+'" data-m="'+x[0]+'" style="--i:'+i+'"><small>0'+(i+1)+'</small>'+x[1]+'<em><img src="'+x[2]+'" alt=""></em></a>'}).join("")+"<p>OLBA B2B Solutions · Riyadh</p>");
