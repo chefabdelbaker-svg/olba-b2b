@@ -792,6 +792,26 @@ a.lnk{color:var(--acc);font-weight:600;text-decoration:none;justify-self:start}
 @media (max-width:860px){.pt-feat{grid-template-columns:1fr}.pt-ph{max-width:360px;margin-inline:auto}}
 @media (max-width:560px){.pt-g{grid-template-columns:1fr}}
 html.l-ar .pt-tx .lbl,html.l-ar .pt-c small,html.l-ar .pt-tag{letter-spacing:0}
+/* v25 bienvenue, logos partenaires, matières premières */
+.hero .bl{font:italic 400 clamp(20px,2.2vw,28px)/1.3 var(--serif);color:var(--herofg);margin:10px 0 26px}.hero .bl em{color:var(--carrot)}
+.pl-logo{height:64px;width:auto;max-width:240px;background:#fff;border-radius:10px;padding:8px 14px;justify-self:start;border:1px solid rgba(62,33,27,.08)}
+.pt-lg{background:#fff;border-radius:14px;position:relative;height:128px;width:100%;border:1px solid rgba(62,33,27,.08)}
+.pt-lg img{position:absolute;inset:16px 20px;width:calc(100% - 40px);height:calc(100% - 32px);object-fit:contain}
+.pt-big{height:110px;width:min(100%,340px)}
+.pt-feat{grid-template-columns:1.1fr 1fr}
+.pt-ph{aspect-ratio:1/1.02;max-width:520px}.pt-ph img{object-position:30% 50%}
+.pt-tx .lbl{order:0}
+.pt-row{display:grid;grid-template-columns:240px 1fr;gap:28px;align-items:center;margin-top:48px;padding:24px;background:var(--card);border-top:3px solid var(--acc);border-radius:0 0 18px 18px;box-shadow:var(--shadow)}
+.pt-row small,.pt-c small{font:600 11px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--acc)}
+.pt-row h3{font:500 clamp(26px,3vw,36px)/1.1 var(--serif);margin:10px 0 8px}.pt-row p{color:var(--mute);max-width:56ch}
+.pt-g{grid-template-columns:repeat(3,1fr)}
+.pt-c .pt-lg{margin-bottom:10px}
+.rmg{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:34px}
+.rm{background:var(--card);border-top:3px solid var(--acc);border-radius:0 0 18px 18px;padding:24px;display:grid;gap:8px;align-content:start;box-shadow:var(--shadow);color:var(--acc)}
+.rm b{font:500 24px/1.15 var(--serif);color:var(--fg)}.rm span{color:var(--mute);font-size:14.5px}
+@media (max-width:1000px){.pt-g{grid-template-columns:1fr 1fr}.rmg{grid-template-columns:1fr 1fr}}
+@media (max-width:860px){.pt-feat{grid-template-columns:1fr}.pt-row{grid-template-columns:1fr}}
+@media (max-width:560px){.pt-g,.rmg{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -819,9 +839,10 @@ if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleap
  <div class="hero dk band">
   <div class="wrap hg">
    <div class="hc">
-    <div class="kr"><div class="kick">OLBA B2B Solutions · Riyad</div><button class="vo" id="vo" type="button" aria-pressed="false"><b class="pl"></b><span>Écouter la présentation</span><em class="eq"><i></i><i></i><i></i></em></button></div>
+    <div class="kr"><div class="kick">Bienvenue chez OLBA B2B Solutions</div><button class="vo" id="vo" type="button" aria-pressed="false"><b class="pl"></b><span>Écouter la présentation</span><em class="eq"><i></i><i></i><i></i></em></button></div>
     <h1><span class="ln"><span>L'excellence</span></span><span class="ln"><span>artisanale,</span></span><span class="ln"><em>à l'échelle.</em></span></h1>
     <p class="sub">Conçu avec expertise. Produit avec régularité. Livré avec fiabilité.</p>
+    <p class="bl">Par des pros, <em>pour des pros.</em></p>
     <div class="row"><a class="btn" href="#catalogue">Découvrir la gamme</a><a class="btn ghost" href="#commander">Parlez-nous de votre cuisine</a></div>
     <div class="cap" aria-hidden="true"><b id="hn"></b><span id="hi"></span></div>
    </div>
@@ -936,9 +957,9 @@ if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleap
    <p class="lead" style="margin-top:22px">Un laboratoire professionnel de boulangerie, de pâtisserie et de production alimentaire, organisé comme une plateforme de production structurée plutôt que comme une cuisine unique.</p>
    <div class="kpis"><div><b data-n="450" data-s=" m²">450 m²</b><span>Laboratoire</span></div><div><b data-n="10000" data-s="">10 000</b><span>Pièces par jour*</span></div><div><b data-n="10" data-s="">10</b><span>Éléments de plateforme</span></div><div><b data-n="6" data-s="">6</b><span>Standards qualité</span></div></div>
   </div>
-  <div class="trio" aria-hidden="true"><div class="a a1"><img src="img/lab3.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><div class="a a2"><img src="img/lab2.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><div class="a a3"><img src="img/lab1.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div></div>
+  <div class="trio" aria-hidden="true"><div class="a a1"><img src="img/lab3.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><div class="a a2"><img src="img/lab2.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div><div class="a a3"><img src="img/bongard_s.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:36% 40%"></div></div>
  </div>
- <div class="wrap"><p class="note" style="color:var(--soft);margin:0 0 28px">*Capacité exprimée toutes catégories confondues, selon le type de produit, la complexité, la finition, la taille de lot et l'emballage. Visuels d’illustration ; photographies du laboratoire après le shooting de marque du mercredi 28 octobre.</p></div></div>
+ <div class="wrap"><p class="note" style="color:var(--soft);margin:0 0 28px">*Capacité exprimée toutes catégories confondues, selon le type de produit, la complexité, la finition, la taille de lot et l'emballage. Visuels d’illustration ; photographies du laboratoire après le shooting de marque.</p></div></div>
 
 <section class="imm" id="imm" aria-label="Visite du laboratoire"><div class="imm-st">
  <div class="imm-bg"><img class="on" src="img/lab_a.jpg" alt="Matières premières et plan de travail du laboratoire OLBA"><img src="img/lab_b.jpg" alt="Four professionnel et chef du laboratoire OLBA" loading="lazy"><img src="img/pack.jpg" alt="Coffret d'éclairs OLBA, étiquettes en français et en arabe" loading="lazy"></div>
@@ -965,9 +986,17 @@ if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleap
   <p class="lead rv">L'équipement professionnel et la mécanisation sélective n'interviennent que là où ils améliorent la précision, la régularité et la capacité, jamais à la place du jugement d'un chef formé.</p>
   <div class="duo">
    <div class="duoc rv"><span class="lbl">Le savoir-faire</span><h3>Le geste français</h3><p>Technique, finition, goût et texture : ce qu'une machine ne sait pas juger seule. Le chef décide, la machine répète.</p><div class="ph2"><img src="img/lab2.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover"></div></div>
-   <div class="duoc rv" style="--d:.15s"><span class="lbl">La capacité</span><h3>L'équipement professionnel</h3><p>Précision répétable, régularité d'un lot à l'autre, capacité de servir le retail et le B2B ensemble. Nos fours sont des Bongard, choisis avec BME, Bongard Middle East, notre partenaire équipement.</p><a class="lnk" href="#partenaires" data-go="partenaires">Voir nos partenaires →</a><div class="ph2"><img src="img/lab_b_s.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:40% 55%"></div></div>
+   <div class="duoc rv" style="--d:.15s"><span class="lbl">La capacité</span><h3>L'équipement professionnel</h3><p>Précision répétable, régularité d'un lot à l'autre, capacité de servir le retail et le B2B ensemble. Bongard, via BME, Bongard Middle East, est notre premier partenaire équipement.</p><img class="pl-logo" src="brand/p/bongard-me.png" alt="Bongard Middle East" loading="lazy"><a class="lnk" href="#partenaires" data-go="partenaires">Voir nos partenaires →</a><div class="ph2"><img src="img/bongard_s.jpg" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:34% 38%"></div></div>
   </div>
  </div></div>
+
+ <div class="wrap sec">
+  <div class="kick rv">Matières premières</div>
+  <h2 class="rv">Des matières premières <em>à la hauteur du premium.</em></h2>
+  <p class="lead rv">OLBA B2B Solutions est une solution premium : nous travaillons avec des matières premières de qualité, issues de maisons françaises de référence, et nous nous adaptons à votre demande.</p>
+  <div class="rmg"><div class="rm rv"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 44V12M24 14c-5-1-7-5-7-9 5 1 7 5 7 9zM24 14c5-1 7-5 7-9-5 1-7 5-7 9zM24 25c-5-1-7-5-7-9M24 25c5-1 7-5 7-9M24 36c-5-1-7-5-7-9M24 36c5-1 7-5 7-9"/></svg><b>Farine</b><span>Grands Moulins de Paris</span></div><div class="rm rv"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="7" width="30" height="34" rx="4"/><path d="M9 18.5h30M9 29.5h30M24 7v34"/></svg><b>Chocolat</b><span>Valrhona</span></div><div class="rm rv"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M24 5C16 16 11 22 11 30a13 13 0 0 0 26 0C37 22 32 16 24 5z"/><path d="M18 31a6 6 0 0 0 5 6"/></svg><b>Beurre et crème</b><span>Elle &amp; Vire, Président, Isigny Sainte-Mère</span></div><div class="rm rv"><svg viewBox="0 0 48 48" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="29" r="13"/><path d="M24 16c0-6 4-9 10-10-1 6-4 9-10 10z"/></svg><b>Fruit</b><span>La Maison Ponthier</span></div></div>
+  <a class="lnk" href="#partenaires" data-go="partenaires" style="margin-top:22px;display:inline-block">Voir nos partenaires →</a>
+ </div>
 
  <div class="dk band"><div class="wrap sec">
   <div class="kick rv">Qualité et sécurité alimentaire</div>
@@ -999,18 +1028,21 @@ if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleap
  <div class="kick rv">Équipement</div>
  <h2 class="rv">La précision de cuisson, <em>signée Bongard.</em></h2>
  <div class="pt-feat rv">
-  <div class="pt-ph"><img src="img/lab_b_s.jpg" alt="Four Bongard dans le laboratoire OLBA" loading="lazy"></div>
-  <div class="pt-tx"><span class="lbl">Partenaire équipement</span><h3>Bongard</h3><p>Fours professionnels français de boulangerie et de pâtisserie. Nous les avons choisis pour la précision et la régularité de cuisson, avec BME, Bongard Middle East, notre partenaire équipement dans la région.</p><span class="pt-tag">Via BME · Bongard Middle East</span></div>
+  <div class="pt-ph"><img src="img/bongard.jpg" alt="Four Bongard dans le laboratoire OLBA" loading="lazy"></div>
+  <div class="pt-tx"><span class="lbl">Partenaire équipement</span><div class="pt-lg pt-big"><img src="brand/p/bongard-me.png" alt="Bongard Middle East"></div><p>Fours professionnels français de boulangerie et de pâtisserie. Bongard, via BME, Bongard Middle East, est notre premier partenaire équipement : nous les avons choisis pour la précision et la régularité de cuisson.</p><span class="pt-tag">Via BME · Bongard Middle East</span></div>
  </div>
+ <div class="pt-row rv"><div class="pt-lg"><img src="brand/p/restofair.png" alt="Restofair Saudi Arabia" loading="lazy"></div><div><small>Petit équipement et moules</small><h3>Restofair Saudi Arabia</h3><p>Revendeur de petit équipement et de moules pour la boulangerie et la pâtisserie. Un partenaire de longue date.</p></div></div>
 </div>
 <div class="alt band"><div class="wrap sec">
  <div class="kick rv">Ingrédients</div>
  <h2 class="rv">Des ingrédients <em>de référence.</em></h2>
  <div class="pt-g">
-  <div class="pt-c rv"><small>Farine</small><h3>Grands Moulins de Paris</h3><p>Farines françaises pour la boulangerie et la pâtisserie.</p></div>
-  <div class="pt-c rv" style="--d:.08s"><small>Chocolat</small><h3>Valrhona</h3><p>Chocolats de couverture pour la pâtisserie professionnelle.</p></div>
-  <div class="pt-c rv" style="--d:.16s"><small>Beurre et crème</small><h3>Elle &amp; Vire</h3><p>Beurres et crèmes pour la pâtisserie et la viennoiserie.</p></div>
-  <div class="pt-c rv" style="--d:.24s"><small>Produits laitiers</small><h3>Président</h3><p>Produits laitiers français pour les professionnels.</p></div>
+  <div class="pt-c rv" style="--d:0s"><div class="pt-lg"><img src="brand/p/gmp.png" alt="Grands Moulins de Paris" loading="lazy"></div><small>Farine</small><h3>Grands Moulins de Paris</h3><p>Farines françaises pour la boulangerie et la pâtisserie.</p></div>
+  <div class="pt-c rv" style="--d:.08s"><div class="pt-lg"><img src="brand/p/valrhona.png" alt="Valrhona" loading="lazy"></div><small>Chocolat</small><h3>Valrhona</h3><p>Chocolats de couverture pour la pâtisserie professionnelle.</p></div>
+  <div class="pt-c rv" style="--d:.16s"><div class="pt-lg"><img src="brand/p/elle-vire.png" alt="Elle &amp; Vire" loading="lazy"></div><small>Beurre et crème</small><h3>Elle &amp; Vire</h3><p>Beurres et crèmes pour la pâtisserie et la viennoiserie.</p></div>
+  <div class="pt-c rv" style="--d:.24s"><div class="pt-lg"><img src="brand/p/president.png" alt="Président" loading="lazy"></div><small>Produits laitiers</small><h3>Président</h3><p>Produits laitiers français pour les professionnels.</p></div>
+  <div class="pt-c rv" style="--d:.32s"><div class="pt-lg"><img src="brand/p/isigny.png" alt="Isigny Sainte-Mère" loading="lazy"></div><small>Beurre et crème</small><h3>Isigny Sainte-Mère</h3><p>Beurres et crèmes de Normandie.</p></div>
+  <div class="pt-c rv" style="--d:.4s"><div class="pt-lg"><img src="brand/p/ponthier.png" alt="La Maison Ponthier" loading="lazy"></div><small>Fruit</small><h3>La Maison Ponthier</h3><p>Purées et préparations de fruits pour la pâtisserie.</p></div>
  </div>
  <p class="note" style="margin-top:26px">Les marques citées appartiennent à leurs propriétaires respectifs.</p>
  <div class="row" style="margin-top:22px"><a class="btn" href="#commander" data-go="commander">Démarrer un projet</a></div>
@@ -1492,7 +1524,7 @@ addEventListener("scroll",function(){if(!tk)tk=requestAnimationFrame(onS)},{pass
 var PS=".ph2 img,.trio .a img,.fhero .arch img,.bannerbook .bimg img,.lhero .arch img";
 function par(){if(rm)return;var vh=innerHeight;[].forEach.call(D.querySelectorAll(PS),function(im){if(!im.offsetParent)return;var r=im.parentNode.getBoundingClientRect();if(r.bottom<-50||r.top>vh+50)return;im.classList.add("fxpar");var o=(r.top+r.height/2-vh/2)*-.07;im.style.transform="translate3d(0,"+o.toFixed(1)+"px,0) scale(1.14)"})}
 /* menu plein ecran */
-var ITEMS=[["accueil","Accueil","img/l00.jpg"],["catalogue","Catalogue","img/l19.jpg"],["laboratoire","Notre laboratoire","img/lab1.jpg"],["partenaires","Partenaires","img/lab_b_s.jpg"],["collaborer","Collaborer","img/lab2.jpg"],["tarifs","Tarifs","img/l12.jpg"],["commander","Démarrer un projet","img/l34.jpg"],["about","Qui sommes-nous","img/lab3.jpg"]];
+var ITEMS=[["accueil","Accueil","img/l00.jpg"],["catalogue","Catalogue","img/l19.jpg"],["laboratoire","Notre laboratoire","img/lab1.jpg"],["partenaires","Partenaires","img/bongard_s.jpg"],["collaborer","Collaborer","img/lab2.jpg"],["tarifs","Tarifs","img/l12.jpg"],["commander","Démarrer un projet","img/l34.jpg"],["about","Qui sommes-nous","img/lab3.jpg"]];
 if(hd){
  var bg=D.createElement("button");bg.id="bg";bg.setAttribute("aria-label","Menu");bg.setAttribute("aria-expanded","false");bg.innerHTML="<i></i><i></i><span>Menu</span>";B.appendChild(bg);
  var mn=mk("div","fxmenu",ITEMS.map(function(x,i){return'<a href="#'+x[0]+'" data-m="'+x[0]+'" style="--i:'+i+'"><small>0'+(i+1)+'</small>'+x[1]+'<em><img src="'+x[2]+'" alt=""></em></a>'}).join("")+"<p>OLBA B2B Solutions · Riyadh</p>");
