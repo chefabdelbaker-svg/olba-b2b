@@ -814,6 +814,8 @@ html.l-ar .pt-tx .lbl,html.l-ar .pt-c small,html.l-ar .pt-tag{letter-spacing:0}
 @media (max-width:1000px){.pt-g{grid-template-columns:1fr 1fr}.rmg{grid-template-columns:1fr 1fr}}
 @media (max-width:860px){.pt-feat{grid-template-columns:1fr}.pt-row{grid-template-columns:1fr}}
 @media (max-width:560px){.pt-g,.rmg{grid-template-columns:1fr}}
+#fxsplash .lk .wl{font:italic 400 clamp(22px,4.2vw,30px)/1 var(--serif);color:#F8DAB8;margin-bottom:4px}
+.hero .kr .kick{font:italic 400 clamp(20px,2.3vw,27px)/1.2 var(--serif);letter-spacing:0;text-transform:none;color:var(--carrot)}
 </style>
 </head>
 <body>
@@ -1587,9 +1589,9 @@ var seen=0;try{seen=sessionStorage.getItem("olba-sw")?1:0;sessionStorage.removeI
 var deep=(location.hash&&location.hash!=="#accueil");
 if(!rm&&!seen&&!deep){
  B.classList.add("fxlock");
- var sp=mk("div","fxsplash",'<div class="s3"><div class="aw"><div class="a2"><img class="on" src="img/l12.jpg" alt=""><img src="img/l53.jpg" alt=""><img src="img/lab_a_s.jpg" alt=""></div><i class="hole"></i></div><div class="w2"><span class="on">Une <em>idée.</em></span><span>Un <em>produit.</em></span><span>À <em>l\'échelle.</em></span></div></div><div class="lk"><img src="brand/wordmark-cream.png" alt="OLBA"><p>B2B Solutions · Riyad</p></div><div class="ct"><b>01</b><span>/ 03</span></div><div class="sk">Cliquer pour passer</div><div class="pg2"><i></i></div>');
- var Z=({en:["An <em>idea.</em>","A <em>product.</em>","At <em>scale.</em>","B2B Solutions · Riyadh","Click to skip"],ar:["<em>فكرة.</em>","<em>منتج.</em>","<em>على نطاق واسع.</em>","B2B Solutions · الرياض","انقر للتخطي"]})[window.__lang];
- if(Z){var zs=sp.querySelectorAll(".w2 span");for(var zi=0;zi<3;zi++)zs[zi].innerHTML=Z[zi];sp.querySelector(".lk p").textContent=Z[3];sp.querySelector(".sk").textContent=Z[4]}
+ var sp=mk("div","fxsplash",'<div class="s3"><div class="aw"><div class="a2"><img class="on" src="img/l12.jpg" alt=""><img src="img/l53.jpg" alt=""><img src="img/lab_a_s.jpg" alt=""></div><i class="hole"></i></div><div class="w2"><span class="on">Une <em>idée.</em></span><span>Un <em>produit.</em></span><span>À <em>l\'échelle.</em></span></div></div><div class="lk"><span class="wl">Bienvenue</span><img src="brand/wordmark-cream.png" alt="OLBA"><p>B2B Solutions · Riyad</p></div><div class="ct"><b>01</b><span>/ 03</span></div><div class="sk">Cliquer pour passer</div><div class="pg2"><i></i></div>');
+ var Z=({en:["An <em>idea.</em>","A <em>product.</em>","At <em>scale.</em>","B2B Solutions · Riyadh","Click to skip","Welcome"],ar:["<em>فكرة.</em>","<em>منتج.</em>","<em>على نطاق واسع.</em>","B2B Solutions · الرياض","انقر للتخطي","أهلاً بكم"]})[window.__lang];
+ if(Z){var zs=sp.querySelectorAll(".w2 span");for(var zi=0;zi<3;zi++)zs[zi].innerHTML=Z[zi];sp.querySelector(".lk p").textContent=Z[3];sp.querySelector(".sk").textContent=Z[4];sp.querySelector(".wl").textContent=Z[5]}
  var aw=sp.querySelector(".aw"),ims=aw.querySelectorAll("img"),ws=sp.querySelectorAll(".w2 span"),cb=sp.querySelector(".ct b"),pg=sp.querySelector(".pg2"),done=0,T=[];
  function step(i){[].forEach.call(ims,function(e,k){e.classList.toggle("on",k===i)});[].forEach.call(ws,function(e,k){e.classList.toggle("on",k===i)});aw.classList.toggle("k2",i===1);aw.classList.toggle("k3",i===2);cb.textContent="0"+(i+1)}
  function rem(){if(sp.parentNode)sp.parentNode.removeChild(sp)}
