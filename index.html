@@ -847,7 +847,7 @@ html.l-ar .rmx-l small{letter-spacing:0}
 </head>
 <body>
 <script>(function(){var L="en";try{var m=/[?&]lang=(en|ar|fr)/.exec(location.search);L=m?m[1]:(localStorage.getItem("olba-lang2")||"en");if(m)localStorage.setItem("olba-lang2",L)}catch(e){}
-if(L!=="en"&&L!=="ar"&&L!=="fr")L="en";window.__lang=L;var h=document.documentElement;h.lang=L;
+if(L!=="en"&&L!=="ar"&&L!=="fr")L="en";window.__lang=L;window.PGD=L!=="fr"?"pages-en/":"pages/";var PGD=window.PGD;var h=document.documentElement;h.lang=L;
 if(L!=="fr"){h.dir=L==="ar"?"rtl":"ltr";h.classList.add("l-"+L);document.write('<script src="lang/'+L+'.js"><\/script>');
 if(L==="ar"){document.write('<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap">')}}})();</script>
 <header class="hd band"><div class="wrap">
@@ -1367,21 +1367,22 @@ var FAM=[
  }
  function bdraw(){
   var p=PAGES[bpos];
-  $("#pg").src="pages/p-"+pn(p)+".jpg";$("#pg").alt="Catalogue OLBA, page "+p;
+  $("#pg").src=PGD+"p-"+pn(p)+".jpg";$("#pg").alt="Catalogue OLBA, page "+p;
   $("#pc").textContent="Page "+(bpos+1)+" sur "+PAGES.length;
   $("#bm").textContent=BS[bsec][1]===BS[bsec][2]?"page "+BS[bsec][1]:"pages "+BS[bsec][1]+" à "+BS[bsec][2];
   [].forEach.call($("#st").children,function(b){var on=+b.dataset.p===p;b.setAttribute("aria-current",on)});
   $("#shot").classList.remove("z");$("#zm").textContent="Zoom";
-  [bpos+1,bpos-1].forEach(function(n){if(PAGES[n]){var im=new Image();im.src="pages/p-"+pn(PAGES[n])+".jpg"}});
+  [bpos+1,bpos-1].forEach(function(n){if(PAGES[n]){var im=new Image();im.src=PGD+"p-"+pn(PAGES[n])+".jpg"}});
  }
  function bgo(d){var n=bpos+d;if(n<0||n>=PAGES.length)return;bpos=n;var i=secOf(PAGES[bpos]);if(i!==bsec)openBook(i,true);else bdraw()}
  function bookPage(){
+  var _en=window.__lang&&window.__lang!=="fr",PDFU=_en?"catalogue/en/OLBA_B2B_Catalogue_EN.pdf":"catalogue-olba-b2b.pdf",PDFN=_en?"OLBA-B2B-Catalogue-EN.pdf":"Catalogue-OLBA-B2B.pdf";
   setCv('<a class="crumb" href="#catalogue">← Catalogue</a><div class="kick" style="margin-top:14px">Édition complète</div><h2>Le catalogue <em>à feuilleter</em></h2>'+
   '<div class="bk"><button class="btn" id="prt" hidden>Télécharger le PDF</button><span class="note" id="pnote">Le PDF enregistré s\'imprime depuis votre lecteur (Ctrl/Cmd + P).</span></div>'+
   '<div class="warn">Le catalogue complet tel que publié. Les prix, formats et conditions sont confirmés lors de votre demande. Les formats surgelés et précuits sont à confirmer avec chaque partenaire.</div>'+
   '<div class="fb"><aside class="fs"><input id="bq" type="search" placeholder="Chercher une famille" aria-label="Chercher une famille" style="width:100%;padding:12px;border:1px solid var(--line);background:var(--card);color:var(--fg);font:15px var(--sans);border-radius:0"><ul id="bl"></ul></aside><div>'+
   '<div class="lh" style="margin:0 0 12px"><h3 id="bt">Catalogue</h3><span class="cnt" id="bm"></span></div>'+
-  '<div class="stage"><button class="nv p" id="pv" aria-label="Page précédente">‹</button><button class="nv n" id="nx" aria-label="Page suivante">›</button><div class="shot" id="shot"><img id="pg" alt="Page du catalogue" src="pages/p-03.jpg"></div></div>'+
+  '<div class="stage"><button class="nv p" id="pv" aria-label="Page précédente">‹</button><button class="nv n" id="nx" aria-label="Page suivante">›</button><div class="shot" id="shot"><img id="pg" alt="Page du catalogue" src="'+PGD+'p-03.jpg"></div></div>'+
   '<div class="ctl"><span class="cnt" id="pc"></span><span class="row"><button class="btn ghost" id="zm">Zoom</button></span></div><div class="strip" id="st"></div><p class="note">Flèches gauche et droite du clavier pour tourner les pages.</p></div></div>');
   $("#pv").onclick=function(){bgo(-1)};$("#nx").onclick=function(){bgo(1)};
   $("#bl").addEventListener("click",function(e){var b=e.target.closest("[data-i]");if(!b)return;var s=BS[+b.dataset.i];bsec=+b.dataset.i;bpos=PAGES.indexOf(s[1]===2?3:s[1]);openBook(bsec)});
@@ -1389,8 +1390,8 @@ var FAM=[
   $("#st").addEventListener("click",function(e){var b=e.target.closest("[data-p]");if(b){bpos=PAGES.indexOf(+b.dataset.p);bdraw()}});
   function zoom(){var z=$("#shot").classList.toggle("z");$("#zm").textContent=z?"Réduire":"Zoom"}
   $("#pg").addEventListener("click",zoom);$("#zm").onclick=zoom;
-  if(!(window.claude&&claude.use)){var _p=$("#prt");if(_p){_p.outerHTML='<a class="btn" href="catalogue-olba-b2b.pdf" target="_blank" rel="noopener" download>Télécharger le PDF</a>';$("#pnote").textContent="Le PDF s\'imprime depuis votre lecteur (Ctrl/Cmd + P)."}}
-  try{if(window.claude&&claude.use){claude.use("downloads").then(function(d){if(!d||!$("#prt"))return;$("#prt").hidden=false;$("#prt").onclick=function(){var n=$("#pnote");n.textContent="Préparation du PDF…";fetch("catalogue-olba-b2b.pdf").then(function(r){if(!r.ok)throw 0;return r.blob()}).then(function(b){return d.save({filename:"Catalogue-OLBA-B2B.pdf",data:b})}).then(function(){n.textContent="PDF enregistré. Ouvrez-le puis Ctrl/Cmd + P pour imprimer."}).catch(function(e){n.textContent=e&&e.code==="declined"?"Téléchargement annulé.":"Téléchargement indisponible ici."})}}).catch(function(){})}}catch(e){}
+  if(!(window.claude&&claude.use)){var _p=$("#prt");if(_p){_p.outerHTML='<a class="btn" href="'+PDFU+'" target="_blank" rel="noopener" download>Télécharger le PDF</a>';$("#pnote").textContent="Le PDF s\'imprime depuis votre lecteur (Ctrl/Cmd + P)."}}
+  try{if(window.claude&&claude.use){claude.use("downloads").then(function(d){if(!d||!$("#prt"))return;$("#prt").hidden=false;$("#prt").onclick=function(){var n=$("#pnote");n.textContent="Préparation du PDF…";fetch(PDFU).then(function(r){if(!r.ok)throw 0;return r.blob()}).then(function(b){return d.save({filename:PDFN,data:b})}).then(function(){n.textContent="PDF enregistré. Ouvrez-le puis Ctrl/Cmd + P pour imprimer."}).catch(function(e){n.textContent=e&&e.code==="declined"?"Téléchargement annulé.":"Téléchargement indisponible ici."})}}).catch(function(){})}}catch(e){}
   openBook(bsec,true);
   if(!bkeys){bkeys=true;document.addEventListener("keydown",function(e){
    if(!$("#pg")||(location.hash||"").indexOf("#livre")!==0||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;
